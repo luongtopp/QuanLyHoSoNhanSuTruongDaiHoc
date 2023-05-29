@@ -22,7 +22,21 @@ public class Main extends javax.swing.JFrame {
                 if (index == 0) {
                     showForm(new HomeForm());
                 } else {
-                    showForm(new DefaultForm("Form : " + index + " " + subIndex));
+                    switch (index) {
+                        case 1:
+                            switch (subIndex) {
+                                case 1:
+                                    showForm(new QuanLyThongTinCanBo());
+                                    break;
+                                case 2:
+                                    showForm(new HomeForm());
+                                    break;
+                            }
+                            break;
+
+                    }
+
+                    System.out.println("Form : " + index + " " + subIndex);
                 }
             }
         });
