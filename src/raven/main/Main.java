@@ -33,7 +33,16 @@ public class Main extends javax.swing.JFrame {
                                     break;
                             }
                             break;
-
+                        case 2:
+                            switch (subIndex) {
+                                case 1:
+                                    showForm(new QuanLyPhongBan());
+                                    break;
+                                case 2:
+                                    showForm(new QuanLyChucVu());
+                                    break;
+                            }
+                            break;
                     }
 
                     System.out.println("Form : " + index + " " + subIndex);

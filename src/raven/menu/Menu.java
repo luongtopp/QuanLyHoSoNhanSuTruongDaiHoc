@@ -29,7 +29,7 @@ public class Menu extends JComponent {
     private String[][] menuItems = new String[][]{
         {"Thống kê"},
         {"Quản lý thông tin cán bộ", "Thông tin cán bộ", "Thông tin gia đình"},
-        {"Quản "},
+        {"Quản lý Phòng ban-Chức vụ", "Phòng ban", "Chức vụ"},
         {""},
         {"UI Kit", "Accordion", "Alerts", "Badges", "Breadcrumbs", "Buttons", "Button group"},
         {"Advanced UI", "Cropper", "Owl Carousel", "Sweet Alert"},
