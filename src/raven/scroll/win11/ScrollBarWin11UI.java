@@ -34,7 +34,7 @@ public class ScrollBarWin11UI extends BasicScrollBarUI {
     private boolean show;
     private boolean hover;
     private boolean press;
-    private final int scrollSize = 10;
+    private final int scrollSize = 14;
     private final MouseAdapter mouseEvent;
 
     public static ComponentUI createUI(JComponent c) {
@@ -79,7 +79,7 @@ public class ScrollBarWin11UI extends BasicScrollBarUI {
         super.installUI(c);
         c.setPreferredSize(new Dimension(scrollSize, scrollSize));
         c.addMouseListener(mouseEvent);
-        c.setForeground(new Color(220, 220, 220));
+        c.setForeground(new Color(150, 150, 150));
         initAnimator();
     }
 
@@ -129,7 +129,7 @@ public class ScrollBarWin11UI extends BasicScrollBarUI {
     protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setComposite(AlphaComposite.SrcOver.derive(animate * 0.08f));
+        g2.setComposite(AlphaComposite.SrcOver.derive(animate * 0.5f));
         g2.setColor(scrollbar.getForeground().brighter());
         g2.fill(new Rectangle2D.Double(trackBounds.x, trackBounds.y, trackBounds.width, trackBounds.height));
         g2.dispose();
@@ -142,7 +142,7 @@ public class ScrollBarWin11UI extends BasicScrollBarUI {
         g2.setColor(scrollbar.getForeground());
         double border = scrollSize * 0.3f - (animate * 1);
         double sp = 10 * animate;
-        g2.setComposite(AlphaComposite.SrcOver.derive(1f - (1f - animate * 0.1f) * 0.6f));
+        g2.setComposite(AlphaComposite.SrcOver.derive(1f - (1f - animate) * 0.3f));
         if (scrollbar.getOrientation() == JScrollBar.VERTICAL) {
             double width = thumbBounds.getWidth() - border * 2;
             double height = thumbBounds.getHeight() - sp * 2;
@@ -222,7 +222,7 @@ public class ScrollBarWin11UI extends BasicScrollBarUI {
         protected void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2.setComposite(AlphaComposite.SrcOver.derive(animate * 0.08f));
+            g2.setComposite(AlphaComposite.SrcOver.derive(animate * 0.5f));
             g2.setColor(scrollbar.getForeground().brighter());
             int x = 0;
             int y = isIncrease ? 8 : 0;
@@ -235,9 +235,9 @@ public class ScrollBarWin11UI extends BasicScrollBarUI {
             }
             g2.setComposite(AlphaComposite.SrcOver.derive(animate));
             if (mousePress) {
-                g2.setColor(new Color(180, 180, 180));
+                g2.setColor(new Color(110, 110, 110));
             } else if (mouseHover) {
-                g2.setColor(new Color(200, 200, 200));
+                g2.setColor(new Color(130, 130, 130));
             } else {
                 g2.setColor(scrollbar.getForeground());
             }

@@ -17,8 +17,6 @@ public class ScrollPaneWin11 extends JScrollPane {
     public ScrollPaneWin11() {
         getVerticalScrollBar().setUI(new ScrollBarWin11UI());
         getHorizontalScrollBar().setUI(new ScrollBarWin11UI());
-        getVerticalScrollBar().setUnitIncrement(10);
-        getHorizontalScrollBar().setUnitIncrement(10);
         setLayout(new ScrollLayout());
     }
 
@@ -29,7 +27,7 @@ public class ScrollPaneWin11 extends JScrollPane {
 
     @Override
     public void updateUI() {
-        super.updateUI();
+         super.updateUI();
         EventQueue.invokeLater(() -> {
             setComponentZOrder(getVerticalScrollBar(), 0);
             setComponentZOrder(getHorizontalScrollBar(), 1);
