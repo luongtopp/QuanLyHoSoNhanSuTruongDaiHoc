@@ -15,8 +15,13 @@ import javax.swing.ScrollPaneLayout;
 public class ScrollPaneWin11 extends JScrollPane {
 
     public ScrollPaneWin11() {
-        getVerticalScrollBar().setUI(new ScrollBarWin11UI());
+//        getVerticalScrollBar().setUI(new ScrollBarWin11UI());
+//        getHorizontalScrollBar().setUI(new ScrollBarWin11UI());
+//        setLayout(new ScrollLayout());
+          getVerticalScrollBar().setUI(new ScrollBarWin11UI());
         getHorizontalScrollBar().setUI(new ScrollBarWin11UI());
+        getVerticalScrollBar().setUnitIncrement(10);
+        getHorizontalScrollBar().setUnitIncrement(10);
         setLayout(new ScrollLayout());
     }
 
