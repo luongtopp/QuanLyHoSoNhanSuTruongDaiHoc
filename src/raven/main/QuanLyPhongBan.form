@@ -62,12 +62,12 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel1" min="-2" pref="83" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtMaDV" min="-2" pref="171" max="-2" attributes="0"/>
+                          <Component id="txtMaDonVi" min="-2" pref="171" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel2" min="-2" pref="83" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtTenDV" min="-2" pref="171" max="-2" attributes="0"/>
+                          <Component id="txtTenDonVi" min="-2" pref="171" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel3" min="-2" pref="83" max="-2" attributes="0"/>
@@ -100,14 +100,14 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtMaDV" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtMaDonVi" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtSDT" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtTenDV" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtTenDonVi" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtGmail" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -171,15 +171,18 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtMaDV">
+        <Component class="javax.swing.JTextField" name="txtMaDonVi">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtTenDV">
+        <Component class="javax.swing.JTextField" name="txtTenDonVi">
         </Component>
         <Component class="javax.swing.JTextField" name="txtSDT">
         </Component>
         <Component class="javax.swing.JTextField" name="txtDiaChi">
         </Component>
         <Component class="javax.swing.JTextField" name="txtGmail">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtGmailActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -338,6 +341,9 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblPhongBanMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

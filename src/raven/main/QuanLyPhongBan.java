@@ -4,6 +4,14 @@
  */
 package raven.main;
 
+import DAO.UserDAO;
+import Model.PhongBan;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author pvant
@@ -15,6 +23,7 @@ public class QuanLyPhongBan extends javax.swing.JPanel {
      */
     public QuanLyPhongBan() {
         initComponents();
+        hienThiBangPhongBan();
     }
 
     /**
@@ -32,8 +41,8 @@ public class QuanLyPhongBan extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtMaDV = new javax.swing.JTextField();
-        txtTenDV = new javax.swing.JTextField();
+        txtMaDonVi = new javax.swing.JTextField();
+        txtTenDonVi = new javax.swing.JTextField();
         txtSDT = new javax.swing.JTextField();
         txtDiaChi = new javax.swing.JTextField();
         txtGmail = new javax.swing.JTextField();
@@ -65,6 +74,12 @@ public class QuanLyPhongBan extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setText(bundle.getString("QuanLyPhongBan.jLabel5.text")); // NOI18N
 
+        txtGmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtGmailActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -75,11 +90,11 @@ public class QuanLyPhongBan extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtMaDV, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtMaDonVi, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTenDV, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtTenDonVi, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -104,13 +119,13 @@ public class QuanLyPhongBan extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel4)
-                    .addComponent(txtMaDV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMaDonVi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel5)
-                    .addComponent(txtTenDV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTenDonVi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtGmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,6 +224,11 @@ public class QuanLyPhongBan extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblPhongBan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPhongBanMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblPhongBan);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -233,26 +253,149 @@ public class QuanLyPhongBan extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+   private void hienThiBangPhongBan() {
+        DefaultTableModel model = (DefaultTableModel) tblPhongBan.getModel();
+        model.setRowCount(0);
+        for (PhongBan item : new UserDAO().timPhongBan()) {
+            model.addRow(new Object[]{
+                item.getMaPhongBan(),
+                item.getTenPhongBan(),
+                item.getDiaChiPhongBan(),
+                item.getSDTPhongBan(),
+                item.getEmailPhongBan()});
+        }
+
+    }
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
+        String MaDonVi = txtMaDonVi.getText();
+        String TenDonVi = txtTenDonVi.getText();
+        String DiaChi = txtDiaChi.getText();
+        String SDT = txtSDT.getText();
+        String Email = txtGmail.getText();
+
+        if (MaDonVi.equals("") || TenDonVi.equals("")
+                || DiaChi.equals("") || SDT.equals("") || Email.equals("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin Phòng ban!");
+        } else {
+            // TextField không rỗng
+            // kiểm tra số điện thoại có đúng định dạng 10 số hay không
+            String regexPattern = "\\d{10}";
+            if (!SDT.matches(regexPattern)) {
+                // đúng định dạng
+
+                JOptionPane.showMessageDialog(this, "Số điện thoại không đúng!");
+
+            } else {
+                UserDAO userDAO = new UserDAO();
+                try {
+                    userDAO.themPhongBan(MaDonVi, TenDonVi, DiaChi, SDT, Email);
+                } catch (SQLException ex) {
+                    //Logger.getLogger(DangKyJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                hienThiBangPhongBan();
+            }
+        }
+
+
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
+        String MaDonVi = txtMaDonVi.getText();
+        String TenDonVi = txtTenDonVi.getText();
+        String DiaChi = txtDiaChi.getText();
+        String SDT = txtSDT.getText();
+        String Email = txtGmail.getText();
+
+        if (MaDonVi.equals("") || TenDonVi.equals("")
+                || DiaChi.equals("") || SDT.equals("") || Email.equals("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin Phòng ban!");
+        } else {
+            // TextField không rỗng
+            // kiểm tra số điện thoại có đúng định dạng 10 số hay không
+            String regexPattern = "\\d{10}";
+            if (!SDT.matches(regexPattern)) {
+                // đúng định dạng
+
+                JOptionPane.showMessageDialog(this, "Số điện thoại không đúng!");
+
+            } else {
+                UserDAO userDAO = new UserDAO();
+                try {
+                    userDAO.suaPhongBan(MaDonVi, TenDonVi, DiaChi, SDT, Email);
+                } catch (SQLException ex) {
+                    //Logger.getLogger(DangKyJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                hienThiBangPhongBan();
+            }
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        // TODO add your handling code here:
+        String MaDonVi = txtMaDonVi.getText();
+        UserDAO userDAO = new UserDAO();
+        try {
+            userDAO.xoaPhongBan(MaDonVi);
+        } catch (SQLException ex) {
+            //Logger.getLogger(DangKyJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        hienThiBangPhongBan();
+
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
-        // TODO add your handling code here:
+        String MaDonVi = txtMaDonVi.getText();
+        DefaultTableModel model = (DefaultTableModel) tblPhongBan.getModel();
+        model.setRowCount(0);
+        try {
+            for (PhongBan item : new UserDAO().timKiemPhongBan(MaDonVi)) {
+                model.addRow(new Object[]{
+                    item.getMaPhongBan(),
+                    item.getTenPhongBan(),
+                    item.getDiaChiPhongBan(),
+                    item.getSDTPhongBan(),
+                    item.getEmailPhongBan()});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QuanLyPhongBan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
-        // TODO add your handling code here:
+        txtMaDonVi.setText("");
+        txtTenDonVi.setText("");
+        txtDiaChi.setText("");
+        txtSDT.setText("");
+        txtGmail.setText("");
+        txtMaDonVi.setEditable(true);
+        hienThiBangPhongBan();
     }//GEN-LAST:event_btnLamMoiActionPerformed
+
+    private void txtGmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtGmailActionPerformed
+
+    private void tblPhongBanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhongBanMouseClicked
+        int row = tblPhongBan.getSelectedRow();
+        String MaPhongBan = tblPhongBan.getValueAt(row, 0).toString();
+        String TenPhongBan = tblPhongBan.getValueAt(row, 1).toString();
+        String DiaChi = tblPhongBan.getValueAt(row, 2).toString();
+        String SDT = tblPhongBan.getValueAt(row, 3).toString();
+        String Email = tblPhongBan.getValueAt(row, 4).toString();
+
+        txtMaDonVi.setText(MaPhongBan);
+        txtTenDonVi.setText(TenPhongBan);
+        txtDiaChi.setText(DiaChi);
+        txtSDT.setText(SDT);
+        txtGmail.setText(Email);
+        txtMaDonVi.setEditable(false);
+
+    }//GEN-LAST:event_tblPhongBanMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -272,8 +415,8 @@ public class QuanLyPhongBan extends javax.swing.JPanel {
     private javax.swing.JTable tblPhongBan;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtGmail;
-    private javax.swing.JTextField txtMaDV;
+    private javax.swing.JTextField txtMaDonVi;
     private javax.swing.JTextField txtSDT;
-    private javax.swing.JTextField txtTenDV;
+    private javax.swing.JTextField txtTenDonVi;
     // End of variables declaration//GEN-END:variables
 }

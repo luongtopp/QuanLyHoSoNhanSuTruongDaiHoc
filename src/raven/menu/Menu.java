@@ -30,7 +30,7 @@ public class Menu extends JComponent {
         {"Thống kê"},
         {"Quản lý thông tin cán bộ", "Thông tin cán bộ", "Thông tin gia đình"},
         {"Quản lý Phòng ban-Chức vụ", "Phòng ban", "Chức vụ"},
-        {""},
+        {"Quá trình công tác cán bộ"},
         {"UI Kit", "Accordion", "Alerts", "Badges", "Breadcrumbs", "Buttons", "Button group"},
         {"Advanced UI", "Cropper", "Owl Carousel", "Sweet Alert"},
         {"Forms", "Basic Elements", "Advanced Elements", "SEditors", "Wizard"},
