@@ -24,8 +24,7 @@ public class Main extends javax.swing.JFrame {
                     switch (index) {
                         case 1 -> {
                             switch (subIndex) {
-                                case 1 -> {
-//                                    JScrollPane scrollPane = new JScrollPane(new QuanLyThongTinCanBo());
+                                case 1 -> {                                 
                                     showForm(new QuanLyThongTinCanBo());
                             }
                                 case 2 -> showForm(new HomeForm());

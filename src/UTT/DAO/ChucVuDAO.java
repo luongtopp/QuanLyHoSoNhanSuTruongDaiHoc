@@ -16,9 +16,19 @@ import java.util.List;
  * @author luongtopp
  */
 public class ChucVuDAO {
+
     public List<ChucVu> hienThiChucVu() {
         String sql = "SELECT * FROM chucvu";
         return selectChucVu(sql);
+    }
+
+    public String hienThiChucVu(String tenChucVu) {
+        if (!"".equals(tenChucVu)) {
+            String sql = "SELECT * FROM chucvu WHERE tenchucvu = N'" + tenChucVu + "'";
+            return selectChucVu(sql).get(0).getMaChucVu();
+        }
+        return "";
+
     }
 
     private List<ChucVu> selectChucVu(String sql, Object... args) {
@@ -49,5 +59,5 @@ public class ChucVuDAO {
         chucVu.setTenChucVu(rs.getString("tenchucvu"));
         return chucVu;
     }
-    
+
 }

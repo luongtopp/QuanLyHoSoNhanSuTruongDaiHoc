@@ -79,7 +79,7 @@ public class CanBoDAO {
                 + "    ),";
 
         PreparedStatement statement = JdbcHelper.preparedStatement(sql);
-        statement.setString(1, maCanBo); // value1, value2, value3 là các giá trị muốn thêm vào.
+        statement.setString(1, maCanBo);
         statement.setString(2, hoTenKhaiSinh);
         statement.setString(3, gioiTinh);
         statement.setString(4, ngaySinh);
@@ -99,9 +99,8 @@ public class CanBoDAO {
         statement.setString(18, trinhDoNgoaiNgu);
         statement.setString(19, maPhongBan);
         statement.setString(20, anh);
-
         statement.executeUpdate();
-        JdbcHelper.executeUpdate(sql, args);
+
     }
 
     private List<CanBo> selectCanBo(String sql, Object... args) {
@@ -149,6 +148,12 @@ public class CanBoDAO {
         canBo.setMaPhongBan(rs.getString("maphongban"));
         canBo.setAnh(rs.getString("anh"));
         return canBo;
+    }
+
+    public static void main(String[] args) throws SQLException {
+        new CanBoDAO().themCanBo("1", "LOL", "Nam", "2002-04-04", "Alone", "12345", "Thái Bình",
+                "Hà Nội", "luong@gmail.com", "Kinh", "Đức thánh chúa trời", "2023-04-04", "Giảng viên",
+                "CV01", "Chơi", "UTT", "2022-02-02", "Trung của", "PB206", "a.jpg", args);
     }
 
 }

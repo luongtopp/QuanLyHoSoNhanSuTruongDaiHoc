@@ -23,9 +23,12 @@ public class PhongBanDAO {
     }
 
     public String hienThiPhongBan(String tenPhongBan) {
-
-        String sql = "SELECT * FROM phongban WHERE tenphongban = N'" + tenPhongBan + "'";
-        return selectPhongBan(sql).get(0).getMaPhongBan();
+        if (!"".equals(tenPhongBan)) {
+            String sql = "SELECT * FROM phongban WHERE tenphongban = N'" + tenPhongBan + "'";
+            return selectPhongBan(sql).get(0).getMaPhongBan();
+        }
+//        System.out.println("".equals(tenPhongBan));
+        return "";
 
     }
 
@@ -62,6 +65,7 @@ public class PhongBanDAO {
     }
 
     public static void main(String[] args) {
-        new PhongBanDAO().hienThiPhongBan("Phòng Đào tạo");
+        String a = new PhongBanDAO().hienThiPhongBan("Phòng Đào tạo");
+        System.out.println(a);
     }
 }
