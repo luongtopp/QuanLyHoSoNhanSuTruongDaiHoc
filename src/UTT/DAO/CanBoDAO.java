@@ -5,6 +5,8 @@
 package UTT.DAO;
 
 import UTT.Connection.JdbcHelper;
+import static UTT.Connection.JdbcHelper.executeUpdate;
+import static UTT.Connection.JdbcHelper.preparedStatement;
 import UTT.Model.CanBo;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,11 @@ public class CanBoDAO {
 
     public List<CanBo> hienThiCanBo() {
         String sql = "SELECT * FROM canbo";
-        return selectCanBo(sql);
+        return timCanBo(sql);
+    }
+    public List<CanBo> hienThiCanBo(String timKiem) {
+        String sql = "{Call tim_kiem_can_bo(?)}";
+        return timCanBo(sql, timKiem);
     }
 
     public void themCanBo(String maCanBo, String hoTenKhaiSinh,
@@ -31,79 +37,104 @@ public class CanBoDAO {
             String noiDaoTao, String namTotNghiep, String trinhDoNgoaiNgu,
             String maPhongBan, String anh, Object... args) throws SQLException {
 
-        String sql = "INSERT INTO\n"
-                + "    `quan_ly_ho_so_nhan_su_truong_dai_hoc`.`canbo` (\n"
-                + "        `macanbo`,\n"
-                + "        `hotenkhaisinh`,\n"
-                + "        `gioitinh`,\n"
-                + "        `ngaysinh`,\n"
-                + "        `tinhtranghonnhan`,\n"
-                + "        `soCMND`,\n"
-                + "        `quequan`,\n"
-                + "        `noiohientai`,\n"
-                + "        `email`,\n"
-                + "        `dantoc`,\n"
-                + "        `tongiao`,\n"
-                + "        `ngayhopdong`,\n"
-                + "        `congviecduocgiao`,\n"
-                + "        `machucvu`,\n"
-                + "        `chuyennganhdaotao`,\n"
-                + "        `noidaotao`,\n"
-                + "        `namtotnghiep`,\n"
-                + "        `trinhdongoainnguthanhthaonhat`,\n"
-                + "        `maphongban`,\n"
-                + "        `anh`\n"
-                + "    )\n"
-                + "VALUES\n"
-                + "    (\n"
-                + "        '?',\n"
-                + "        N'?',\n"
-                + "        N'?',\n"
-                + "        '?',\n"
-                + "        N'?',\n"
-                + "        '?',\n"
-                + "        N'?',\n"
-                + "        N'?',\n"
-                + "        '?',\n"
-                + "        N'?',\n"
-                + "        N'?',\n"
-                + "        '?',\n"
-                + "        N'?',\n"
-                + "        '?',\n"
-                + "        N'?',\n"
-                + "        N'?',\n"
-                + "        '?',\n"
-                + "        N'?',\n"
-                + "        '?',\n"
-                + "        '?'\n"
-                + "    ),";
+        String sql = """
+                     INSERT INTO canbo (
+                             macanbo,
+                             hotenkhaisinh,
+                             gioitinh,
+                             ngaysinh,
+                             tinhtranghonnhan,
+                             soCMND,
+                             quequan,
+                             noiohientai,
+                             email,
+                             dantoc,
+                             tongiao,
+                             ngayhopdong,
+                             congviecduocgiao,
+                             machucvu,
+                             chuyennganhdaotao,
+                             noidaotao,
+                             namtotnghiep,
+                             trinhdongoainnguthanhthaonhat,
+                             maphongban,
+                             anh
+                         ) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""";
 
-        PreparedStatement statement = JdbcHelper.preparedStatement(sql);
-        statement.setString(1, maCanBo);
-        statement.setString(2, hoTenKhaiSinh);
-        statement.setString(3, gioiTinh);
-        statement.setString(4, ngaySinh);
-        statement.setString(5, tinhTrangHonNhan);
-        statement.setString(6, soCMND);
-        statement.setString(7, queQuan);
-        statement.setString(8, noiOHienTai);
-        statement.setString(9, email);
-        statement.setString(10, danToc);
-        statement.setString(11, tonGiao);
-        statement.setString(12, ngayHopDong);
-        statement.setString(13, congViecDuocGiao);
-        statement.setString(14, maChucVu);
-        statement.setString(15, chuyenNganhDaoTao);
-        statement.setString(16, noiDaoTao);
-        statement.setString(17, namTotNghiep);
-        statement.setString(18, trinhDoNgoaiNgu);
-        statement.setString(19, maPhongBan);
-        statement.setString(20, anh);
-        statement.executeUpdate();
+        try (PreparedStatement pstmt = preparedStatement(sql, maCanBo, hoTenKhaiSinh,
+                gioiTinh, ngaySinh, tinhTrangHonNhan,
+                soCMND, queQuan, noiOHienTai, email,
+                danToc, tonGiao, ngayHopDong,
+                congViecDuocGiao, maChucVu, chuyenNganhDaoTao,
+                noiDaoTao, namTotNghiep, trinhDoNgoaiNgu,
+                maPhongBan, anh
+        )) {
+            int rowsAffected = pstmt.executeUpdate();
+            System.out.println(rowsAffected + " row(s) affected.");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
 
     }
 
-    private List<CanBo> selectCanBo(String sql, Object... args) {
+    public void suaCanBo(String maCanBo, String hoTenKhaiSinh,
+            String gioiTinh, String ngaySinh, String tinhTrangHonNhan,
+            String soCMND, String queQuan, String noiOHienTai, String email,
+            String danToc, String tonGiao, String ngayHopDong,
+            String congViecDuocGiao, String maChucVu, String chuyenNganhDaoTao,
+            String noiDaoTao, String namTotNghiep, String trinhDoNgoaiNgu,
+            String maPhongBan, String anh, Object... args) throws SQLException {
+        String sql = """
+                     UPDATE canbo 
+                     SET
+                     hotenkhaisinh = ?,
+                     gioitinh = ?,
+                     ngaysinh = ?,
+                     tinhtranghonnhan = ?,
+                     soCMND = ?,
+                     quequan = ?,
+                     noiohientai = ?,
+                     email = ?,
+                     dantoc = ?,
+                     tongiao = ?,
+                     ngayhopdong = ?,
+                     congviecduocgiao = ?,
+                     machucvu = ?,
+                     chuyennganhdaotao = ?,
+                     noidaotao = ?,
+                     namtotnghiep = ?,
+                     trinhdongoainnguthanhthaonhat = ?,
+                     maphongban = ?,
+                     anh = ?
+                     WHERE macanbo = ?""";
+        try {
+            executeUpdate(sql, hoTenKhaiSinh,
+                    gioiTinh, ngaySinh, tinhTrangHonNhan,
+                    soCMND, queQuan, noiOHienTai, email,
+                    danToc, tonGiao, ngayHopDong,
+                    congViecDuocGiao, maChucVu, chuyenNganhDaoTao,
+                    noiDaoTao, namTotNghiep, trinhDoNgoaiNgu,
+                    maPhongBan, anh, maCanBo
+            );
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+    }
+
+    public void xoaCanBo(String maCanBo, Object... args) throws SQLException {
+        String sql = """
+                      DELETE FROM canbo WHERE macanbo = ?
+                     """;
+        try {
+            executeUpdate(sql, maCanBo);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+    }
+
+    private List<CanBo> timCanBo(String sql, Object... args) {
         List<CanBo> list = new ArrayList<>();
         try {
             ResultSet rs = null;
@@ -151,9 +182,11 @@ public class CanBoDAO {
     }
 
     public static void main(String[] args) throws SQLException {
-        new CanBoDAO().themCanBo("1", "LOL", "Nam", "2002-04-04", "Alone", "12345", "Thái Bình",
-                "Hà Nội", "luong@gmail.com", "Kinh", "Đức thánh chúa trời", "2023-04-04", "Giảng viên",
-                "CV01", "Chơi", "UTT", "2022-02-02", "Trung của", "PB206", "a.jpg", args);
+        List<CanBo>  list =new CanBoDAO().hienThiCanBo("Hà Nội");
+        for(var item : list) {
+            System.out.println(item.getMaCanBo());
+        }
+        
     }
 
 }
