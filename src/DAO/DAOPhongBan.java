@@ -5,6 +5,7 @@
 package DAO;
 
 import Connection.JdbcHelper;
+import Model.CanBo;
 import Model.PhongBan;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,7 @@ public class DAOPhongBan {
         return selectPhongBan(sql);
     }
     
+ 
      public List<PhongBan> timKiemPhongBan(String MaPhongBan)throws SQLException {
         String sql = "SELECT * FROM phongban WHERE maphongban like '%" + MaPhongBan+ "%'";
       return selectPhongBan(sql);

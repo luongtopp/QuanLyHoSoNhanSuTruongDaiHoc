@@ -210,6 +210,11 @@ public class QuanLyPhongBan1 extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblPhongBan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPhongBanMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblPhongBan);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -355,6 +360,22 @@ public class QuanLyPhongBan1 extends javax.swing.JPanel {
         txtMaPhongBan.setEditable(true);
         hienThiBangPhongBan();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void tblPhongBanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhongBanMouseClicked
+       int row = tblPhongBan.getSelectedRow();
+        String MaPhongBan = tblPhongBan.getValueAt(row, 0).toString();
+        String TenPhongBan = tblPhongBan.getValueAt(row, 1).toString();
+        String DiaChi = tblPhongBan.getValueAt(row, 2).toString();
+        String SDT = tblPhongBan.getValueAt(row, 3).toString();
+        String Email = tblPhongBan.getValueAt(row, 4).toString();
+
+        txtMaPhongBan.setText(MaPhongBan);
+        txtTenPhongBan.setText(TenPhongBan);
+        txtDiaChi.setText(DiaChi);
+        txtSDT.setText(SDT);
+        txtEmail.setText(Email);
+        txtMaPhongBan.setEditable(false);
+    }//GEN-LAST:event_tblPhongBanMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
