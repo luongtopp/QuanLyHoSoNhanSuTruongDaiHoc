@@ -15,7 +15,7 @@ import java.sql.SQLException;
  *
  * @author luongtopp
  */
-public class UserDAO {
+public class DAOPhongBan {
     
     public void themPhongBan(String maPhongBan, String tenPhongBan, String DiaChi, String SDT, String Email) throws SQLException {
         String sql = "INSERT into phongban(maphongban, tenphongban, diachi, sdt, email) VALUES( "
@@ -26,6 +26,8 @@ public class UserDAO {
                  + ",N'" + Email + "')";
         update(sql);
     }
+    
+  
 
     public List<PhongBan> timPhongBan() {
         String sql = "SELECT * FROM phongban";

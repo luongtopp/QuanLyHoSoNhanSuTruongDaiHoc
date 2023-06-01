@@ -4,7 +4,7 @@
  */
 package raven.main;
 
-import DAO.UserDAO;
+import DAO.DAOPhongBan;
 import Model.PhongBan;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -256,7 +256,7 @@ public class QuanLyPhongBan extends javax.swing.JPanel {
    private void hienThiBangPhongBan() {
         DefaultTableModel model = (DefaultTableModel) tblPhongBan.getModel();
         model.setRowCount(0);
-        for (PhongBan item : new UserDAO().timPhongBan()) {
+        for (PhongBan item : new DAOPhongBan().timPhongBan()) {
             model.addRow(new Object[]{
                 item.getMaPhongBan(),
                 item.getTenPhongBan(),
@@ -287,7 +287,7 @@ public class QuanLyPhongBan extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Số điện thoại không đúng!");
 
             } else {
-                UserDAO userDAO = new UserDAO();
+                DAOPhongBan userDAO = new DAOPhongBan();
                 try {
                     userDAO.themPhongBan(MaDonVi, TenDonVi, DiaChi, SDT, Email);
                 } catch (SQLException ex) {
@@ -321,7 +321,7 @@ public class QuanLyPhongBan extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Số điện thoại không đúng!");
 
             } else {
-                UserDAO userDAO = new UserDAO();
+                DAOPhongBan userDAO = new DAOPhongBan();
                 try {
                     userDAO.suaPhongBan(MaDonVi, TenDonVi, DiaChi, SDT, Email);
                 } catch (SQLException ex) {
@@ -335,7 +335,7 @@ public class QuanLyPhongBan extends javax.swing.JPanel {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         String MaDonVi = txtMaDonVi.getText();
-        UserDAO userDAO = new UserDAO();
+        DAOPhongBan userDAO = new DAOPhongBan();
         try {
             userDAO.xoaPhongBan(MaDonVi);
         } catch (SQLException ex) {
@@ -351,7 +351,7 @@ public class QuanLyPhongBan extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblPhongBan.getModel();
         model.setRowCount(0);
         try {
-            for (PhongBan item : new UserDAO().timKiemPhongBan(MaDonVi)) {
+            for (PhongBan item : new DAOPhongBan().timKiemPhongBan(MaDonVi)) {
                 model.addRow(new Object[]{
                     item.getMaPhongBan(),
                     item.getTenPhongBan(),
