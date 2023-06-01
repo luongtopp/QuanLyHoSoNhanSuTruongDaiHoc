@@ -36,7 +36,7 @@ public class Main extends javax.swing.JFrame {
                         case 2:
                             switch (subIndex) {
                                 case 1:
-                                    showForm(new QuanLyPhongBan());
+                                    showForm(new QuanLyPhongBan1());
                                     break;
                                 case 2:
                                     showForm(new QuanLyChucVu());

@@ -26,6 +26,10 @@ public class CanBoDAO {
         String sql = "SELECT * FROM canbo";
         return timCanBo(sql);
     }
+     public List<CanBo> timKiemCanBo(String timkiem) {
+        String sql = "SELECT * FROM canbo";
+        return timCanBo(sql);
+    }
     public List<CanBo> hienThiCanBo(String timKiem) {
         String sql = "{Call tim_kiem_can_bo(?)}";
         return timCanBo(sql, timKiem);
