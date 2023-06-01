@@ -11,7 +11,7 @@ public class CanBo {
     public CanBo() {
     }
 
-    public CanBo(String maCanBo, String hoTenKhaiSinh, String gioiTinh, Date ngaySinh, String tinhTrangHonNhan, String soCMND, String queQuan, String noiOHienTai, String email, String danToc, String tonGiao, Date ngayHopDong, String congViecDuocGiao, String maChucVu, String chuyenNganhDaoTao, String noiDaoTao, int namTotNghiep, String trinhDoNgoaiNgu, String maPhongBan, String anh) {
+    public CanBo(String maCanBo, String hoTenKhaiSinh, String gioiTinh, Date ngaySinh, String tinhTrangHonNhan, String soCMND, String queQuan, String noiOHienTai, String email, String danToc, String tonGiao, Date ngayHopDong, String congViecDuocGiao, String maChucVu, String chuyenNganhDaoTao, String noiDaoTao, int namTotNghiep, String trinhDoNgoaiNgu, String maPhongBan) {
         this.maCanBo = maCanBo;
         this.hoTenKhaiSinh = hoTenKhaiSinh;
         this.gioiTinh = gioiTinh;
@@ -31,7 +31,6 @@ public class CanBo {
         this.namTotNghiep = namTotNghiep;
         this.trinhDoNgoaiNgu = trinhDoNgoaiNgu;
         this.maPhongBan = maPhongBan;
-        this.anh = anh;
     }
 
     public String getMaCanBo() {
@@ -186,14 +185,6 @@ public class CanBo {
         this.maPhongBan = maPhongBan;
     }
 
-    public String getAnh() {
-        return anh;
-    }
-
-    public void setAnh(String anh) {
-        this.anh = anh;
-    }
-    
     String maCanBo;
     String hoTenKhaiSinh;
     String gioiTinh;
@@ -213,6 +204,5 @@ public class CanBo {
     int namTotNghiep;
     String trinhDoNgoaiNgu;
     String maPhongBan;
-    String anh;
 
 }

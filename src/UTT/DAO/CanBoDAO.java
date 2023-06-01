@@ -37,7 +37,7 @@ public class CanBoDAO {
             String danToc, String tonGiao, String ngayHopDong,
             String congViecDuocGiao, String maChucVu, String chuyenNganhDaoTao,
             String noiDaoTao, String namTotNghiep, String trinhDoNgoaiNgu,
-            String maPhongBan, String anh, Object... args) throws SQLException {
+            String maPhongBan, Object... args) throws SQLException {
 
         String sql = """
                      INSERT INTO canbo (
@@ -59,9 +59,9 @@ public class CanBoDAO {
                              noidaotao,
                              namtotnghiep,
                              trinhdongoainnguthanhthaonhat,
-                             maphongban,
-                             anh
-                         ) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""";
+                             maphongban
+                          
+                         ) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""";
 
         try (PreparedStatement pstmt = preparedStatement(sql, maCanBo, hoTenKhaiSinh,
                 gioiTinh, ngaySinh, tinhTrangHonNhan,
@@ -69,7 +69,7 @@ public class CanBoDAO {
                 danToc, tonGiao, ngayHopDong,
                 congViecDuocGiao, maChucVu, chuyenNganhDaoTao,
                 noiDaoTao, namTotNghiep, trinhDoNgoaiNgu,
-                maPhongBan, anh
+                maPhongBan
         )) {
             int rowsAffected = pstmt.executeUpdate();
             System.out.println(rowsAffected + " row(s) affected.");
@@ -85,7 +85,7 @@ public class CanBoDAO {
             String danToc, String tonGiao, String ngayHopDong,
             String congViecDuocGiao, String maChucVu, String chuyenNganhDaoTao,
             String noiDaoTao, String namTotNghiep, String trinhDoNgoaiNgu,
-            String maPhongBan, String anh, Object... args) throws SQLException {
+            String maPhongBan, Object... args) throws SQLException {
         String sql = """
                      UPDATE canbo 
                      SET
@@ -106,8 +106,7 @@ public class CanBoDAO {
                      noidaotao = ?,
                      namtotnghiep = ?,
                      trinhdongoainnguthanhthaonhat = ?,
-                     maphongban = ?,
-                     anh = ?
+                     maphongban = ?
                      WHERE macanbo = ?""";
         try {
             executeUpdate(sql, hoTenKhaiSinh,
@@ -116,7 +115,7 @@ public class CanBoDAO {
                     danToc, tonGiao, ngayHopDong,
                     congViecDuocGiao, maChucVu, chuyenNganhDaoTao,
                     noiDaoTao, namTotNghiep, trinhDoNgoaiNgu,
-                    maPhongBan, anh, maCanBo
+                    maPhongBan, maCanBo
             );
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -179,12 +178,11 @@ public class CanBoDAO {
         canBo.setNamTotNghiep(rs.getInt("namtotnghiep"));
         canBo.setTrinhDoNgoaiNgu(rs.getNString("trinhdongoainnguthanhthaonhat"));
         canBo.setMaPhongBan(rs.getString("maphongban"));
-        canBo.setAnh(rs.getString("anh"));
         return canBo;
     }
 
     public static void main(String[] args) throws SQLException {
-        List<CanBo>  list =new CanBoDAO().hienThiCanBo("Hà Nội");
+        List<CanBo>  list =new CanBoDAO().hienThiCanBo();
         for(var item : list) {
             System.out.println(item.getMaCanBo());
         }
