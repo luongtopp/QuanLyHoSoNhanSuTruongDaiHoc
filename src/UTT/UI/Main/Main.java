@@ -24,15 +24,17 @@ public class Main extends javax.swing.JFrame {
                     switch (index) {
                         case 1 -> {
                             switch (subIndex) {
-                                case 1 -> {                                 
+                                case 1 -> {
                                     showForm(new QuanLyThongTinCanBo());
+                                }
+                                case 2 -> {
+                                    showForm(new QuanLyThongTinGiaDinh());
+                                }
                             }
-                                case 2 -> showForm(new HomeForm());
-                            }
+
                         }
 
                     }
-
                     System.out.println("Form : " + index + " " + subIndex);
                 }
             }

@@ -62,7 +62,7 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
                         item.getNoiDaoTao(),
                         item.getNamTotNghiep(),
                         item.getTrinhDoNgoaiNgu(),
-                        item.getMaPhongBan(),
+                        item.getMaPhongBan()
                     }
             );
         }
@@ -94,8 +94,8 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
                         item.getNoiDaoTao(),
                         item.getNamTotNghiep(),
                         item.getTrinhDoNgoaiNgu(),
-                        item.getMaPhongBan(),
-                        item.getAnh()
+                        item.getMaPhongBan()
+       
                     }
             );
         }
@@ -862,9 +862,7 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         }
 
        
-        if ("".equals(maCanBo)) {
-
-        }
+        
         try {
             new CanBoDAO().themCanBo(maCanBo, hoTenKhaiSinh,
                     gioiTinh, chuoiNgaySinh, tinhTrangHonNhan,
