@@ -7,9 +7,14 @@ import UTT.Model.CanBo;
 import UTT.Model.ChucVu;
 import UTT.Model.PhongBan;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -27,10 +32,12 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         hienThiBangCanBo();
         hienThiBangPhongBan();
         hienThiBangChucVu();
-//        cboTenPhongBan.setSelectedIndex(-1);
+        tblCanBo.setComponentPopupMenu(jPopupMenu1);
 
+//        cboTenPhongBan.setSelectedIndex(-1);
     }
 
+    // Hiển thị bảng CÁN BỘ không tham số
     private void hienThiBangCanBo() {
         DefaultTableModel model = (DefaultTableModel) tblCanBo.getModel();
         model.setRowCount(0);
@@ -62,9 +69,51 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         }
     }
 
+    // Hiển thị bảng CÁN BỘ có tham số
+    private void hienThiBangCanBo(String timKiem) {
+
+        DefaultTableModel model = (DefaultTableModel) tblCanBo.getModel();
+        model.setRowCount(0);
+        for (CanBo item : new CanBoDAO().hienThiCanBo(timKiem)) {
+            model.addRow(
+                    new Object[]{
+                        item.getMaCanBo(),
+                        item.getHoTenKhaiSinh(),
+                        item.getGioiTinh(),
+                        item.getNgaySinh(),
+                        item.getTinhTrangHonNhan(),
+                        item.getSoCMND(),
+                        item.getQueQuan(),
+                        item.getNoiOHienTai(),
+                        item.getEmail(),
+                        item.getDanToc(),
+                        item.getTonGiao(),
+                        item.getNgayHopDong(),
+                        item.getCongViecDuocGiao(),
+                        item.getMaChucVu(),
+                        item.getChuyenNganhDaoTao(),
+                        item.getNoiDaoTao(),
+                        item.getNamTotNghiep(),
+                        item.getTrinhDoNgoaiNgu(),
+                        item.getMaPhongBan(),
+                        item.getAnh()
+                    }
+            );
+        }
+    }
+
+    // Hiển COMBOBOX PHÒNG BAN 
     private void hienThiBangPhongBan() {
 
         for (PhongBan item : new PhongBanDAO().hienThiPhongBan()) {
+            cboTenPhongBan.addItem(item.getTenPhongBan());
+
+        }
+    }
+
+    private void hienThiBangPhongBan(String timKiem) {
+
+        for (PhongBan item : new PhongBanDAO().timKiemTenPhongBan(timKiem)) {
             cboTenPhongBan.addItem(item.getTenPhongBan());
 
         }
@@ -82,15 +131,21 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        menuItemSua = new javax.swing.JMenuItem();
+        menuItemXoa = new javax.swing.JMenuItem();
         scrollPaneWin111 = new UTT.UI.scroll.win11.ScrollPaneWin11();
         jPanel1 = new javax.swing.JPanel();
+        pnlChucNang1 = new javax.swing.JPanel();
+        btnTimKiem = new javax.swing.JButton();
+        txtTimKiem = new javax.swing.JTextField();
+        btnLamMoi = new javax.swing.JButton();
         pnlCaNhanCon = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtTenKhaiSinh = new javax.swing.JTextField();
-        txtNgaySinh = new javax.swing.JTextField();
         txtQueQuan = new javax.swing.JTextField();
         txtNoiOHienTai = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -107,6 +162,7 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         pnlGioiTinh = new javax.swing.JPanel();
         rdoNu = new javax.swing.JRadioButton();
         rdoNam = new javax.swing.JRadioButton();
+        txtNgaySinh = new com.toedter.calendar.JDateChooser();
         pnlCongViec = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -114,7 +170,6 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         jLabel18 = new javax.swing.JLabel();
         txtMaCanBo = new javax.swing.JTextField();
         txtMaPhongBan = new javax.swing.JTextField();
-        txtNgayHopDong = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         txtCongViecDuocGiao = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
@@ -125,13 +180,12 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         txtNoiDaoTao = new javax.swing.JTextField();
-        txtNamTotNghiep = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         txtTrinhDoNgoaiNgu = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        txtAnh = new javax.swing.JTextField();
         txtMaChucVu = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
+        txtNgayHopDong = new com.toedter.calendar.JDateChooser();
+        txtNamTotNghiep = new javax.swing.JTextField();
         pnlChucNang = new javax.swing.JPanel();
         btnThem = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
@@ -140,9 +194,61 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         scrollPaneWin112 = new UTT.UI.scroll.win11.ScrollPaneWin11();
         tblCanBo = new javax.swing.JTable();
 
+        menuItemSua.setText("Sửa");
+        menuItemSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemSuaActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(menuItemSua);
+
+        menuItemXoa.setText("Xóa");
+        menuItemXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemXoaActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(menuItemXoa);
+
         setPreferredSize(new java.awt.Dimension(866, 728));
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
+
+        pnlChucNang1.setBackground(new java.awt.Color(255, 255, 255));
+        pnlChucNang1.setLayout(new java.awt.GridBagLayout());
+
+        btnTimKiem.setText("Tìm kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
+        pnlChucNang1.add(btnTimKiem, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 300;
+        pnlChucNang1.add(txtTimKiem, gridBagConstraints);
+
+        btnLamMoi.setText("Làm mới");
+        btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLamMoiActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 70);
+        pnlChucNang1.add(btnLamMoi, gridBagConstraints);
+
+        jPanel1.add(pnlChucNang1);
 
         pnlCaNhanCon.setBackground(new java.awt.Color(255, 255, 255));
         pnlCaNhanCon.setBorder(javax.swing.BorderFactory.createTitledBorder("Cá nhân"));
@@ -188,13 +294,6 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         pnlCaNhanCon.add(txtTenKhaiSinh, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 123;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(txtNgaySinh, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -325,11 +424,25 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         pnlCaNhanCon.add(pnlGioiTinh, gridBagConstraints);
 
+        txtNgaySinh.setBackground(new java.awt.Color(255, 255, 255));
+        txtNgaySinh.setDateFormatString("yyyy-MM-dd");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 97;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        pnlCaNhanCon.add(txtNgaySinh, gridBagConstraints);
+
         jPanel1.add(pnlCaNhanCon);
 
         pnlCongViec.setBackground(new java.awt.Color(255, 255, 255));
         pnlCongViec.setBorder(javax.swing.BorderFactory.createTitledBorder("Công việc"));
-        pnlCongViec.setLayout(new java.awt.GridBagLayout());
+        java.awt.GridBagLayout pnlCongViecLayout = new java.awt.GridBagLayout();
+        pnlCongViecLayout.columnWidths = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        pnlCongViecLayout.rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        pnlCongViec.setLayout(pnlCongViecLayout);
 
         jLabel13.setText("Mã cán bộ:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -342,7 +455,7 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         jLabel15.setText("Tên phòng ban:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         pnlCongViec.add(jLabel15, gridBagConstraints);
@@ -350,7 +463,7 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         jLabel17.setText("Mã phòng ban:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.ipadx = 36;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
@@ -359,7 +472,7 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         jLabel18.setText("Ngày hợp đồng:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.ipadx = 36;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
@@ -375,29 +488,22 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         txtMaPhongBan.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 123;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViec.add(txtMaPhongBan, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.ipadx = 123;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViec.add(txtNgayHopDong, gridBagConstraints);
+        pnlCongViec.add(txtMaPhongBan, gridBagConstraints);
 
         jLabel22.setText("Công việc được giao:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         pnlCongViec.add(jLabel22, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.ipadx = 123;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
@@ -406,7 +512,7 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         jLabel25.setText("Chức vụ hiện tại:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         pnlCongViec.add(jLabel25, gridBagConstraints);
@@ -420,7 +526,7 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.ipadx = 115;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
@@ -436,7 +542,7 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.ipadx = 115;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
@@ -460,7 +566,7 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         jLabel4.setText("Nơi đào tạo:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         pnlCongViec.add(jLabel4, gridBagConstraints);
@@ -468,73 +574,68 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         jLabel28.setText("Năm tốt nghiệp:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         pnlCongViec.add(jLabel28, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 123;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViec.add(txtNoiDaoTao, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.ipadx = 123;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViec.add(txtNamTotNghiep, gridBagConstraints);
+        pnlCongViec.add(txtNoiDaoTao, gridBagConstraints);
 
         jLabel14.setText("Trình độ ngoại ngữ:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.ipadx = 36;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         pnlCongViec.add(jLabel14, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.ipadx = 123;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         pnlCongViec.add(txtTrinhDoNgoaiNgu, gridBagConstraints);
 
-        jLabel16.setText("Ảnh:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViec.add(jLabel16, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 100;
-        gridBagConstraints.ipady = 100;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        pnlCongViec.add(txtAnh, gridBagConstraints);
-
         txtMaChucVu.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.ipadx = 123;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         pnlCongViec.add(txtMaChucVu, gridBagConstraints);
 
         jLabel19.setText("Mã chức vụ:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         pnlCongViec.add(jLabel19, gridBagConstraints);
+
+        txtNgayHopDong.setBackground(new java.awt.Color(255, 255, 255));
+        txtNgayHopDong.setDateFormatString("yyyy-MM-dd");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 97;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        pnlCongViec.add(txtNgayHopDong, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.ipadx = 123;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        pnlCongViec.add(txtNamTotNghiep, gridBagConstraints);
 
         jPanel1.add(pnlCongViec);
 
@@ -555,6 +656,11 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         pnlChucNang.add(btnThem, gridBagConstraints);
 
         btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -563,6 +669,11 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         pnlChucNang.add(btnSua, gridBagConstraints);
 
         btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -571,6 +682,11 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         pnlChucNang.add(btnXoa, gridBagConstraints);
 
         btnHuy.setText("Hủy");
+        btnHuy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHuyActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
@@ -614,59 +730,442 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cboTenPhongBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTenPhongBanActionPerformed
-        txtMaPhongBan.setText(new PhongBanDAO().hienThiPhongBan((String) cboTenPhongBan.getSelectedItem()));
+        String maPhongBan = (String) cboTenPhongBan.getSelectedItem();
+        if ("".equals(maPhongBan)) {
+        } else {
+            txtMaPhongBan.setText(new PhongBanDAO().timKiemMaPhongBan(maPhongBan).get(0).getMaPhongBan());
+        }
     }//GEN-LAST:event_cboTenPhongBanActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
 
         String maCanBo = txtMaCanBo.getText();
+        if (maCanBo == null || maCanBo.trim().isEmpty()) {
+            maCanBo = JOptionPane.showInputDialog("Nhập lại mã cán bộ:");
+            txtMaCanBo.setText(maCanBo);
+        }
         String hoTenKhaiSinh = txtTenKhaiSinh.getText();
+        if (hoTenKhaiSinh == null || hoTenKhaiSinh.trim().isEmpty()) {
+            hoTenKhaiSinh = JOptionPane.showInputDialog("Nhập lại họ tên khai sinh:");
+            txtTenKhaiSinh.setText(hoTenKhaiSinh);
+        }
         String gioiTinh = "";
         if (rdoNam.isSelected()) {
             gioiTinh = "Nam";
         } else {
-            gioiTinh = "Nữ";
+            if (rdoNu.isSelected()) {
+                gioiTinh = "Nữ";
+            } else {
+                JOptionPane.showMessageDialog(null, "Vui lòng chọn giới tính.");
+            }
+
         }
-        String ngaySinh = txtNgaySinh.getText();
+        String chuoiNgaySinh = "";
+        Date ngaySinh = txtNgaySinh.getDate();
+        if (ngaySinh == null) {
+            JOptionPane.showMessageDialog(null, "Nhập lại ngày sinh:");
+        } else {
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            chuoiNgaySinh = df.format(txtNgaySinh.getDate());
+            System.out.println(ngaySinh);
+        }
+
         String tinhTrangHonNhan = txtHonNhan.getText();
+        if (tinhTrangHonNhan == null || tinhTrangHonNhan.trim().isEmpty()) {
+            tinhTrangHonNhan = JOptionPane.showInputDialog("Nhập lại tình trạng hôn nhân:");
+            txtHonNhan.setText(tinhTrangHonNhan);
+        }
+
         String soCMND = txtSoCMND.getText();
+        if (soCMND == null || soCMND.trim().isEmpty()) {
+            soCMND = JOptionPane.showInputDialog("Nhập lại số CMND:");
+            txtSoCMND.setText(soCMND);
+
+        }
+
         String queQuan = txtQueQuan.getText();
+        if (queQuan == null || queQuan.trim().isEmpty()) {
+            queQuan = JOptionPane.showInputDialog("Nhập lại quê quán:");
+            txtQueQuan.setText(queQuan);
+        }
+
         String noiOHienTai = txtNoiOHienTai.getText();
+        if (noiOHienTai == null || noiOHienTai.trim().isEmpty()) {
+            noiOHienTai = JOptionPane.showInputDialog("Nhập lại nơi ở hiện tại:");
+            txtNoiOHienTai.setText(noiOHienTai);
+        }
+
         String email = txtEmail.getText();
+        if (email == null || email.trim().isEmpty()) {
+            email = JOptionPane.showInputDialog("Nhập lại email:");
+            txtEmail.setText(email);
+        }
+
         String danToc = txtDanToc.getText();
+        if (danToc == null || danToc.trim().isEmpty()) {
+            danToc = JOptionPane.showInputDialog("Nhập lại dân tộc:");
+            txtDanToc.setText(danToc);
+        }
+
         String tonGiao = txtTonGiao.getText();
-        String ngayHopDong = txtNgayHopDong.getText();
+        if (tonGiao == null || tonGiao.trim().isEmpty()) {
+            tonGiao = JOptionPane.showInputDialog("Nhập lại tôn giáo:");
+            txtTonGiao.setText(tonGiao);
+        }
+
+        String chuoiNgayHopDong = "";
+        Date ngayHopDong = txtNgayHopDong.getDate();
+        if (ngayHopDong == null) {
+            JOptionPane.showMessageDialog(null, "Nhập lại ngày hợp đồng:");
+        } else {
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            chuoiNgayHopDong = df.format(txtNgaySinh.getDate());
+            System.out.println(chuoiNgayHopDong);
+        }
+
         String congViecDuocGiao = txtCongViecDuocGiao.getText();
-        String maChucVu = "";
+        if (congViecDuocGiao == null || congViecDuocGiao.trim().isEmpty()) {
+            congViecDuocGiao = JOptionPane.showInputDialog("Nhập lại công việc được giao:");
+            txtCongViecDuocGiao.setText(congViecDuocGiao);
+        }
+        String maChucVu = txtMaChucVu.getText();
+        while (maChucVu == null || maChucVu.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn chức vụ");
+        }
+
         String chuyenNganhDaoTao = txtChuyenNganhDaoTao.getText();
+        if (chuyenNganhDaoTao == null || chuyenNganhDaoTao.trim().isEmpty()) {
+            chuyenNganhDaoTao = JOptionPane.showInputDialog("Nhập lại chuyên ngành đào tạo:");
+            txtChuyenNganhDaoTao.setText(chuyenNganhDaoTao);
+        }
+
         String noiDaoTao = txtNoiDaoTao.getText();
+        if (noiDaoTao == null || noiDaoTao.trim().isEmpty()) {
+            noiDaoTao = JOptionPane.showInputDialog("Nhập lại nơi đào tạo:");
+            txtNoiDaoTao.setText(noiDaoTao);
+        }
+
         String namTotNghiep = txtNamTotNghiep.getText();
+        if (namTotNghiep == null || namTotNghiep.trim().isEmpty()) {
+            namTotNghiep = JOptionPane.showInputDialog("Nhập lại năm tốt nghiệp:");
+            txtNamTotNghiep.setText(namTotNghiep);
+        }
+
         String trinhDoNgoaiNgu = txtTrinhDoNgoaiNgu.getText();
+        if (trinhDoNgoaiNgu == null || trinhDoNgoaiNgu.trim().isEmpty()) {
+            trinhDoNgoaiNgu = JOptionPane.showInputDialog("Nhập lại trình độ ngoại ngữ:");
+            txtTrinhDoNgoaiNgu.setText(trinhDoNgoaiNgu);
+        }
+
         String maPhongBan = txtMaPhongBan.getText();
-        String anh = txtAnh.getText();
+        if (maPhongBan == null || maPhongBan.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn phòng ban");
+        }
+
+       
+        if ("".equals(maCanBo)) {
+
+        }
         try {
             new CanBoDAO().themCanBo(maCanBo, hoTenKhaiSinh,
-                    gioiTinh, ngaySinh, tinhTrangHonNhan,
+                    gioiTinh, chuoiNgaySinh, tinhTrangHonNhan,
                     soCMND, queQuan, noiOHienTai, email,
-                    danToc, tonGiao, ngayHopDong,
+                    danToc, tonGiao, chuoiNgayHopDong,
                     congViecDuocGiao, maChucVu, chuyenNganhDaoTao,
                     noiDaoTao, namTotNghiep, trinhDoNgoaiNgu,
-                    maPhongBan, anh,
-                     null);
+                    maPhongBan,
+                    null);
         } catch (SQLException ex) {
             Logger.getLogger(QuanLyThongTinCanBo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        hienThiBangCanBo();
     }//GEN-LAST:event_btnThemActionPerformed
 
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        hienThiBangCanBo(txtTimKiem.getText());
+    }//GEN-LAST:event_btnTimKiemActionPerformed
+
+    private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
+        hienThiBangCanBo();
+        txtTimKiem.setText("");
+    }//GEN-LAST:event_btnLamMoiActionPerformed
+
+    private void menuItemSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSuaActionPerformed
+        txtMaCanBo.setEnabled(false);
+        txtMaCanBo.setText(tblCanBo.getModel().getValueAt(tblCanBo.getSelectedRow(), 0).toString());
+        txtTenKhaiSinh.setText(tblCanBo.getModel().getValueAt(tblCanBo.getSelectedRow(), 1).toString());
+
+        String gioiTinh = tblCanBo.getModel().getValueAt(tblCanBo.getSelectedRow(), 2).toString();
+        if ("Nam".equals(gioiTinh)) {
+            rdoNam.setSelected(true);
+        } else {
+            rdoNu.setSelected(true);
+        }
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date ngaySinh = null;
+        try {
+            ngaySinh = df.parse(tblCanBo.getModel().getValueAt(tblCanBo.getSelectedRow(), 3).toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        txtNgaySinh.setDate(ngaySinh);
+
+        txtHonNhan.setText(tblCanBo.getModel().getValueAt(tblCanBo.getSelectedRow(), 4).toString());
+        txtSoCMND.setText(tblCanBo.getModel().getValueAt(tblCanBo.getSelectedRow(), 5).toString());
+        txtQueQuan.setText(tblCanBo.getModel().getValueAt(tblCanBo.getSelectedRow(), 6).toString());
+        txtNoiOHienTai.setText(tblCanBo.getModel().getValueAt(tblCanBo.getSelectedRow(), 7).toString());
+        txtEmail.setText(tblCanBo.getModel().getValueAt(tblCanBo.getSelectedRow(), 8).toString());
+        txtDanToc.setText(tblCanBo.getModel().getValueAt(tblCanBo.getSelectedRow(), 9).toString());
+        txtTonGiao.setText(tblCanBo.getModel().getValueAt(tblCanBo.getSelectedRow(), 10).toString());
+
+        Date ngayHopDong = null;
+        try {
+            ngayHopDong = df.parse(tblCanBo.getModel().getValueAt(tblCanBo.getSelectedRow(), 11).toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        txtNgayHopDong.setDate(ngayHopDong);
+        txtCongViecDuocGiao.setText(tblCanBo.getModel().getValueAt(tblCanBo.getSelectedRow(), 12).toString());
+        txtMaChucVu.setText(tblCanBo.getModel().getValueAt(tblCanBo.getSelectedRow(), 13).toString());
+        txtChuyenNganhDaoTao.setText(tblCanBo.getModel().getValueAt(tblCanBo.getSelectedRow(), 14).toString());
+        txtNoiDaoTao.setText(tblCanBo.getModel().getValueAt(tblCanBo.getSelectedRow(), 15).toString());
+        txtNamTotNghiep.setText(tblCanBo.getModel().getValueAt(tblCanBo.getSelectedRow(), 16).toString());
+        txtTrinhDoNgoaiNgu.setText(tblCanBo.getModel().getValueAt(tblCanBo.getSelectedRow(), 17).toString());
+        txtMaPhongBan.setText(tblCanBo.getModel().getValueAt(tblCanBo.getSelectedRow(), 18).toString());
+
+        cboTenPhongBan.setSelectedItem(new PhongBanDAO().timKiemTenPhongBan(txtMaPhongBan.getText()).get(0).getTenPhongBan());
+        cboTenChucVu.setSelectedItem(new ChucVuDAO().timKiemTenChucVu(txtMaChucVu.getText()).get(0).getTenChucVu());
+
+        System.out.println(new PhongBanDAO().timKiemTenPhongBan(txtMaPhongBan.getText()).get(0).getTenPhongBan());
+
+    }//GEN-LAST:event_menuItemSuaActionPerformed
+
+    private void menuItemXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemXoaActionPerformed
+
+        int dialogResult = JOptionPane.showConfirmDialog(null,
+                "Bạn có muốn tiếp tục thực hiện câu lệnh không?",
+                "Thông báo", JOptionPane.YES_NO_OPTION);
+        if (dialogResult == JOptionPane.YES_OPTION) {
+            try {
+                new CanBoDAO().xoaCanBo(tblCanBo.getModel().getValueAt(tblCanBo.getSelectedRow(), 0).toString());
+                hienThiBangCanBo();
+            } catch (SQLException ex) {
+                Logger.getLogger(QuanLyThongTinCanBo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+
+        }
+    }//GEN-LAST:event_menuItemXoaActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        int dialogResult = JOptionPane.showConfirmDialog(null,
+                "Bạn có muốn tiếp tục thực hiện câu lệnh không?",
+                "Thông báo", JOptionPane.YES_NO_OPTION);
+        if (dialogResult == JOptionPane.YES_OPTION) {
+            try {
+                new CanBoDAO().xoaCanBo(txtMaCanBo.getText());
+                hienThiBangCanBo();
+            } catch (SQLException ex) {
+                Logger.getLogger(QuanLyThongTinCanBo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+
+        }
+
+
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
+        txtMaCanBo.setEnabled(true);
+        txtMaCanBo.setText("");
+        txtTenKhaiSinh.setText("");
+        rdoNam.setSelected(false);
+        rdoNu.setSelected(false);
+        txtNgaySinh.setDate(null);
+        txtHonNhan.setText("");
+        txtSoCMND.setText("");
+        txtQueQuan.setText("");
+        txtNoiOHienTai.setText("");
+        txtEmail.setText("");
+        txtDanToc.setText("");
+        txtTonGiao.setText("");
+        txtNgayHopDong.setDate(null);
+        txtCongViecDuocGiao.setText("");
+        txtMaChucVu.setText("");
+        txtChuyenNganhDaoTao.setText("");
+        txtNoiDaoTao.setText("");
+        txtNamTotNghiep.setText("");
+        txtTrinhDoNgoaiNgu.setText("");
+        txtMaPhongBan.setText("");
+        cboTenChucVu.setSelectedItem("");
+        cboTenPhongBan.setSelectedItem("");
+
+
+    }//GEN-LAST:event_btnHuyActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+
+        String maCanBo = txtMaCanBo.getText();
+        if (maCanBo == null || maCanBo.trim().isEmpty()) {
+            maCanBo = JOptionPane.showInputDialog("Nhập lại mã cán bộ:");
+            txtMaCanBo.setText(maCanBo);
+        }
+        String hoTenKhaiSinh = txtTenKhaiSinh.getText();
+        if (hoTenKhaiSinh == null || hoTenKhaiSinh.trim().isEmpty()) {
+            hoTenKhaiSinh = JOptionPane.showInputDialog("Nhập lại họ tên khai sinh:");
+            txtTenKhaiSinh.setText(hoTenKhaiSinh);
+        }
+        String gioiTinh = "";
+        if (rdoNam.isSelected()) {
+            gioiTinh = "Nam";
+        } else {
+            if (rdoNu.isSelected()) {
+                gioiTinh = "Nữ";
+            } else {
+                JOptionPane.showMessageDialog(null, "Vui lòng chọn giới tính.");
+            }
+
+        }
+        String chuoiNgaySinh = "";
+        Date ngaySinh = txtNgaySinh.getDate();
+        if (ngaySinh == null) {
+            JOptionPane.showMessageDialog(null, "Nhập lại ngày sinh:");
+        } else {
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            chuoiNgaySinh = df.format(txtNgaySinh.getDate());
+            System.out.println(ngaySinh);
+        }
+
+        String tinhTrangHonNhan = txtHonNhan.getText();
+        if (tinhTrangHonNhan == null || tinhTrangHonNhan.trim().isEmpty()) {
+            tinhTrangHonNhan = JOptionPane.showInputDialog("Nhập lại tình trạng hôn nhân:");
+            txtHonNhan.setText(tinhTrangHonNhan);
+        }
+
+        String soCMND = txtSoCMND.getText();
+        if (soCMND == null || soCMND.trim().isEmpty()) {
+            soCMND = JOptionPane.showInputDialog("Nhập lại số CMND:");
+            txtSoCMND.setText(soCMND);
+
+        }
+
+        String queQuan = txtQueQuan.getText();
+        if (queQuan == null || queQuan.trim().isEmpty()) {
+            queQuan = JOptionPane.showInputDialog("Nhập lại quê quán:");
+            txtQueQuan.setText(queQuan);
+        }
+
+        String noiOHienTai = txtNoiOHienTai.getText();
+        if (noiOHienTai == null || noiOHienTai.trim().isEmpty()) {
+            noiOHienTai = JOptionPane.showInputDialog("Nhập lại nơi ở hiện tại:");
+            txtNoiOHienTai.setText(noiOHienTai);
+        }
+
+        String email = txtEmail.getText();
+        if (email == null || email.trim().isEmpty()) {
+            email = JOptionPane.showInputDialog("Nhập lại email:");
+            txtEmail.setText(email);
+        }
+
+        String danToc = txtDanToc.getText();
+        if (danToc == null || danToc.trim().isEmpty()) {
+            danToc = JOptionPane.showInputDialog("Nhập lại dân tộc:");
+            txtDanToc.setText(danToc);
+        }
+
+        String tonGiao = txtTonGiao.getText();
+        if (tonGiao == null || tonGiao.trim().isEmpty()) {
+            tonGiao = JOptionPane.showInputDialog("Nhập lại tôn giáo:");
+            txtTonGiao.setText(tonGiao);
+        }
+
+        String chuoiNgayHopDong = "";
+        Date ngayHopDong = txtNgayHopDong.getDate();
+        if (ngayHopDong == null) {
+            JOptionPane.showMessageDialog(null, "Nhập lại ngày hợp đồng:");
+        } else {
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            chuoiNgayHopDong = df.format(txtNgaySinh.getDate());
+            System.out.println(chuoiNgayHopDong);
+        }
+
+        String congViecDuocGiao = txtCongViecDuocGiao.getText();
+        if (congViecDuocGiao == null || congViecDuocGiao.trim().isEmpty()) {
+            congViecDuocGiao = JOptionPane.showInputDialog("Nhập lại công việc được giao:");
+            txtCongViecDuocGiao.setText(congViecDuocGiao);
+        }
+        String maChucVu = txtMaChucVu.getText();
+        while (maChucVu == null || maChucVu.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn chức vụ");
+        }
+
+        String chuyenNganhDaoTao = txtChuyenNganhDaoTao.getText();
+        if (chuyenNganhDaoTao == null || chuyenNganhDaoTao.trim().isEmpty()) {
+            chuyenNganhDaoTao = JOptionPane.showInputDialog("Nhập lại chuyên ngành đào tạo:");
+            txtChuyenNganhDaoTao.setText(chuyenNganhDaoTao);
+        }
+
+        String noiDaoTao = txtNoiDaoTao.getText();
+        if (noiDaoTao == null || noiDaoTao.trim().isEmpty()) {
+            noiDaoTao = JOptionPane.showInputDialog("Nhập lại nơi đào tạo:");
+            txtNoiDaoTao.setText(noiDaoTao);
+        }
+
+        String namTotNghiep = txtNamTotNghiep.getText();
+        if (namTotNghiep == null || namTotNghiep.trim().isEmpty()) {
+            namTotNghiep = JOptionPane.showInputDialog("Nhập lại năm tốt nghiệp:");
+            txtNamTotNghiep.setText(namTotNghiep);
+        }
+
+        String trinhDoNgoaiNgu = txtTrinhDoNgoaiNgu.getText();
+        if (trinhDoNgoaiNgu == null || trinhDoNgoaiNgu.trim().isEmpty()) {
+            trinhDoNgoaiNgu = JOptionPane.showInputDialog("Nhập lại trình độ ngoại ngữ:");
+            txtTrinhDoNgoaiNgu.setText(trinhDoNgoaiNgu);
+        }
+
+        String maPhongBan = txtMaPhongBan.getText();
+        if (maPhongBan == null || maPhongBan.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn phòng ban");
+        }
+
+   
+
+        if ("".equals(maCanBo)) {
+
+        }
+        try {
+            new CanBoDAO().suaCanBo(maCanBo, hoTenKhaiSinh,
+                    gioiTinh, chuoiNgaySinh, tinhTrangHonNhan,
+                    soCMND, queQuan, noiOHienTai, email,
+                    danToc, tonGiao, chuoiNgayHopDong,
+                    congViecDuocGiao, maChucVu, chuyenNganhDaoTao,
+                    noiDaoTao, namTotNghiep, trinhDoNgoaiNgu,
+                    maPhongBan,
+                    null);
+        } catch (SQLException ex) {
+            Logger.getLogger(QuanLyThongTinCanBo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        hienThiBangCanBo();
+    }//GEN-LAST:event_btnSuaActionPerformed
+
     private void cboTenChucVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTenChucVuActionPerformed
-        txtMaChucVu.setText(new ChucVuDAO().hienThiChucVu((String) cboTenChucVu.getSelectedItem()));
+        String maChuVu = (String) cboTenChucVu.getSelectedItem();
+        if ("".equals(maChuVu)) {
+        } else {
+            txtMaChucVu.setText(new ChucVuDAO().timKiemMaChucVu(maChuVu).get(0).getMaChucVu());
+        }
     }//GEN-LAST:event_cboTenChucVuActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHuy;
+    private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cboTenChucVu;
     private javax.swing.JComboBox<String> cboTenPhongBan;
@@ -677,7 +1176,6 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -693,8 +1191,12 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JMenuItem menuItemSua;
+    private javax.swing.JMenuItem menuItemXoa;
     private javax.swing.JPanel pnlCaNhanCon;
     private javax.swing.JPanel pnlChucNang;
+    private javax.swing.JPanel pnlChucNang1;
     private javax.swing.JPanel pnlCongViec;
     private javax.swing.JPanel pnlGioiTinh;
     private javax.swing.JRadioButton rdoNam;
@@ -702,7 +1204,6 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
     private UTT.UI.scroll.win11.ScrollPaneWin11 scrollPaneWin111;
     private UTT.UI.scroll.win11.ScrollPaneWin11 scrollPaneWin112;
     private javax.swing.JTable tblCanBo;
-    private javax.swing.JTextField txtAnh;
     private javax.swing.JTextField txtChuyenNganhDaoTao;
     private javax.swing.JTextField txtCongViecDuocGiao;
     private javax.swing.JTextField txtDanToc;
@@ -712,13 +1213,14 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
     private javax.swing.JTextField txtMaChucVu;
     private javax.swing.JTextField txtMaPhongBan;
     private javax.swing.JTextField txtNamTotNghiep;
-    private javax.swing.JTextField txtNgayHopDong;
-    private javax.swing.JTextField txtNgaySinh;
+    private com.toedter.calendar.JDateChooser txtNgayHopDong;
+    private com.toedter.calendar.JDateChooser txtNgaySinh;
     private javax.swing.JTextField txtNoiDaoTao;
     private javax.swing.JTextField txtNoiOHienTai;
     private javax.swing.JTextField txtQueQuan;
     private javax.swing.JTextField txtSoCMND;
     private javax.swing.JTextField txtTenKhaiSinh;
+    private javax.swing.JTextField txtTimKiem;
     private javax.swing.JTextField txtTonGiao;
     private javax.swing.JTextField txtTrinhDoNgoaiNgu;
     // End of variables declaration//GEN-END:variables

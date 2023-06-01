@@ -11,7 +11,7 @@ public class CanBo {
     public CanBo() {
     }
 
-    public CanBo(String maCanBo, String hoTenKhaiSinh, String gioiTinh, Date ngaySinh, String tinhTrangHonNhan, String soCMND, String queQuan, String noiOHienTai, String email, String danToc, String tonGiao, Date ngayHopDong, String congViecDuocGiao, String maChucVu, String chuyenNganhDaoTao, String noiDaoTao, Date namTotNghiep, String trinhDoNgoaiNgu, String maPhongBan, String anh) {
+    public CanBo(String maCanBo, String hoTenKhaiSinh, String gioiTinh, Date ngaySinh, String tinhTrangHonNhan, String soCMND, String queQuan, String noiOHienTai, String email, String danToc, String tonGiao, Date ngayHopDong, String congViecDuocGiao, String maChucVu, String chuyenNganhDaoTao, String noiDaoTao, int namTotNghiep, String trinhDoNgoaiNgu, String maPhongBan, String anh) {
         this.maCanBo = maCanBo;
         this.hoTenKhaiSinh = hoTenKhaiSinh;
         this.gioiTinh = gioiTinh;
@@ -162,11 +162,11 @@ public class CanBo {
         this.noiDaoTao = noiDaoTao;
     }
 
-    public Date getNamTotNghiep() {
+    public int getNamTotNghiep() {
         return namTotNghiep;
     }
 
-    public void setNamTotNghiep(Date namTotNghiep) {
+    public void setNamTotNghiep(int namTotNghiep) {
         this.namTotNghiep = namTotNghiep;
     }
 
@@ -210,7 +210,7 @@ public class CanBo {
     String maChucVu;
     String chuyenNganhDaoTao;
     String noiDaoTao;
-    Date namTotNghiep;
+    int namTotNghiep;
     String trinhDoNgoaiNgu;
     String maPhongBan;
     String anh;

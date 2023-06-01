@@ -17,21 +17,22 @@ import java.util.List;
  */
 public class ChucVuDAO {
 
-    public List<ChucVu> hienThiChucVu() {
+       public List<ChucVu> hienThiChucVu() {
         String sql = "SELECT * FROM chucvu";
-        return selectChucVu(sql);
+        return timKiemChucVu(sql);
     }
 
-    public String hienThiChucVu(String tenChucVu) {
-        if (!"".equals(tenChucVu)) {
-            String sql = "SELECT * FROM chucvu WHERE tenchucvu = N'" + tenChucVu + "'";
-            return selectChucVu(sql).get(0).getMaChucVu();
-        }
-        return "";
-
+    public List<ChucVu> timKiemMaChucVu(String timKiem) {
+        String sql = "SELECT * FROM chucvu WHERE tenchucvu = ?";
+        return timKiemChucVu(sql, timKiem);
     }
 
-    private List<ChucVu> selectChucVu(String sql, Object... args) {
+    public List<ChucVu> timKiemTenChucVu(String timKiem) {
+        String sql = "SELECT * FROM chucvu WHERE machucvu = ?";
+        return timKiemChucVu(sql, timKiem);
+    }
+
+    private List<ChucVu> timKiemChucVu(String sql, Object... args) {
         List<ChucVu> list = new ArrayList<>();
         try {
             ResultSet rs = null;

@@ -7,6 +7,8 @@ package UTT.DAO;
 import UTT.Connection.JdbcHelper;
 import static UTT.Connection.JdbcHelper.executeUpdate;
 import static UTT.Connection.JdbcHelper.preparedStatement;
+
+
 import UTT.Model.CanBo;
 import java.util.ArrayList;
 import java.util.List;
@@ -174,7 +176,7 @@ public class CanBoDAO {
         canBo.setMaChucVu(rs.getString("machucvu"));
         canBo.setChuyenNganhDaoTao(rs.getNString("chuyennganhdaotao"));
         canBo.setNoiDaoTao(rs.getNString("noidaotao"));
-        canBo.setNamTotNghiep(rs.getDate("namtotnghiep"));
+        canBo.setNamTotNghiep(rs.getInt("namtotnghiep"));
         canBo.setTrinhDoNgoaiNgu(rs.getNString("trinhdongoainnguthanhthaonhat"));
         canBo.setMaPhongBan(rs.getString("maphongban"));
         canBo.setAnh(rs.getString("anh"));

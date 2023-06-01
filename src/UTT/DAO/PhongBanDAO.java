@@ -19,20 +19,20 @@ public class PhongBanDAO {
 
     public List<PhongBan> hienThiPhongBan() {
         String sql = "SELECT * FROM phongban";
-        return selectPhongBan(sql);
+        return timKiemPhongBan(sql);
     }
 
-    public String hienThiPhongBan(String tenPhongBan) {
-        if (!"".equals(tenPhongBan)) {
-            String sql = "SELECT * FROM phongban WHERE tenphongban = N'" + tenPhongBan + "'";
-            return selectPhongBan(sql).get(0).getMaPhongBan();
-        }
-//        System.out.println("".equals(tenPhongBan));
-        return "";
-
+    public List<PhongBan> timKiemMaPhongBan(String timKiem) {
+        String sql = "SELECT * FROM phongban WHERE tenphongban = ?";
+        return timKiemPhongBan(sql, timKiem);
     }
 
-    private List<PhongBan> selectPhongBan(String sql, Object... args) {
+    public List<PhongBan> timKiemTenPhongBan(String timKiem) {
+        String sql = "SELECT * FROM phongban WHERE maphongban = ?";
+        return timKiemPhongBan(sql, timKiem);
+    }
+
+    private List<PhongBan> timKiemPhongBan(String sql, Object... args) {
         List<PhongBan> list = new ArrayList<>();
         try {
             ResultSet rs = null;
@@ -64,8 +64,4 @@ public class PhongBanDAO {
         return phongBan;
     }
 
-    public static void main(String[] args) {
-        String a = new PhongBanDAO().hienThiPhongBan("Phòng Đào tạo");
-        System.out.println(a);
-    }
 }

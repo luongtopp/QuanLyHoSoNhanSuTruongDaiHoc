@@ -57,7 +57,7 @@ public class Menu extends JComponent {
     }
 
     private Icon getIcon(int index) {
-        URL url = getClass().getResource("/raven/menu/" + index + ".png");
+        URL url = getClass().getResource("/UTT/UI/Menu/" + index + ".png");
         if (url != null) {
             return new ImageIcon(url);
         } else {
