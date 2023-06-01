@@ -34,8 +34,8 @@ public class Header extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(237, 237, 237));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/component/logo.png"))); // NOI18N
-        jLabel1.setText("Raven Channel");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/component/icon_logo.png"))); // NOI18N
+        jLabel1.setText("Quản lý nhân sự");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -44,7 +44,7 @@ public class Header extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
