@@ -1,4 +1,4 @@
-package UTT.UI.swing.shadow;
+package UTT.UI.effect;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;

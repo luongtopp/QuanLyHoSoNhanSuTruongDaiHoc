@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UTT.UI.Main;
+package UTT.UI.component;
 
-import UTT.DAO.CanBoDAO;
 import UTT.DAO.QuanHeDAO;
 import UTT.Model.QuanHe;
 import UTT.Model.TaiKhoan;
@@ -14,8 +13,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.ButtonGroup;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.jdesktop.swingx.prompt.PromptSupport;
@@ -26,7 +26,7 @@ import org.jdesktop.swingx.prompt.PromptSupport;
  */
 public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
 
-    String id = "";
+    int id;
 
     public QuanLyThongTinGiaDinh() {
         initComponents();
@@ -94,7 +94,7 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         menuItemSua = new javax.swing.JMenuItem();
         menuItemXoa = new javax.swing.JMenuItem();
-        scrollPaneWin111 = new UTT.UI.scroll.win11.ScrollPaneWin11();
+        scrollPaneWin111 = new UTT.UI.effect.ScrollPaneWin11();
         jPanel1 = new javax.swing.JPanel();
         pnlTimKiem = new javax.swing.JPanel();
         btnTimKiem = new javax.swing.JButton();
@@ -121,7 +121,8 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         btnThem = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         btnHuy = new javax.swing.JButton();
-        scrollPaneWin112 = new UTT.UI.scroll.win11.ScrollPaneWin11();
+        btnXoa = new javax.swing.JButton();
+        scrollPaneWin112 = new UTT.UI.effect.ScrollPaneWin11();
         tblQuanHe = new javax.swing.JTable();
 
         menuItemSua.setText("Sửa");
@@ -333,8 +334,6 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
         pnlChucNang.add(btnSua, gridBagConstraints);
 
         btnHuy.setText("Hủy");
@@ -342,6 +341,19 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
         pnlChucNang.add(btnHuy, gridBagConstraints);
+
+        btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
+        pnlChucNang.add(btnXoa, gridBagConstraints);
 
         scrollPaneWin112.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPaneWin112.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -442,7 +454,7 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         String chuoiNgaySinh = "";
         Date ngaySinh = txtNgaySinh.getDate();
         if (ngaySinh == null) {
-            JOptionPane.showMessageDialog(null, "Nhập lại ngày sinh:");
+            JOptionPane.showMessageDialog(null, "Nhập lại ngày sinh");
         } else {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             chuoiNgaySinh = df.format(txtNgaySinh.getDate());
@@ -474,7 +486,7 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
                     diaChi,
                     null);
         } catch (SQLException ex) {
-            Logger.getLogger(QuanLyThongTinCanBo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(QuanLyThongTinGiaDinh.class.getName()).log(Level.SEVERE, null, ex);
         }
         hienThiBangQuanHe();
 
@@ -487,10 +499,12 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
                 "Thông báo", JOptionPane.YES_NO_OPTION);
         if (dialogResult == JOptionPane.YES_OPTION) {
             try {
-                new QuanHeDAO().xoaQuanHe(tblQuanHe.getModel().getValueAt(tblQuanHe.getSelectedRow(), 0).toString());
+                new QuanHeDAO().xoaQuanHe(Integer.parseInt(
+                        tblQuanHe.getModel().getValueAt(
+                                tblQuanHe.getSelectedRow(), 0).toString()));
                 hienThiBangQuanHe();
             } catch (SQLException ex) {
-                Logger.getLogger(QuanLyThongTinCanBo.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(QuanLyThongTinGiaDinh.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else {
@@ -500,7 +514,7 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
 
     private void menuItemSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSuaActionPerformed
         btnSua.setVisible(true);
-        id = (tblQuanHe.getModel().getValueAt(tblQuanHe.getSelectedRow(), 0).toString());
+        id = Integer.parseInt((tblQuanHe.getModel().getValueAt(tblQuanHe.getSelectedRow(), 0).toString()));
         txtMaCanBo.setText(tblQuanHe.getModel().getValueAt(tblQuanHe.getSelectedRow(), 1).toString());
         txtQuanHe.setText(tblQuanHe.getModel().getValueAt(tblQuanHe.getSelectedRow(), 2).toString());
         txtHoTenNguoiThan.setText(tblQuanHe.getModel().getValueAt(tblQuanHe.getSelectedRow(), 3).toString());
@@ -585,6 +599,24 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnSuaActionPerformed
 
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        int dialogResult = JOptionPane.showConfirmDialog(null,
+                "Bạn có muốn tiếp tục thực hiện câu lệnh không?",
+                "Thông báo", JOptionPane.YES_NO_OPTION);
+        if (dialogResult == JOptionPane.YES_OPTION) {
+            try {
+                new QuanHeDAO().xoaQuanHe(id);
+                hienThiBangQuanHe();
+            } catch (SQLException ex) {
+                Logger.getLogger(QuanLyThongTinGiaDinh.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+
+        }
+
+    }//GEN-LAST:event_btnXoaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHuy;
@@ -592,6 +624,7 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnTimKiem;
+    private javax.swing.JButton btnXoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -609,8 +642,8 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
     private javax.swing.JPanel pnlTimKiem;
     private javax.swing.JRadioButton rdoNam;
     private javax.swing.JRadioButton rdoNu;
-    private UTT.UI.scroll.win11.ScrollPaneWin11 scrollPaneWin111;
-    private UTT.UI.scroll.win11.ScrollPaneWin11 scrollPaneWin112;
+    private UTT.UI.effect.ScrollPaneWin11 scrollPaneWin111;
+    private UTT.UI.effect.ScrollPaneWin11 scrollPaneWin112;
     private javax.swing.JTable tblQuanHe;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtHoTenNguoiThan;

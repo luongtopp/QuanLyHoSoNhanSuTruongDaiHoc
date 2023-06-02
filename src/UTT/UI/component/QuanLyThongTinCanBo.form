@@ -52,12 +52,12 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="scrollPaneWin111" alignment="0" pref="728" max="32767" attributes="0"/>
+          <Component id="scrollPaneWin111" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="UTT.UI.scroll.win11.ScrollPaneWin11" name="scrollPaneWin111">
+    <Container class="UTT.UI.effect.ScrollPaneWin11" name="scrollPaneWin111">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
@@ -688,7 +688,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="UTT.UI.scroll.win11.ScrollPaneWin11" name="scrollPaneWin112">
+            <Container class="UTT.UI.effect.ScrollPaneWin11" name="scrollPaneWin112">
               <Properties>
                 <Property name="horizontalScrollBarPolicy" type="int" value="32"/>
                 <Property name="verticalScrollBarPolicy" type="int" value="22"/>

@@ -1,19 +1,25 @@
 package UTT.UI.Main;
 
+import UTT.UI.component.QuanLyPhongBan;
+import UTT.UI.component.QuanLyChucVu;
+import UTT.UI.component.QuanLyThongTinCanBo;
+import UTT.UI.component.QuanLyThongTinGiaDinh;
+import UTT.UI.component.QuanLyTaiKhoan;
 import UTT.UI.component.HomeForm;
 import java.awt.Component;
 import UTT.UI.Menu.MenuEvent;
+import UTT.UI.component.QuanLyKyLuat;
 
 /**
  *
  * @author RAVEN
  */
-public class Main extends javax.swing.JFrame {
+public class Home extends javax.swing.JFrame {
 
     /**
      * Creates new form Main
      */
-    public Main() {
+    public Home() {
         initComponents();
         menu1.setEvent(new MenuEvent() {
             @Override
@@ -41,7 +47,21 @@ public class Main extends javax.swing.JFrame {
                         }
                         case 4 -> {
                             showForm(new QuanLyTaiKhoan());
+                            
                         }
+                        case 5 -> {
+                            switch (subIndex) {
+                                case 1 -> {
+                                    showForm(new QuanLyKyLuat());
+                                }
+                                case 2 -> {
+//                                    showForm(new QuanLyThongTinGiaDinh());
+                                }
+                            }
+                            
+                        }
+                        
+                        
 
                     }
                     System.out.println("Form : " + index + " " + subIndex);
@@ -62,18 +82,14 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        header1 = new UTT.UI.component.Header();
-        scrollPaneWin111 = new UTT.UI.scroll.win11.ScrollPaneWin11();
-        menu1 = new UTT.UI.Menu.Menu();
+        header1 = new UTT.UI.Component.Header();
         body = new javax.swing.JPanel();
+        menu1 = new UTT.UI.Menu.Menu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(163, 163, 163)));
-
-        scrollPaneWin111.setBorder(null);
-        scrollPaneWin111.setViewportView(menu1);
 
         body.setBackground(new java.awt.Color(245, 245, 245));
         body.setLayout(new java.awt.BorderLayout());
@@ -83,19 +99,18 @@ public class Main extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(scrollPaneWin111, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(menu1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(header1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1250, Short.MAX_VALUE)
+            .addComponent(header1, javax.swing.GroupLayout.DEFAULT_SIZE, 1250, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
-                    .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
+                    .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -130,29 +145,29 @@ public class Main extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                new Home().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel body;
-    private UTT.UI.component.Header header1;
+    private UTT.UI.Component.Header header1;
     private javax.swing.JPanel jPanel1;
     private UTT.UI.Menu.Menu menu1;
-    private UTT.UI.scroll.win11.ScrollPaneWin11 scrollPaneWin111;
     // End of variables declaration//GEN-END:variables
 }

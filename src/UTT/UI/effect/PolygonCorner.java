@@ -1,4 +1,4 @@
-package UTT.UI.scroll.win11;
+package UTT.UI.effect;
 
 import java.awt.Point;
 import java.awt.geom.GeneralPath;

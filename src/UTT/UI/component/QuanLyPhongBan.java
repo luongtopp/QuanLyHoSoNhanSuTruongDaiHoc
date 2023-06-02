@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UTT.UI.Main;
+package UTT.UI.component;
 
 import UTT.DAO.DAOPhongBan;
 import UTT.Model.PhongBan;
@@ -65,7 +65,6 @@ public class QuanLyPhongBan extends javax.swing.JPanel {
 
         pnlTimKiem.setLayout(new java.awt.GridBagLayout());
 
-        jButton4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton4.setText("Tìm Kiếm");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,21 +85,16 @@ public class QuanLyPhongBan extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
         pnlTimKiem.add(txtTimKiem, gridBagConstraints);
 
-        pnlQuanLyPhongBan.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Quản lý phòng ban", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18))); // NOI18N
+        pnlQuanLyPhongBan.setBorder(javax.swing.BorderFactory.createTitledBorder("Quản lý phòng ban"));
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel1.setText("Mã phòng ban");
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel2.setText("Tên phòng ban");
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel3.setText("Địa chỉ");
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel4.setText("SĐT");
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setText("Email");
 
         javax.swing.GroupLayout pnlQuanLyPhongBanLayout = new javax.swing.GroupLayout(pnlQuanLyPhongBan);
@@ -130,7 +124,7 @@ public class QuanLyPhongBan extends javax.swing.JPanel {
                         .addGroup(pnlQuanLyPhongBanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap(179, Short.MAX_VALUE))
         );
         pnlQuanLyPhongBanLayout.setVerticalGroup(
             pnlQuanLyPhongBanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,7 +150,6 @@ public class QuanLyPhongBan extends javax.swing.JPanel {
 
         pnlChucNang.setLayout(new java.awt.GridBagLayout());
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton1.setText("Thêm");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,7 +163,6 @@ public class QuanLyPhongBan extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
         pnlChucNang.add(jButton1, gridBagConstraints);
 
-        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton2.setText("Sửa");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,7 +176,6 @@ public class QuanLyPhongBan extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
         pnlChucNang.add(jButton2, gridBagConstraints);
 
-        jButton3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton3.setText("Xóa");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,7 +189,6 @@ public class QuanLyPhongBan extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
         pnlChucNang.add(jButton3, gridBagConstraints);
 
-        jButton5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton5.setText("Làm mới");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,7 +202,6 @@ public class QuanLyPhongBan extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
         pnlChucNang.add(jButton5, gridBagConstraints);
 
-        tblPhongBan.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         tblPhongBan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -253,8 +242,8 @@ public class QuanLyPhongBan extends javax.swing.JPanel {
                 .addComponent(pnlQuanLyPhongBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(pnlChucNang, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

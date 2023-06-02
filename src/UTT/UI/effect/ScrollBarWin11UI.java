@@ -1,4 +1,4 @@
-package UTT.UI.scroll.win11;
+package UTT.UI.effect;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;

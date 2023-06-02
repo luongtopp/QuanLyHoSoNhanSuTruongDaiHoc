@@ -64,7 +64,7 @@ public class QuanHeDAO {
 
     public void suaQuanHe(String maCanBo, String quanHe, String hoTen,
             Date ngaySinh, String gioiTinh, String ngheNghiep,
-            String diaChi, String id, Object... args) throws SQLException {
+            String diaChi, int id, Object... args) throws SQLException {
         String sql = """
                      UPDATE quanhe
                      SET
@@ -87,7 +87,7 @@ public class QuanHeDAO {
 
     }
 
-    public void xoaQuanHe(String id, Object... args) throws SQLException {
+    public void xoaQuanHe(int id, Object... args) throws SQLException {
         String sql = """
                       DELETE FROM quanhe WHERE id = ?
                      """;

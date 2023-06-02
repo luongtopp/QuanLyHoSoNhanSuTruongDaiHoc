@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UTT.UI.Main;
+package UTT.UI.component;
 
 import UTT.DAO.CanBoDAO;
 import UTT.DAO.ChucVuDAO;
@@ -35,7 +35,7 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
         hienThiBangTaiKhoan();
         hienThiBangPhongBan();
         hienThiBangChucVu();
-        cboTenChucVu.setPrototypeDisplayValue("");        
+        cboTenChucVu.setPrototypeDisplayValue("");
         cboTenPhongBan.setPrototypeDisplayValue("");
         btnSua.setVisible(false);
         if (!TaiKhoan.isAdmin) {
@@ -46,7 +46,7 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
         } else {
             tblTaiKhoan.setComponentPopupMenu(jPopupMenu1);
         }
-           }
+    }
 
     private void hienThiBangTaiKhoan() {
         DefaultTableModel model = (DefaultTableModel) tblTaiKhoan.getModel();
@@ -115,7 +115,7 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         menuItemSua = new javax.swing.JMenuItem();
         menuItemXoa = new javax.swing.JMenuItem();
-        scrollPaneWin111 = new UTT.UI.scroll.win11.ScrollPaneWin11();
+        scrollPaneWin111 = new UTT.UI.effect.ScrollPaneWin11();
         jPanel1 = new javax.swing.JPanel();
         pnlTimKiem = new javax.swing.JPanel();
         btnTimKiem = new javax.swing.JButton();
@@ -147,7 +147,7 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
         btnSua = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         btnHuy = new javax.swing.JButton();
-        scrollPaneWin112 = new UTT.UI.scroll.win11.ScrollPaneWin11();
+        scrollPaneWin112 = new UTT.UI.effect.ScrollPaneWin11();
         tblTaiKhoan = new javax.swing.JTable();
 
         menuItemSua.setText("Sửa");
@@ -709,8 +709,8 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
                 Logger.getLogger(QuanLyTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        } 
-        
+        }
+
     }//GEN-LAST:event_menuItemXoaActionPerformed
 
 
@@ -741,8 +741,8 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
     private javax.swing.JPanel pnlChucNang;
     private javax.swing.JPanel pnlTaiKhoan;
     private javax.swing.JPanel pnlTimKiem;
-    private UTT.UI.scroll.win11.ScrollPaneWin11 scrollPaneWin111;
-    private UTT.UI.scroll.win11.ScrollPaneWin11 scrollPaneWin112;
+    private UTT.UI.effect.ScrollPaneWin11 scrollPaneWin111;
+    private UTT.UI.effect.ScrollPaneWin11 scrollPaneWin112;
     private javax.swing.JTable tblTaiKhoan;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtHoTen;

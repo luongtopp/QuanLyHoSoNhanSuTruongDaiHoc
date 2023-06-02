@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import UTT.UI.Effect.RippleEffect;
-import UTT.UI.swing.shadow.ShadowRenderer;
+import UTT.UI.effect.ShadowRenderer;
 
 public class MenuItem extends JButton {
 

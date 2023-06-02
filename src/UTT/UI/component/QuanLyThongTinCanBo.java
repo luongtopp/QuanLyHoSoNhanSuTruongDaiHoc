@@ -1,4 +1,4 @@
-package UTT.UI.Main;
+package UTT.UI.component;
 
 import UTT.DAO.CanBoDAO;
 import UTT.DAO.ChucVuDAO;
@@ -146,7 +146,7 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         menuItemSua = new javax.swing.JMenuItem();
         menuItemXoa = new javax.swing.JMenuItem();
-        scrollPaneWin111 = new UTT.UI.scroll.win11.ScrollPaneWin11();
+        scrollPaneWin111 = new UTT.UI.effect.ScrollPaneWin11();
         jPanel1 = new javax.swing.JPanel();
         pnlTimKiem = new javax.swing.JPanel();
         btnTimKiem = new javax.swing.JButton();
@@ -205,7 +205,7 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         btnSua = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         btnHuy = new javax.swing.JButton();
-        scrollPaneWin112 = new UTT.UI.scroll.win11.ScrollPaneWin11();
+        scrollPaneWin112 = new UTT.UI.effect.ScrollPaneWin11();
         tblCanBo = new javax.swing.JTable();
 
         menuItemSua.setText("Sửa");
@@ -1224,8 +1224,8 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
     private javax.swing.JPanel pnlTimKiem;
     private javax.swing.JRadioButton rdoNam;
     private javax.swing.JRadioButton rdoNu;
-    private UTT.UI.scroll.win11.ScrollPaneWin11 scrollPaneWin111;
-    private UTT.UI.scroll.win11.ScrollPaneWin11 scrollPaneWin112;
+    private UTT.UI.effect.ScrollPaneWin11 scrollPaneWin111;
+    private UTT.UI.effect.ScrollPaneWin11 scrollPaneWin112;
     private javax.swing.JTable tblCanBo;
     private javax.swing.JTextField txtChuyenNganhDaoTao;
     private javax.swing.JTextField txtCongViecDuocGiao;
