@@ -3,10 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/luongtopp/Documents/study/UTT/junior/semester-2/software_technology/QuanLyHoSoNhanSuTruongDaiHoc/src/UTT/DAO/CanBoDAO.java</file>
-            <file>file:/Users/luongtopp/Documents/study/UTT/junior/semester-2/software_technology/QuanLyHoSoNhanSuTruongDaiHoc/src/UTT/UI/Main/QuanLyThongTinCanBo.java</file>
-            <file>file:/Users/luongtopp/Documents/study/UTT/junior/semester-2/software_technology/QuanLyHoSoNhanSuTruongDaiHoc/src/UTT/Model/CanBo.java</file>
-            <file>file:/Users/luongtopp/Documents/study/UTT/junior/semester-2/software_technology/QuanLyHoSoNhanSuTruongDaiHoc/src/UTT/Connection/JdbcHelper.java</file>
+            <file>file:/Users/luongtopp/Documents/study/UTT/junior/semester-2/software_technology/QuanLyHoSoNhanSuTruongDaiHoc/src/UTT/UI/component/Header.java</file>
+            <file>file:/Users/luongtopp/Documents/study/UTT/junior/semester-2/software_technology/QuanLyHoSoNhanSuTruongDaiHoc/src/UTT/UI/Main/Main.java</file>
         </group>
     </open-files>
 </project-private>

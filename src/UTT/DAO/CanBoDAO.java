@@ -182,10 +182,14 @@ public class CanBoDAO {
     }
 
     public static void main(String[] args) throws SQLException {
-        List<CanBo>  list =new CanBoDAO().hienThiCanBo();
-        for(var item : list) {
-            System.out.println(item.getMaCanBo());
-        }
+        List<CanBo>  list =new CanBoDAO().hienThiCanBo("Kinh");
+       
+           for(var item : list) {
+               
+               System.out.println(item.getChuyenNganhDaoTao());
+           }
+
+        
         
     }
 

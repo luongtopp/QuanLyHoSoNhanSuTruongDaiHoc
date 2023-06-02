@@ -136,7 +136,6 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
 
-        pnlChucNang1.setBackground(new java.awt.Color(255, 255, 255));
         pnlChucNang1.setLayout(new java.awt.GridBagLayout());
 
         btnTimKiem.setText("Tìm kiếm");
@@ -172,7 +171,6 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
 
         jPanel1.add(pnlChucNang1);
 
-        pnlCaNhanCon.setBackground(new java.awt.Color(255, 255, 255));
         pnlCaNhanCon.setBorder(javax.swing.BorderFactory.createTitledBorder("Người thân"));
         pnlCaNhanCon.setPreferredSize(new java.awt.Dimension(552, 250));
         pnlCaNhanCon.setRequestFocusEnabled(false);
@@ -269,8 +267,6 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         pnlCaNhanCon.add(jLabel12, gridBagConstraints);
 
-        pnlGioiTinh.setBackground(new java.awt.Color(255, 255, 255));
-
         rdoNu.setText("Nữ");
 
         rdoNam.setText("Nam");
@@ -301,7 +297,6 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         pnlCaNhanCon.add(pnlGioiTinh, gridBagConstraints);
 
-        txtNgaySinh.setBackground(new java.awt.Color(255, 255, 255));
         txtNgaySinh.setDateFormatString("yyyy-MM-dd");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -314,7 +309,6 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
 
         jPanel1.add(pnlCaNhanCon);
 
-        pnlChucNang.setBackground(new java.awt.Color(255, 255, 255));
         pnlChucNang.setLayout(new java.awt.GridBagLayout());
 
         btnThem.setText("Thêm");
@@ -353,7 +347,6 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
 
         jPanel1.add(pnlChucNang);
 
-        scrollPaneWin112.setBackground(new java.awt.Color(255, 255, 255));
         scrollPaneWin112.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPaneWin112.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPaneWin112.setViewportView(null);

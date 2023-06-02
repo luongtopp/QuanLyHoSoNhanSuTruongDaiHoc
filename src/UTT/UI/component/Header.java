@@ -1,4 +1,4 @@
-package UTT.UI.Component;
+package UTT.UI.component;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
