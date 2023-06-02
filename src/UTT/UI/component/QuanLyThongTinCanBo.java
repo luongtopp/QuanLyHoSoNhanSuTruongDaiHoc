@@ -975,8 +975,6 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
                 Logger.getLogger(QuanLyThongTinCanBo.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        } else {
-
         }
     }//GEN-LAST:event_menuItemXoaActionPerformed
 
@@ -992,9 +990,7 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
                 Logger.getLogger(QuanLyThongTinCanBo.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        } else {
-
-        }
+        } 
 
 
     }//GEN-LAST:event_btnXoaActionPerformed

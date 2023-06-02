@@ -2,7 +2,11 @@ package UTT.UI.component;
 
 import UTT.DAO.KyLuatDAO;
 import UTT.Model.KyLuat;
+import UTT.Model.TaiKhoan;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,11 +19,18 @@ import javax.swing.table.DefaultTableModel;
  */
 public class QuanLyKyLuat extends javax.swing.JPanel {
 
-    private int id;
-
     public QuanLyKyLuat() {
+
         initComponents();
+        btnSua.setVisible(false);
         hienThiBangKyLuat();
+        if (!TaiKhoan.isAdmin) {
+//            pnlChucNang.setVisible(false);
+//            pnlKyLuat.setVisible(false);
+        } else {
+        }
+                    tblKyLuat.setComponentPopupMenu(jPopupMenu1);
+
     }
 
     private void hienThiBangKyLuat() {
@@ -31,7 +42,6 @@ public class QuanLyKyLuat extends javax.swing.JPanel {
                         item.getId(),
                         item.getMaKyLuat(),
                         item.getMaCanBo(),
-                        item.getNamKyLuat(),
                         item.getNamKyLuat(),
                         item.getHinhThucKyLuat()}
             );
@@ -47,7 +57,6 @@ public class QuanLyKyLuat extends javax.swing.JPanel {
                         item.getId(),
                         item.getMaKyLuat(),
                         item.getMaCanBo(),
-                        item.getNamKyLuat(),
                         item.getNamKyLuat(),
                         item.getHinhThucKyLuat()}
             );
@@ -86,9 +95,19 @@ public class QuanLyKyLuat extends javax.swing.JPanel {
         tblKyLuat = new javax.swing.JTable();
 
         menuItemSua.setText("Sửa");
+        menuItemSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemSuaActionPerformed(evt);
+            }
+        });
         jPopupMenu1.add(menuItemSua);
 
         menuItemXoa.setText("Xóa");
+        menuItemXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemXoaActionPerformed(evt);
+            }
+        });
         jPopupMenu1.add(menuItemXoa);
 
         pnlTimKiem.setLayout(new java.awt.GridBagLayout());
@@ -221,6 +240,11 @@ public class QuanLyKyLuat extends javax.swing.JPanel {
         pnlChucNang.add(btnSua, gridBagConstraints);
 
         btnHuy.setText("Hủy");
+        btnHuy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHuyActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
@@ -382,8 +406,8 @@ public class QuanLyKyLuat extends javax.swing.JPanel {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         int dialogResult = JOptionPane.showConfirmDialog(null,
-            "Bạn có muốn tiếp tục thực hiện câu lệnh không?",
-            "Thông báo", JOptionPane.YES_NO_OPTION);
+                "Bạn có muốn tiếp tục thực hiện câu lệnh không?",
+                "Thông báo", JOptionPane.YES_NO_OPTION);
         if (dialogResult == JOptionPane.YES_OPTION) {
             try {
                 new KyLuatDAO().xoaKyLuat(id);
@@ -397,7 +421,49 @@ public class QuanLyKyLuat extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 
+    private void menuItemSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSuaActionPerformed
+        btnSua.setVisible(true);
+        id = Integer.parseInt((tblKyLuat.getModel().getValueAt(tblKyLuat.getSelectedRow(), 0).toString()));
+        txtMaKyLuat.setText(tblKyLuat.getModel().getValueAt(tblKyLuat.getSelectedRow(), 1).toString());
+        txtMaCanBo.setText(tblKyLuat.getModel().getValueAt(tblKyLuat.getSelectedRow(), 2).toString());
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date namKyLuat = null;
+        try {
+            namKyLuat = df.parse(tblKyLuat.getModel().getValueAt(tblKyLuat.getSelectedRow(), 3).toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        txtNamKyLuat.setDate(namKyLuat);
 
+        txtHinhThucKyLuat.setText(tblKyLuat.getModel().getValueAt(tblKyLuat.getSelectedRow(), 4).toString());
+    }//GEN-LAST:event_menuItemSuaActionPerformed
+
+    private void menuItemXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemXoaActionPerformed
+        int dialogResult = JOptionPane.showConfirmDialog(null,
+                "Bạn có muốn tiếp tục thực hiện câu lệnh không?",
+                "Thông báo", JOptionPane.YES_NO_OPTION);
+        if (dialogResult == JOptionPane.YES_OPTION) {
+            try {
+                new KyLuatDAO().xoaKyLuat(Integer.parseInt(
+                        tblKyLuat.getModel().getValueAt(
+                                tblKyLuat.getSelectedRow(), 0).toString()));
+            } catch (SQLException ex) {
+                Logger.getLogger(QuanLyKyLuat.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            hienThiBangKyLuat();
+        }
+    }//GEN-LAST:event_menuItemXoaActionPerformed
+
+    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
+        txtMaKyLuat.setText("");       
+        txtMaCanBo.setText("");
+        txtNamKyLuat.setDate(null);
+        txtHinhThucKyLuat.setText("");
+        btnSua.setVisible(false);
+
+    }//GEN-LAST:event_btnHuyActionPerformed
+
+    private int id;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHuy;
     private javax.swing.JButton btnLamMoi;
