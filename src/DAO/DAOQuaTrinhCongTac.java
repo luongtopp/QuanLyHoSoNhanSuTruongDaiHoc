@@ -44,21 +44,21 @@ public class DAOQuaTrinhCongTac {
         return selectCanBo(sql);
     }
 
-//    public void xoaQuaTrinhCongTac(String MaQuaTrinhCongTac) throws SQLException {
-//       String sql = "DELETE FROM phongban WHERE maphongban = N'" + MaQuaTrinhCongTac + "'";
-//        update(sql);
-//    }
-//
-//    public void suaQuaTrinhCongTac(String MaQuaTrinhCongTac, String TenQuaTrinhCongTac, String DiaChi,
-//            String SDT, String Email) throws SQLException {
-//        String sql = "UPDATE phongban set tenphongban = N'" + TenQuaTrinhCongTac + "'"
-//                + ", diachi = N'" + DiaChi + "'"
-//                + ", sdt = N'" + SDT + "'"
-//                + ", email = N'" + Email + "'"
-//                + " WHERE maphongban = N'" + MaQuaTrinhCongTac + "'";
-//
-//        update(sql);
-//    }
+    public void xoaQuaTrinhCongTac(String maQuaTrinhCongTac) throws SQLException {
+       String sql = "DELETE FROM quatrinhcongtac WHERE macanbo = N'" + maQuaTrinhCongTac + "'";
+        update(sql);
+    }
+
+    public void suaQuaTrinhCongTac(String maCanBo, String ngayBatDau, String ngayKetThuc, String congViec, String noiCongTac, String chucVuCaoNhat) throws SQLException {
+        String sql = "UPDATE quatrinhcongtac set thoigianbatdau = N'" + ngayBatDau + "'"
+                + ", thoigianketthuc = N'" + ngayKetThuc + "'"
+                + ", congviec = N'" + congViec + "'"
+                + ", noicongtac = N'" + noiCongTac + "'"
+                 + ", chucvucaonhat = N'" + chucVuCaoNhat + "'"
+                + " WHERE macanbo = N'" + maCanBo + "'";
+
+        update(sql);
+    }
 //    public List<QuaTrinhCongTac> hienThiQuaTrinhCongTac(String maCanBo) {
 //        String sql = "SELECT * FROM quatrinhcongtac WHERE macanbo = ?";
 //        return selectQuaTrinhCongTac(sql, maCanBo);
@@ -133,9 +133,9 @@ public class DAOQuaTrinhCongTac {
     }
 
     public static void main(String[] args) throws SQLException {
-        List<QuaTrinhCongTac> list = new DAOQuaTrinhCongTac().timKiemQuaTrinhCongTac("CB003");
+        List<CanBo> list = new CanBoDAO().timKiemCanBo("CB003");
         for (var item : list) {
-            System.out.println(item.getThoiGianBatDau());
+            System.out.println(item.getMaCanBo());
         }
     }
 }

@@ -44,8 +44,12 @@ public class Main extends javax.swing.JFrame {
                             }
                             break;
                         case 3:
-                                    showForm(new CapNhapQuaTrinhCanBo());
-                                    break;
+                            showForm(new CapNhapQuaTrinhCanBo());
+                            break;
+
+                        case 4:
+                            showForm(new QuanLyCanBoNghiHuu());
+                            break;
                     }
 
                     System.out.println("Form : " + index + " " + subIndex);
