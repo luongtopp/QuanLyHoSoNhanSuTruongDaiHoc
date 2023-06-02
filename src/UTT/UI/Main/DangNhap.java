@@ -5,7 +5,6 @@ import UTT.Model.TaiKhoan;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author luongtopp
@@ -142,16 +141,19 @@ public class DangNhap extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDangNhapActionPerformed
     private void checkLogin(String tenTaiKhoan, String matKhau) {
+        TaiKhoanDAO taiKhoanDAO = new TaiKhoanDAO();
         TaiKhoan taiKhoan = new TaiKhoan();
         List<TaiKhoan> danhSachTaiKhoan = new TaiKhoanDAO().hienTaiKhoan(tenTaiKhoan);
         if (danhSachTaiKhoan.size() >= 1) {
             for (TaiKhoan item : danhSachTaiKhoan) {
                 if (item.getMatKhau().equals(matKhau)) {
+                    taiKhoan.isAdmin =  
+                            taiKhoanDAO.isAdmin(tenTaiKhoan).get(0).isAdmin();
 
+                    
                     java.awt.EventQueue.invokeLater(new Runnable() {
                         public void run() {
 
-//                                UIManager.setLookAndFeel();
                             new Main().setVisible(true);
                         }
                     });

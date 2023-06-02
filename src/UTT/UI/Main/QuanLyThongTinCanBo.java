@@ -6,6 +6,7 @@ import UTT.DAO.PhongBanDAO;
 import UTT.Model.CanBo;
 import UTT.Model.ChucVu;
 import UTT.Model.PhongBan;
+import UTT.Model.TaiKhoan;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -32,9 +33,18 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         hienThiBangCanBo();
         hienThiBangPhongBan();
         hienThiBangChucVu();
-        tblCanBo.setComponentPopupMenu(jPopupMenu1);
         cboTenChucVu.setPrototypeDisplayValue("");        
         cboTenPhongBan.setPrototypeDisplayValue("");
+//        System.out.println("Trang thai cua tai khoan la: " + TaiKhoan.isAdmin);
+        if(!TaiKhoan.isAdmin) {
+            
+        pnlCaNhanCha.setVisible(false);        
+        pnlCongViecCha.setVisible(false);
+        pnlChucNang.setVisible(false);
+
+        } else {
+            tblCanBo.setComponentPopupMenu(jPopupMenu1);
+        }
 
 
 //        cboTenPhongBan.setSelectedIndex(-1);
@@ -216,8 +226,6 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(866, 728));
 
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
-
         pnlTimKiem.setPreferredSize(new java.awt.Dimension(813, 47));
         pnlTimKiem.setLayout(new java.awt.GridBagLayout());
 
@@ -251,8 +259,6 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 70);
         pnlTimKiem.add(btnLamMoi, gridBagConstraints);
-
-        jPanel1.add(pnlTimKiem);
 
         pnlCaNhanCha.setLayout(new java.awt.BorderLayout());
 
@@ -438,8 +444,6 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         pnlCaNhanCon.add(txtNgaySinh, gridBagConstraints);
 
         pnlCaNhanCha.add(pnlCaNhanCon, java.awt.BorderLayout.CENTER);
-
-        jPanel1.add(pnlCaNhanCha);
 
         pnlCongViecCha.setLayout(new java.awt.BorderLayout());
 
@@ -639,8 +643,6 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
 
         pnlCongViecCha.add(pnlCongViecCon, java.awt.BorderLayout.CENTER);
 
-        jPanel1.add(pnlCongViecCha);
-
         pnlChucNang.setLayout(new java.awt.GridBagLayout());
 
         btnThem.setText("Thêm");
@@ -695,8 +697,6 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
         pnlChucNang.add(btnHuy, gridBagConstraints);
 
-        jPanel1.add(pnlChucNang);
-
         scrollPaneWin112.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPaneWin112.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPaneWin112.setViewportView(null);
@@ -713,7 +713,30 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         tblCanBo.setAutoscrolls(false);
         scrollPaneWin112.setViewportView(tblCanBo);
 
-        jPanel1.add(scrollPaneWin112);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlChucNang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlCongViecCha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
+            .addComponent(pnlCaNhanCha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(scrollPaneWin112, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(pnlTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(pnlCaNhanCha, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(pnlCongViecCha, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(pnlChucNang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(scrollPaneWin112, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
+        );
 
         scrollPaneWin111.setViewportView(jPanel1);
 
@@ -721,7 +744,7 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, 866, Short.MAX_VALUE)
+            .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

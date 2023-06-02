@@ -30,8 +30,10 @@ public class Menu extends JComponent {
         {"Thống kê"},
         {"Quản lý thông tin cán bộ", "Thông tin cán bộ", "Thông tin gia đình"},
         {"Quản lý phòng ban"},
-        {"Quản lý chức vụ"}
-        
+        {"Quản lý chức vụ"},
+        {"Quản lý tài khoản"},
+        {"Khen thưởng -  Kỷ luật", "Khen thưởng", "Kỷ luật"}
+
     };
 
     public Menu() {
@@ -50,7 +52,7 @@ public class Menu extends JComponent {
     }
 
     private Icon getIcon(int index) {
-        URL url = getClass().getResource("/UTT/UI/Menu/" + index + ".png");
+        URL url = getClass().getResource("/UTT/UI/Anh/" + index + ".png");
         if (url != null) {
             return new ImageIcon(url);
         } else {

@@ -7,7 +7,6 @@ package UTT.DAO;
 import UTT.Connection.JdbcHelper;
 import static UTT.Connection.JdbcHelper.executeUpdate;
 import static UTT.Connection.JdbcHelper.preparedStatement;
-import UTT.Model.QuanHe;
 import UTT.Model.TaiKhoan;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +21,10 @@ import java.util.List;
  */
 public class TaiKhoanDAO {
 
+    public TaiKhoanDAO() {
+ 
+    }
+
     public List<TaiKhoan> hienTaiKhoan() {
         String sql = "SELECT * FROM taikhoan";
         return timQuanHe(sql);
@@ -31,9 +34,13 @@ public class TaiKhoanDAO {
         String sql = "SELECT * FROM taikhoan WHERE tendangnhap = ?";
         return timQuanHe(sql, timKiem);
     }
+    public List<TaiKhoan> isAdmin(String timKiem) {
+        String sql = "SELECT * FROM taikhoan WHERE tendangnhap = ?";
+        return timQuanHe(sql, timKiem);
+    }
 
     public void themTaiKhoan(String tenDangNhap, String matKhau,
-            String ngayCapQuyen, String admin, String hoTen,
+            String ngayCapQuyen, Boolean admin, String hoTen,
             String maPhongBan, String maChucVu, String email,
             Object... args) throws SQLException {
 
@@ -55,7 +62,7 @@ public class TaiKhoanDAO {
     }
 
     public void suaTaiKhoan(String tenDangNhap, String matKhau,
-            String ngayCapQuyen, String admin, String hoTen,
+            Date ngayCapQuyen, Boolean admin, String hoTen,
             String maPhongBan, String maChucVu, String email,
             Object... args) throws SQLException {
         String sql = """
@@ -82,12 +89,12 @@ public class TaiKhoanDAO {
 
     }
 
-    public void xoaQuanHe(String tenTaiKhoan, Object... args) throws SQLException {
+    public void xoaTaiKhoan(String tenDangNhap, Object... args) throws SQLException {
         String sql = """
                       DELETE FROM taikhoan WHERE tendangnhap = ?
                      """;
         try {
-            executeUpdate(sql, tenTaiKhoan);
+            executeUpdate(sql, tenDangNhap);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }

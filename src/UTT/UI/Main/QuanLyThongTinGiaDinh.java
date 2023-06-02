@@ -7,6 +7,7 @@ package UTT.UI.Main;
 import UTT.DAO.CanBoDAO;
 import UTT.DAO.QuanHeDAO;
 import UTT.Model.QuanHe;
+import UTT.Model.TaiKhoan;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -32,10 +33,15 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         hienThiBangQuanHe();
         PromptSupport.setPrompt("Nhập mã cán bộ", txtTimKiem);
         btnSua.setVisible(false);
-        tblQuanHe.setComponentPopupMenu(jPopupMenu1);
         ButtonGroup bg = new ButtonGroup();
         bg.add(rdoNam);
         bg.add(rdoNu);
+        if (!TaiKhoan.isAdmin) {
+            pnlNguoiThan.setVisible(false);
+            pnlChucNang.setVisible(false);
+        } else {
+            tblQuanHe.setComponentPopupMenu(jPopupMenu1);
+        }
     }
 
     private void hienThiBangQuanHe() {
@@ -90,11 +96,11 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         menuItemXoa = new javax.swing.JMenuItem();
         scrollPaneWin111 = new UTT.UI.scroll.win11.ScrollPaneWin11();
         jPanel1 = new javax.swing.JPanel();
-        pnlChucNang1 = new javax.swing.JPanel();
+        pnlTimKiem = new javax.swing.JPanel();
         btnTimKiem = new javax.swing.JButton();
         txtTimKiem = new javax.swing.JTextField();
         btnLamMoi = new javax.swing.JButton();
-        pnlCaNhanCon = new javax.swing.JPanel();
+        pnlNguoiThan = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -134,9 +140,7 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         });
         jPopupMenu1.add(menuItemXoa);
 
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
-
-        pnlChucNang1.setLayout(new java.awt.GridBagLayout());
+        pnlTimKiem.setLayout(new java.awt.GridBagLayout());
 
         btnTimKiem.setText("Tìm kiếm");
         btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
@@ -149,12 +153,12 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
-        pnlChucNang1.add(btnTimKiem, gridBagConstraints);
+        pnlTimKiem.add(btnTimKiem, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 300;
-        pnlChucNang1.add(txtTimKiem, gridBagConstraints);
+        pnlTimKiem.add(txtTimKiem, gridBagConstraints);
 
         btnLamMoi.setText("Làm mới");
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
@@ -167,14 +171,12 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 70);
-        pnlChucNang1.add(btnLamMoi, gridBagConstraints);
+        pnlTimKiem.add(btnLamMoi, gridBagConstraints);
 
-        jPanel1.add(pnlChucNang1);
-
-        pnlCaNhanCon.setBorder(javax.swing.BorderFactory.createTitledBorder("Người thân"));
-        pnlCaNhanCon.setPreferredSize(new java.awt.Dimension(552, 250));
-        pnlCaNhanCon.setRequestFocusEnabled(false);
-        pnlCaNhanCon.setLayout(new java.awt.GridBagLayout());
+        pnlNguoiThan.setBorder(javax.swing.BorderFactory.createTitledBorder("Người thân"));
+        pnlNguoiThan.setPreferredSize(new java.awt.Dimension(288, 47));
+        pnlNguoiThan.setRequestFocusEnabled(false);
+        pnlNguoiThan.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setText("Mã cán bộ:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -182,7 +184,7 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(jLabel1, gridBagConstraints);
+        pnlNguoiThan.add(jLabel1, gridBagConstraints);
 
         jLabel2.setText("Họ tên người thân:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -190,7 +192,7 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(jLabel2, gridBagConstraints);
+        pnlNguoiThan.add(jLabel2, gridBagConstraints);
 
         jLabel5.setText("Quan hệ:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -198,7 +200,7 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(jLabel5, gridBagConstraints);
+        pnlNguoiThan.add(jLabel5, gridBagConstraints);
 
         jLabel6.setText("Ngày sinh:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -206,28 +208,28 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(jLabel6, gridBagConstraints);
+        pnlNguoiThan.add(jLabel6, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 123;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(txtMaCanBo, gridBagConstraints);
+        pnlNguoiThan.add(txtMaCanBo, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.ipadx = 123;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(txtQuanHe, gridBagConstraints);
+        pnlNguoiThan.add(txtQuanHe, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 123;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(txtHoTenNguoiThan, gridBagConstraints);
+        pnlNguoiThan.add(txtHoTenNguoiThan, gridBagConstraints);
 
         jLabel7.setText("Địa chỉ:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -235,7 +237,7 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 5);
-        pnlCaNhanCon.add(jLabel7, gridBagConstraints);
+        pnlNguoiThan.add(jLabel7, gridBagConstraints);
 
         jLabel10.setText("Nghề nghiệp:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -243,21 +245,21 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 5);
-        pnlCaNhanCon.add(jLabel10, gridBagConstraints);
+        pnlNguoiThan.add(jLabel10, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 123;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(txtNgheNghiep, gridBagConstraints);
+        pnlNguoiThan.add(txtNgheNghiep, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 123;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(txtDiaChi, gridBagConstraints);
+        pnlNguoiThan.add(txtDiaChi, gridBagConstraints);
 
         jLabel12.setText("Giới tính:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -265,7 +267,7 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(jLabel12, gridBagConstraints);
+        pnlNguoiThan.add(jLabel12, gridBagConstraints);
 
         rdoNu.setText("Nữ");
 
@@ -295,7 +297,7 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        pnlCaNhanCon.add(pnlGioiTinh, gridBagConstraints);
+        pnlNguoiThan.add(pnlGioiTinh, gridBagConstraints);
 
         txtNgaySinh.setDateFormatString("yyyy-MM-dd");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -305,9 +307,7 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 97;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(txtNgaySinh, gridBagConstraints);
-
-        jPanel1.add(pnlCaNhanCon);
+        pnlNguoiThan.add(txtNgaySinh, gridBagConstraints);
 
         pnlChucNang.setLayout(new java.awt.GridBagLayout());
 
@@ -340,12 +340,8 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         btnHuy.setText("Hủy");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
         pnlChucNang.add(btnHuy, gridBagConstraints);
-
-        jPanel1.add(pnlChucNang);
 
         scrollPaneWin112.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPaneWin112.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -380,7 +376,29 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
             tblQuanHe.getColumnModel().getColumn(7).setPreferredWidth(500);
         }
 
-        jPanel1.add(scrollPaneWin112);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnlTimKiem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1021, Short.MAX_VALUE)
+                    .addComponent(pnlChucNang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(scrollPaneWin112, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlNguoiThan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(pnlTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(pnlNguoiThan, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(pnlChucNang, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(scrollPaneWin112, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE))
+        );
 
         scrollPaneWin111.setViewportView(jPanel1);
 
@@ -388,11 +406,11 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollPaneWin111, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
+            .addComponent(scrollPaneWin111, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollPaneWin111, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
+            .addComponent(scrollPaneWin111, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -585,10 +603,10 @@ public class QuanLyThongTinGiaDinh extends javax.swing.JPanel {
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JMenuItem menuItemSua;
     private javax.swing.JMenuItem menuItemXoa;
-    private javax.swing.JPanel pnlCaNhanCon;
     private javax.swing.JPanel pnlChucNang;
-    private javax.swing.JPanel pnlChucNang1;
     private javax.swing.JPanel pnlGioiTinh;
+    private javax.swing.JPanel pnlNguoiThan;
+    private javax.swing.JPanel pnlTimKiem;
     private javax.swing.JRadioButton rdoNam;
     private javax.swing.JRadioButton rdoNu;
     private UTT.UI.scroll.win11.ScrollPaneWin11 scrollPaneWin111;

@@ -90,8 +90,6 @@ public class TaiKhoan {
         this.email = email;
     }
 
-  
-
     private String tenDangNhap;
     private String matKhau;
     private Date ngayCapQuyen;
@@ -100,5 +98,6 @@ public class TaiKhoan {
     private String maPhongBan;
     private String maChucVu;
     private String email;
+    static public boolean isAdmin; 
 
 }

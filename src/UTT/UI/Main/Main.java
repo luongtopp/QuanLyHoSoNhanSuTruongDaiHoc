@@ -3,10 +3,6 @@ package UTT.UI.Main;
 import UTT.UI.component.HomeForm;
 import java.awt.Component;
 import UTT.UI.Menu.MenuEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -42,6 +38,9 @@ public class Main extends javax.swing.JFrame {
                         }
                         case 3 -> {
                             showForm(new QuanLyChucVu());
+                        }
+                        case 4 -> {
+                            showForm(new QuanLyTaiKhoan());
                         }
 
                     }
@@ -82,20 +81,20 @@ public class Main extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(scrollPaneWin111, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, 1011, Short.MAX_VALUE))
-            .addComponent(header1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(header1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1250, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(header1, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
                     .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
