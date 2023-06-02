@@ -25,8 +25,8 @@ public class QuanLyKyLuat extends javax.swing.JPanel {
         btnSua.setVisible(false);
         hienThiBangKyLuat();
         if (!TaiKhoan.isAdmin) {
-//            pnlChucNang.setVisible(false);
-//            pnlKyLuat.setVisible(false);
+            pnlChucNang.setVisible(false);
+            pnlKyLuat.setVisible(false);
         } else {
         }
                     tblKyLuat.setComponentPopupMenu(jPopupMenu1);

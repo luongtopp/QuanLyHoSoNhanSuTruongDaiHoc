@@ -8,6 +8,8 @@ import UTT.UI.component.QuanLyTaiKhoan;
 import UTT.UI.component.HomeForm;
 import java.awt.Component;
 import UTT.UI.Menu.MenuEvent;
+import UTT.UI.component.CapNhapQuaTrinhCanBo;
+import UTT.UI.component.QuanLyCanBoNghiHuu;
 import UTT.UI.component.QuanLyKyLuat;
 
 /**
@@ -36,6 +38,10 @@ public class Home extends javax.swing.JFrame {
                                 case 2 -> {
                                     showForm(new QuanLyThongTinGiaDinh());
                                 }
+                                case 3 -> {
+                                    showForm(new QuanLyCanBoNghiHuu());
+                                }
+                                
                             }
 
                         }
@@ -46,10 +52,13 @@ public class Home extends javax.swing.JFrame {
                             showForm(new QuanLyChucVu());
                         }
                         case 4 -> {
+                            showForm(new CapNhapQuaTrinhCanBo());
+                        }
+                        case 5 -> {
                             showForm(new QuanLyTaiKhoan());
 
                         }
-                        case 5 -> {
+                        case 6 -> {
                             switch (subIndex) {
                                 case 1 -> {
 
