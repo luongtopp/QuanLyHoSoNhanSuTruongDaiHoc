@@ -19,7 +19,7 @@ import java.util.List;
 public class DAONghiHuu {
 
     public void themCanBoNghiHuu(String maCanBo, String quyetDinhSo, String ngayBatDau) throws SQLException {
-        String sql = "INSERT into thong_tin_nghi_huu(macanbo, soqdnghihuu, thoigiannghihuu ) VALUES( "
+        String sql = "INSERT into thongtinnghihuu(macanbo, soqdnghihuu, thoigiannghihuu ) VALUES( "
                 + "N'" + maCanBo + "'"
                 + ",N'" + quyetDinhSo + "'"
                 + ",N'" + ngayBatDau + "')";
@@ -27,12 +27,12 @@ public class DAONghiHuu {
     }
 
     public List<CanBoNghiHuu> bangCanBoNghiHuu() {
-        String sql = "SELECT * FROM thong_tin_nghi_huu";
+        String sql = "SELECT * FROM thongtinnghihuu";
         return selectCanBoNghiHuu(sql);
     }
 
     public List<CanBoNghiHuu> timKiemCanBoNghiHuu(String maCanBo) throws SQLException {
-        String sql = "SELECT * FROM thong_tin_nghi_huu  WHERE macanbo like '%" + maCanBo + "%'";
+        String sql = "SELECT * FROM thongtinnghihuu  WHERE macanbo like '%" + maCanBo + "%'";
         return selectCanBoNghiHuu(sql);
     }
 
@@ -45,12 +45,12 @@ public class DAONghiHuu {
     }
 
     public void xoaCanBoNghiHuu(String maCanBo) throws SQLException {
-        String sql = "DELETE FROM thong_tin_nghi_huu WHERE macanbo = N'" + maCanBo + "'";
+        String sql = "DELETE FROM thongtinnghihuu WHERE macanbo = N'" + maCanBo + "'";
         update(sql);
     }
 
     public void suaCanBoNghiHuu(String maCanBo, String quyetDinhSo, String ngayBatDau) throws SQLException {
-        String sql = "UPDATE thong_tin_nghi_huu set soqdnghihuu = N'" + quyetDinhSo + "'"
+        String sql = "UPDATE thongtinnghihuu set soqdnghihuu = N'" + quyetDinhSo + "'"
                 + ", thoigiannghihuu = N'" + ngayBatDau + "'"
                 + " WHERE macanbo = N'" + maCanBo + "'";
 
