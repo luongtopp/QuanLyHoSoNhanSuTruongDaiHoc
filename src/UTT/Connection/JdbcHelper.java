@@ -16,9 +16,9 @@ import java.sql.SQLException;
  */
 public class JdbcHelper {
 
-    private static final String DATABASE_URL = "jdbc:mysql://127.0.0.1:3306/quan_ly_ho_so_nhan_su_truong_dai_hoc";
+    private static final String DATABASE_URL = "jdbc:mysql://127.0.0.1:3306/quan_ly_ho_so_nhan_su_truong_dai_hoc1";
     private static final String DATABASE_USER_NAME = "root";
-    private static final String DATABASE_PASSWORD = "1234";
+    private static final String DATABASE_PASSWORD = "";
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(DATABASE_URL, DATABASE_USER_NAME, DATABASE_PASSWORD);

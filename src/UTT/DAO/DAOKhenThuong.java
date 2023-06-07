@@ -7,6 +7,7 @@ package UTT.DAO;
 import UTT.Connection.JdbcHelper;
 import UTT.Model.CanBo;
 import UTT.Model.CanBoNghiHuu;
+import UTT.Model.KhenThuong;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,24 +17,27 @@ import java.util.List;
  *
  * @author pvant
  */
-public class DAONghiHuu {
+public class DAOKhenThuong {
 
-    public void themCanBoNghiHuu(String maCanBo, String quyetDinhSo, String ngayBatDau) throws SQLException {
-        String sql = "INSERT into thong_tin_nghi_huu(macanbo, soqdnghihuu, thoigiannghihuu ) VALUES( "
-                + "N'" + maCanBo + "'"
-                + ",N'" + quyetDinhSo + "'"
-                + ",N'" + ngayBatDau + "')";
+    public void themCanBoKhenThuong(String maKhenThuong, String maCanBo, String hinhThucKhenThuong, String ngayKhenThuong, String phongBan, String danhHieu) throws SQLException {
+        String sql = "INSERT into khenthuong(makhenthuong, macanbo, hinhthuckhenthuong, ngaykhenthuong, donvi,danhhieu ) VALUES( "
+                + "N'" + maKhenThuong + "'"
+                + ",N'" + maCanBo + "'"
+                + ",N'" + hinhThucKhenThuong + "'"
+                + ",N'" + ngayKhenThuong + "'"
+                + ",N'" + phongBan + "'"
+                + ",N'" + danhHieu + "')";
         update(sql);
     }
 
-    public List<CanBoNghiHuu> bangCanBoNghiHuu() {
-        String sql = "SELECT * FROM thong_tin_nghi_huu";
-        return selectCanBoNghiHuu(sql);
+    public List<KhenThuong> bangKhenThuong() {
+        String sql = "SELECT * FROM khenthuong";
+        return selectKhenThuong(sql);
     }
 
-    public List<CanBoNghiHuu> timKiemCanBoNghiHuu(String maCanBo) throws SQLException {
-        String sql = "SELECT * FROM thong_tin_nghi_huu  WHERE macanbo like '%" + maCanBo + "%'";
-        return selectCanBoNghiHuu(sql);
+    public List<KhenThuong> timKiemCanBoKhenThuong(String maKhenThuong) throws SQLException {
+        String sql = "SELECT * FROM khenthuong  WHERE makhenthuong like '%" + maKhenThuong + "%'";
+        return selectKhenThuong(sql);
     }
 
     public List<CanBo> timKiemCanBo(String maCanBo) throws SQLException {
@@ -44,15 +48,18 @@ public class DAONghiHuu {
         return selectCanBo(sql);
     }
 
-    public void xoaCanBoNghiHuu(String maCanBo) throws SQLException {
-        String sql = "DELETE FROM thong_tin_nghi_huu WHERE macanbo = N'" + maCanBo + "'";
+    public void xoaCanBoKhenThuong(String maKhenThuong) throws SQLException {
+        String sql = "DELETE FROM khenthuong WHERE makhenthuong = N'" + maKhenThuong + "'";
         update(sql);
     }
 
-    public void suaCanBoNghiHuu(String maCanBo, String quyetDinhSo, String ngayBatDau) throws SQLException {
-        String sql = "UPDATE thong_tin_nghi_huu set soqdnghihuu = N'" + quyetDinhSo + "'"
-                + ", thoigiannghihuu = N'" + ngayBatDau + "'"
-                + " WHERE macanbo = N'" + maCanBo + "'";
+    public void suaCanBoKhenThuong(String maKhenThuong, String maCanBo, String hinhThucKhenThuong, String ngayKhenThuong, String phongBan, String danhHieu) throws SQLException {
+        String sql = "UPDATE khenthuong set macanbo = N'" + maCanBo + "'"
+                + ", hinhthuckhenthuong = N'" + hinhThucKhenThuong + "'"
+                + ", ngaykhenthuong = N'" + ngayKhenThuong + "'"
+                + ", donvi = N'" + phongBan + "'"
+                + ", danhhieu = N'" + danhHieu + "'"
+                + " WHERE makhenthuong = N'" + maKhenThuong + "'";
 
         update(sql);
     }
@@ -61,16 +68,16 @@ public class DAONghiHuu {
 //        return selectQuaTrinhCongTac(sql, maCanBo);
 //    }
 
-    private List<CanBoNghiHuu> selectCanBoNghiHuu(String sql, Object... args) {
-        List<CanBoNghiHuu> list = new ArrayList<>();
+    private List<KhenThuong> selectKhenThuong(String sql, Object... args) {
+        List<KhenThuong> list = new ArrayList<>();
         try {
             ResultSet rs = null;
             try {
                 rs = JdbcHelper.executeQuery(sql, args);
 
                 while (rs.next()) {
-                    CanBoNghiHuu canbonghihuu = traTruyVanCanBoNghiHuu(rs);
-                    list.add(canbonghihuu);
+                    KhenThuong khenthuong = traTruyKhenThuong(rs);
+                    list.add(khenthuong);
                 }
             } finally {
                 rs.getStatement().getConnection().close();
@@ -103,13 +110,16 @@ public class DAONghiHuu {
         return list;
     }
 
-    private CanBoNghiHuu traTruyVanCanBoNghiHuu(ResultSet rs) throws SQLException {
-        CanBoNghiHuu canbonghihuu = new CanBoNghiHuu();
-        canbonghihuu.setMaCanBo(rs.getString("macanbo"));
-        canbonghihuu.setQuyetDinhSo(rs.getString("soqdnghihuu"));
-        canbonghihuu.setThoiGianNghiHuu(rs.getDate("thoigiannghihuu"));
+    private KhenThuong traTruyKhenThuong(ResultSet rs) throws SQLException {
+        KhenThuong khenthuong = new KhenThuong();
+        khenthuong.setMaKhenThuong(rs.getString("makhenthuong"));
+        khenthuong.setMaCanBo(rs.getString("macanbo"));
+        khenthuong.setHinhThucKhenThuong(rs.getString("hinhthuckhenthuong"));
+        khenthuong.setNgayKhenThuong(rs.getDate("ngaykhenthuong"));
+        khenthuong.setDonVi(rs.getString("donvi"));
+        khenthuong.setDanhHieu(rs.getString("danhhieu"));
 
-        return canbonghihuu;
+        return khenthuong;
     }
 
     private CanBo traTruyVanCanBo(ResultSet rs) throws SQLException {
@@ -133,6 +143,6 @@ public class DAONghiHuu {
 //        List<QuaTrinhCongTac> list = new DAONghiHuu().timKiemQuaTrinhCongTac("CB003");
 //        for (var item : list) {
 //            System.out.println(item.getThoiGianBatDau());
-     //   }
+        //   }
     }
 }

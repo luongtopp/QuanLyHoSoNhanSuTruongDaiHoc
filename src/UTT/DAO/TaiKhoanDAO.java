@@ -26,16 +26,16 @@ public class TaiKhoanDAO {
     }
 
     public List<TaiKhoan> hienTaiKhoan() {
-        String sql = "SELECT * FROM taikhoan";
+        String sql = "SELECT * FROM tai_khoan";
         return timQuanHe(sql);
     }
 
     public List<TaiKhoan> hienTaiKhoan(String timKiem) {
-        String sql = "SELECT * FROM taikhoan WHERE tendangnhap = ?";
+        String sql = "SELECT * FROM tai_khoan WHERE tendn = ?";
         return timQuanHe(sql, timKiem);
     }
     public List<TaiKhoan> isAdmin(String timKiem) {
-        String sql = "SELECT * FROM taikhoan WHERE tendangnhap = ?";
+        String sql = "SELECT * FROM tai_khoan WHERE tendn = ?";
         return timQuanHe(sql, timKiem);
     }
 
@@ -45,7 +45,7 @@ public class TaiKhoanDAO {
             Object... args) throws SQLException {
 
         String sql = """
-                     INSERT INTO taikhoan (tendangnhap, matkhau, 
+                     INSERT INTO tai_khoan (tendn, matkhau, 
                      ngaycapquyen, admin, hoten, maphongban, machucvu, email)
                          VALUES (?, ?, ?, ?, ?, ?, ?, ?)
                     """;
@@ -66,7 +66,7 @@ public class TaiKhoanDAO {
             String maPhongBan, String maChucVu, String email,
             Object... args) throws SQLException {
         String sql = """
-                     UPDATE taikhoan
+                     UPDATE tai_khoan
                      SET
                          matkhau = ?,
                          ngaycapquyen = ?,
@@ -76,7 +76,7 @@ public class TaiKhoanDAO {
                          machucvu = ?,
                          email = ?
                      WHERE
-                         tendangnhap = ?;
+                         tendn = ?;
                     """;
         try {
             executeUpdate(sql, matKhau,
@@ -91,7 +91,7 @@ public class TaiKhoanDAO {
 
     public void xoaTaiKhoan(String tenDangNhap, Object... args) throws SQLException {
         String sql = """
-                      DELETE FROM taikhoan WHERE tendangnhap = ?
+                      DELETE FROM tai_khoan WHERE tendn = ?
                      """;
         try {
             executeUpdate(sql, tenDangNhap);
@@ -125,7 +125,7 @@ public class TaiKhoanDAO {
     private TaiKhoan layDuLieuTuBangQuanHe(ResultSet rs) throws SQLException {
 
         TaiKhoan taiKhoan = new TaiKhoan();
-        taiKhoan.setTenDangNhap(rs.getNString("tendangnhap"));
+        taiKhoan.setTenDangNhap(rs.getNString("tendn"));
         taiKhoan.setMatKhau(rs.getString("matkhau"));
         taiKhoan.setNgayCapQuyen(rs.getDate("ngaycapquyen"));
         taiKhoan.setAdmin(rs.getBoolean("admin"));
@@ -138,7 +138,7 @@ public class TaiKhoanDAO {
 
     public static void main(String[] args) throws SQLException {
         List<TaiKhoan> list = new TaiKhoanDAO().hienTaiKhoan();
-        for (var item : list) {
+        for (TaiKhoan item : list) {
             System.out.println(item.getHoTen());
         }
 

@@ -9,6 +9,7 @@ import UTT.UI.component.HomeForm;
 import java.awt.Component;
 import UTT.UI.Menu.MenuEvent;
 import UTT.UI.component.CapNhapQuaTrinhCanBo;
+import UTT.UI.component.QuanLyKhenThuong;
 import UTT.UI.component.QuanLyCanBoNghiHuu;
 import UTT.UI.component.QuanLyKyLuat;
 
@@ -41,7 +42,7 @@ public class Home extends javax.swing.JFrame {
                                 case 3 -> {
                                     showForm(new QuanLyCanBoNghiHuu());
                                 }
-                                
+
                             }
 
                         }
@@ -61,7 +62,7 @@ public class Home extends javax.swing.JFrame {
                         case 6 -> {
                             switch (subIndex) {
                                 case 1 -> {
-
+                                    showForm(new QuanLyKhenThuong());
                                 }
                                 case 2 -> {
                                     showForm(new QuanLyKyLuat());
@@ -140,7 +141,7 @@ public class Home extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-       
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Home().setVisible(true);
