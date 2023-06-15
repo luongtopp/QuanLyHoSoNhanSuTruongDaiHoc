@@ -10,6 +10,7 @@ import java.awt.Component;
 import UTT.UI.Menu.MenuEvent;
 import UTT.UI.component.CapNhapQuaTrinhCanBo;
 import UTT.UI.component.QuanLyCanBoNghiHuu;
+import UTT.UI.component.QuanLyKhenThuong;
 import UTT.UI.component.QuanLyKyLuat;
 
 /**
@@ -61,7 +62,7 @@ public class Home extends javax.swing.JFrame {
                         case 6 -> {
                             switch (subIndex) {
                                 case 1 -> {
-
+                                    showForm(new QuanLyKhenThuong());
                                 }
                                 case 2 -> {
                                     showForm(new QuanLyKyLuat());

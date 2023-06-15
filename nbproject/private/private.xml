@@ -3,14 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Users/luongtopp/Documents/study/UTT/junior/semester-2/software_technology/QuanLyHoSoNhanSuTruongDaiHoc/src/UTT/Model/KhenThuong.java</file>
             <file>file:/Users/luongtopp/Documents/study/UTT/junior/semester-2/software_technology/QuanLyHoSoNhanSuTruongDaiHoc/src/UTT/UI/Main/Home.java</file>
-            <file>file:/Users/luongtopp/Documents/study/UTT/junior/semester-2/software_technology/QuanLyHoSoNhanSuTruongDaiHoc/src/UTT/UI/Main/DangNhap.java</file>
-            <file>file:/Users/luongtopp/Documents/study/UTT/junior/semester-2/software_technology/QuanLyHoSoNhanSuTruongDaiHoc/src/UTT/UI/component/HomeForm.java</file>
-            <file>file:/Users/luongtopp/Documents/study/UTT/junior/semester-2/software_technology/QuanLyHoSoNhanSuTruongDaiHoc/src/UTT/Model/ThongKe.java</file>
-            <file>file:/Users/luongtopp/Documents/study/UTT/junior/semester-2/software_technology/QuanLyHoSoNhanSuTruongDaiHoc/src/UTT/UI/effect/PolygonCorner.java</file>
-            <file>file:/Users/luongtopp/Documents/study/UTT/junior/semester-2/software_technology/QuanLyHoSoNhanSuTruongDaiHoc/src/UTT/UI/effect/RippleEffect.java</file>
-            <file>file:/Users/luongtopp/Documents/study/UTT/junior/semester-2/software_technology/QuanLyHoSoNhanSuTruongDaiHoc/src/UTT/DAO/CanBoDAO.java</file>
-            <file>file:/Users/luongtopp/Documents/study/UTT/junior/semester-2/software_technology/QuanLyHoSoNhanSuTruongDaiHoc/src/UTT/DAO/ThongKeDAO.java</file>
+            <file>file:/Users/luongtopp/Documents/study/UTT/junior/semester-2/software_technology/QuanLyHoSoNhanSuTruongDaiHoc/src/UTT/UI/component/QuanLyThongTinCanBo.java</file>
+            <file>file:/Users/luongtopp/Documents/study/UTT/junior/semester-2/software_technology/QuanLyHoSoNhanSuTruongDaiHoc/src/UTT/UI/component/QuanLyKhenThuong.java</file>
+            <file>file:/Users/luongtopp/Documents/study/UTT/junior/semester-2/software_technology/QuanLyHoSoNhanSuTruongDaiHoc/src/UTT/UI/component/QuanLyKyLuat.java</file>
+            <file>file:/Users/luongtopp/Documents/study/UTT/junior/semester-2/software_technology/QuanLyHoSoNhanSuTruongDaiHoc/src/UTT/UI/component/QuanLyTaiKhoan.java</file>
+            <file>file:/Users/luongtopp/Documents/study/UTT/junior/semester-2/software_technology/QuanLyHoSoNhanSuTruongDaiHoc/src/UTT/Connection/JdbcHelper.java</file>
+            <file>file:/Users/luongtopp/Documents/study/UTT/junior/semester-2/software_technology/QuanLyHoSoNhanSuTruongDaiHoc/src/UTT/DAO/DAOKhenThuong.java</file>
         </group>
     </open-files>
 </project-private>

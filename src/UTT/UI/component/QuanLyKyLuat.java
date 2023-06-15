@@ -143,7 +143,7 @@ public class QuanLyKyLuat extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 70);
         pnlTimKiem.add(btnLamMoi, gridBagConstraints);
 
-        pnlKyLuat.setBorder(javax.swing.BorderFactory.createTitledBorder("Người thân"));
+        pnlKyLuat.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin cán bộ"));
         pnlKyLuat.setPreferredSize(new java.awt.Dimension(288, 47));
         pnlKyLuat.setRequestFocusEnabled(false);
         pnlKyLuat.setLayout(new java.awt.GridBagLayout());
