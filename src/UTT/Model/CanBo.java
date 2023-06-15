@@ -11,7 +11,7 @@ public class CanBo {
     public CanBo() {
     }
 
-    public CanBo(String maCanBo, String hoTenKhaiSinh, String gioiTinh, Date ngaySinh, String tinhTrangHonNhan, String soCMND, String queQuan, String noiOHienTai, String email, String danToc, String tonGiao, Date ngayHopDong, String congViecDuocGiao, String maChucVu, String chuyenNganhDaoTao, String noiDaoTao, int namTotNghiep, String trinhDoNgoaiNgu, String maPhongBan) {
+    public CanBo(String maCanBo, String hoTenKhaiSinh, String gioiTinh, Date ngaySinh, String tinhTrangHonNhan, String soCMND, String queQuan, String noiOHienTai, String email, String danToc, String tonGiao, Date ngayHopDong, String congViecDuocGiao, String maChucVu, String chuyenNganhDaoTao, String noiDaoTao, int namTotNghiep, String trinhDoNgoaiNgu, String maPhongBan, String anh) {
         this.maCanBo = maCanBo;
         this.hoTenKhaiSinh = hoTenKhaiSinh;
         this.gioiTinh = gioiTinh;
@@ -31,7 +31,8 @@ public class CanBo {
         this.namTotNghiep = namTotNghiep;
         this.trinhDoNgoaiNgu = trinhDoNgoaiNgu;
         this.maPhongBan = maPhongBan;
-    }
+        this.anh = anh;
+    } 
 
     public String getMaCanBo() {
         return maCanBo;
@@ -185,24 +186,35 @@ public class CanBo {
         this.maPhongBan = maPhongBan;
     }
 
-    String maCanBo;
-    String hoTenKhaiSinh;
-    String gioiTinh;
-    Date ngaySinh;
-    String tinhTrangHonNhan;
-    String soCMND;
-    String queQuan;
-    String noiOHienTai;
-    String email;
-    String danToc;
-    String tonGiao;
-    Date ngayHopDong;
-    String congViecDuocGiao;
-    String maChucVu;
-    String chuyenNganhDaoTao;
-    String noiDaoTao;
-    int namTotNghiep;
-    String trinhDoNgoaiNgu;
-    String maPhongBan;
+    public String getAnh() {
+        return anh;
+    }
+
+    public void setAnh(String anh) {
+        this.anh = anh;
+    }
+    
+    
+
+    private String maCanBo;
+    private String hoTenKhaiSinh;
+    private String gioiTinh;
+    private Date ngaySinh;
+    private String tinhTrangHonNhan;
+    private String soCMND;
+    private String queQuan;
+    private String noiOHienTai;
+    private String email;
+    private String danToc;
+    private String tonGiao;
+    private Date ngayHopDong;
+    private String congViecDuocGiao;
+    private String maChucVu;
+    private String chuyenNganhDaoTao;
+    private String noiDaoTao;
+    private int namTotNghiep;
+    private String trinhDoNgoaiNgu;
+    private String maPhongBan;
+    private String anh;
 
 }

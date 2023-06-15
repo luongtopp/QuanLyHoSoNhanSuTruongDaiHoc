@@ -268,7 +268,7 @@ public class QuanLyChucVu extends javax.swing.JPanel {
         int row = tblChucVu.getSelectedRow();
         String MaChucVu = tblChucVu.getValueAt(row, 0).toString();
         String TenChucVu = tblChucVu.getValueAt(row, 1).toString();
-        String PhuCap = tblChucVu.getValueAt(row, 2).toString();
+//        String PhuCap = tblChucVu.getValueAt(row, 2).toString();
 
         txtMaChucVu.setText(MaChucVu);
         txtTenChucVu.setText(TenChucVu);

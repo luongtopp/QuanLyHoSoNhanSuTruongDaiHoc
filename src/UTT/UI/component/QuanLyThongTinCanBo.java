@@ -7,6 +7,9 @@ import UTT.Model.CanBo;
 import UTT.Model.ChucVu;
 import UTT.Model.PhongBan;
 import UTT.Model.TaiKhoan;
+import java.awt.Component;
+import java.awt.Image;
+import java.io.File;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -15,9 +18,16 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -41,100 +51,11 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
             pnlCaNhanCha.setVisible(false);
             pnlCongViecCha.setVisible(false);
             pnlChucNang.setVisible(false);
-
         } else {
-            tblCanBo.setComponentPopupMenu(jPopupMenu1);
         }
+        tblCanBo.setComponentPopupMenu(jPopupMenu1);
 
 //        cboTenPhongBan.setSelectedIndex(-1);
-    }
-
-    // Hiển thị bảng CÁN BỘ không tham số
-    private void hienThiBangCanBo() {
-        DefaultTableModel model = (DefaultTableModel) tblCanBo.getModel();
-        model.setRowCount(0);
-        for (CanBo item : new CanBoDAO().hienThiCanBo()) {
-            model.addRow(
-                    new Object[]{
-                        item.getMaCanBo(),
-                        item.getHoTenKhaiSinh(),
-                        item.getGioiTinh(),
-                        item.getNgaySinh(),
-                        item.getTinhTrangHonNhan(),
-                        item.getSoCMND(),
-                        item.getQueQuan(),
-                        item.getNoiOHienTai(),
-                        item.getEmail(),
-                        item.getDanToc(),
-                        item.getTonGiao(),
-                        item.getNgayHopDong(),
-                        item.getCongViecDuocGiao(),
-                        item.getMaChucVu(),
-                        item.getChuyenNganhDaoTao(),
-                        item.getNoiDaoTao(),
-                        item.getNamTotNghiep(),
-                        item.getTrinhDoNgoaiNgu(),
-                        item.getMaPhongBan()
-                    }
-            );
-        }
-    }
-
-    // Hiển thị bảng CÁN BỘ có tham số
-    private void hienThiBangCanBo(String timKiem) {
-
-        DefaultTableModel model = (DefaultTableModel) tblCanBo.getModel();
-        model.setRowCount(0);
-        for (CanBo item : new CanBoDAO().hienThiCanBo(timKiem)) {
-            model.addRow(
-                    new Object[]{
-                        item.getMaCanBo(),
-                        item.getHoTenKhaiSinh(),
-                        item.getGioiTinh(),
-                        item.getNgaySinh(),
-                        item.getTinhTrangHonNhan(),
-                        item.getSoCMND(),
-                        item.getQueQuan(),
-                        item.getNoiOHienTai(),
-                        item.getEmail(),
-                        item.getDanToc(),
-                        item.getTonGiao(),
-                        item.getNgayHopDong(),
-                        item.getCongViecDuocGiao(),
-                        item.getMaChucVu(),
-                        item.getChuyenNganhDaoTao(),
-                        item.getNoiDaoTao(),
-                        item.getNamTotNghiep(),
-                        item.getTrinhDoNgoaiNgu(),
-                        item.getMaPhongBan()
-
-                    }
-            );
-        }
-    }
-
-    // Hiển COMBOBOX PHÒNG BAN 
-    private void hienThiBangPhongBan() {
-
-        for (PhongBan item : new PhongBanDAO().hienThiPhongBan()) {
-            cboTenPhongBan.addItem(item.getTenPhongBan());
-
-        }
-    }
-
-    private void hienThiBangPhongBan(String timKiem) {
-
-        for (PhongBan item : new PhongBanDAO().timKiemTenPhongBan(timKiem)) {
-            cboTenPhongBan.addItem(item.getTenPhongBan());
-
-        }
-    }
-
-    private void hienThiBangChucVu() {
-
-        for (ChucVu item : new ChucVuDAO().hienThiChucVu()) {
-            cboTenChucVu.addItem(item.getTenChucVu());
-        }
     }
 
     @SuppressWarnings("unchecked")
@@ -146,8 +67,8 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         menuItemSua = new javax.swing.JMenuItem();
         menuItemXoa = new javax.swing.JMenuItem();
         popNhapXuatExcel = new javax.swing.JPopupMenu();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        menuItemNhapExcel = new javax.swing.JMenuItem();
+        menuItemXuatExcel = new javax.swing.JMenuItem();
         scrollPaneWin111 = new UTT.UI.effect.ScrollPaneWin11();
         jPanel1 = new javax.swing.JPanel();
         pnlTimKiem = new javax.swing.JPanel();
@@ -180,6 +101,10 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         rdoNam = new javax.swing.JRadioButton();
         txtNgaySinh = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
+        lblAnh = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        btnThemAnh = new javax.swing.JButton();
         pnlCongViecCha = new javax.swing.JPanel();
         pnlCongViecCon = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
@@ -229,11 +154,21 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         });
         jPopupMenu1.add(menuItemXoa);
 
-        jMenu1.setText("jMenu1");
-        popNhapXuatExcel.add(jMenu1);
+        menuItemNhapExcel.setText("jMenuItem1");
+        menuItemNhapExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemNhapExcelActionPerformed(evt);
+            }
+        });
+        popNhapXuatExcel.add(menuItemNhapExcel);
 
-        jMenuItem1.setText("jMenuItem1");
-        popNhapXuatExcel.add(jMenuItem1);
+        menuItemXuatExcel.setText("jMenuItem1");
+        menuItemXuatExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemXuatExcelActionPerformed(evt);
+            }
+        });
+        popNhapXuatExcel.add(menuItemXuatExcel);
 
         setPreferredSize(new java.awt.Dimension(866, 728));
 
@@ -249,13 +184,14 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
         pnlTimKiem.add(btnTimKiem, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 300;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         pnlTimKiem.add(txtTimKiem, gridBagConstraints);
 
         btnLamMoi.setText("Làm mới");
@@ -267,7 +203,7 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 70);
         pnlTimKiem.add(btnLamMoi, gridBagConstraints);
 
@@ -275,11 +211,6 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         btnNhapXuat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnNhapXuatMouseClicked(evt);
-            }
-        });
-        btnNhapXuat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNhapXuatActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -293,149 +224,26 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         pnlCaNhanCon.setBorder(javax.swing.BorderFactory.createTitledBorder("Cá nhân"));
         pnlCaNhanCon.setPreferredSize(new java.awt.Dimension(552, 250));
         pnlCaNhanCon.setRequestFocusEnabled(false);
-        pnlCaNhanCon.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setText("Tên khai sinh:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(jLabel1, gridBagConstraints);
 
         jLabel2.setText("Ngày sinh:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(jLabel2, gridBagConstraints);
 
         jLabel5.setText("Quên quán:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(jLabel5, gridBagConstraints);
 
         jLabel6.setText("Nơi ở hiện tại:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(jLabel6, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 115;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(txtTenKhaiSinh, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 115;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(txtQueQuan, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 115;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(txtNoiOHienTai, gridBagConstraints);
 
         jLabel7.setText("Hôn nhân:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(jLabel7, gridBagConstraints);
 
         jLabel8.setText("Số CMND:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(jLabel8, gridBagConstraints);
 
         jLabel9.setText("Email:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(jLabel9, gridBagConstraints);
 
         jLabel10.setText("Dân tộc:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(jLabel10, gridBagConstraints);
 
         jLabel11.setText("Tôn giáo:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(jLabel11, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 115;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(txtDanToc, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 115;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(txtHonNhan, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 115;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(txtSoCMND, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 115;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(txtEmail, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 115;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(txtTonGiao, gridBagConstraints);
 
         jLabel12.setText("Giới tính:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(jLabel12, gridBagConstraints);
 
         rdoNu.setText("Nữ");
 
@@ -461,123 +269,166 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(pnlGioiTinh, gridBagConstraints);
-
         txtNgaySinh.setDateFormatString("yyyy-MM-dd");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 97;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCaNhanCon.add(txtNgaySinh, gridBagConstraints);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 50, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 165, Short.MAX_VALUE)
         );
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 100;
-        pnlCaNhanCon.add(jPanel2, gridBagConstraints);
+        jLabel16.setText("Ảnh:");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 165, Short.MAX_VALUE)
+        );
+
+        btnThemAnh.setText("Thêm");
+        btnThemAnh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemAnhActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlCaNhanConLayout = new javax.swing.GroupLayout(pnlCaNhanCon);
+        pnlCaNhanCon.setLayout(pnlCaNhanConLayout);
+        pnlCaNhanConLayout.setHorizontalGroup(
+            pnlCaNhanConLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCaNhanConLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(pnlCaNhanConLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel12))
+                .addGap(10, 10, 10)
+                .addGroup(pnlCaNhanConLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtTenKhaiSinh)
+                    .addComponent(txtQueQuan)
+                    .addComponent(txtNoiOHienTai)
+                    .addComponent(pnlGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNgaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(pnlCaNhanConLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel11))
+                .addGap(10, 10, 10)
+                .addGroup(pnlCaNhanConLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDanToc, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHonNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTonGiao, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSoCMND, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(pnlCaNhanConLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCaNhanConLayout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addGap(21, 21, 21)
+                        .addComponent(btnThemAnh))
+                    .addComponent(lblAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        pnlCaNhanConLayout.setVerticalGroup(
+            pnlCaNhanConLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCaNhanConLayout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addComponent(jLabel1)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel2)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel5)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel6)
+                .addGap(21, 21, 21)
+                .addComponent(jLabel12))
+            .addGroup(pnlCaNhanConLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(txtTenKhaiSinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(txtQueQuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(txtNoiOHienTai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(pnlGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pnlCaNhanConLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pnlCaNhanConLayout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addComponent(jLabel10)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel7)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel8)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel9)
+                .addGap(21, 21, 21)
+                .addComponent(jLabel11))
+            .addGroup(pnlCaNhanConLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(txtDanToc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(txtHonNhan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(txtTonGiao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(txtSoCMND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pnlCaNhanConLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pnlCaNhanConLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addGroup(pnlCaNhanConLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCaNhanConLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel16))
+                    .addComponent(btnThemAnh))
+                .addGap(10, 10, 10)
+                .addComponent(lblAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         pnlCaNhanCha.add(pnlCaNhanCon, java.awt.BorderLayout.CENTER);
 
         pnlCongViecCha.setLayout(new java.awt.BorderLayout());
 
         pnlCongViecCon.setBorder(javax.swing.BorderFactory.createTitledBorder("Công việc"));
-        pnlCongViecCon.setLayout(new java.awt.GridBagLayout());
 
         jLabel13.setText("Mã cán bộ:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViecCon.add(jLabel13, gridBagConstraints);
 
         jLabel15.setText("Tên phòng ban:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViecCon.add(jLabel15, gridBagConstraints);
 
         jLabel17.setText("Mã phòng ban:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViecCon.add(jLabel17, gridBagConstraints);
 
         jLabel18.setText("Ngày hợp đồng:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.ipadx = 36;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViecCon.add(jLabel18, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 115;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViecCon.add(txtMaCanBo, gridBagConstraints);
 
         txtMaPhongBan.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 115;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViecCon.add(txtMaPhongBan, gridBagConstraints);
 
         jLabel22.setText("Công việc được giao:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViecCon.add(jLabel22, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 115;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViecCon.add(txtCongViecDuocGiao, gridBagConstraints);
 
         jLabel25.setText("Chức vụ hiện tại:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViecCon.add(jLabel25, gridBagConstraints);
 
         cboTenPhongBan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
         cboTenPhongBan.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -587,14 +438,6 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
                 cboTenPhongBanActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 115;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViecCon.add(cboTenPhongBan, gridBagConstraints);
 
         cboTenChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
         cboTenChucVu.setToolTipText("");
@@ -604,126 +447,123 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
                 cboTenChucVuActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 115;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViecCon.add(cboTenChucVu, gridBagConstraints);
 
         jLabel3.setText("Chuyên ngành đào tạo:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViecCon.add(jLabel3, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 115;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViecCon.add(txtChuyenNganhDaoTao, gridBagConstraints);
 
         jLabel4.setText("Nơi đào tạo:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViecCon.add(jLabel4, gridBagConstraints);
 
         jLabel28.setText("Năm tốt nghiệp:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViecCon.add(jLabel28, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 115;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViecCon.add(txtNoiDaoTao, gridBagConstraints);
 
         jLabel14.setText("Trình độ ngoại ngữ:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 36;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViecCon.add(jLabel14, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 115;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViecCon.add(txtTrinhDoNgoaiNgu, gridBagConstraints);
 
         txtMaChucVu.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 115;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViecCon.add(txtMaChucVu, gridBagConstraints);
 
         jLabel19.setText("Mã chức vụ:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViecCon.add(jLabel19, gridBagConstraints);
 
         txtNgayHopDong.setDateFormatString("yyyy-MM-dd");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 97;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViecCon.add(txtNgayHopDong, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 115;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlCongViecCon.add(txtNamTotNghiep, gridBagConstraints);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 198, Short.MAX_VALUE)
         );
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 100;
-        pnlCongViecCon.add(jPanel3, gridBagConstraints);
+        javax.swing.GroupLayout pnlCongViecConLayout = new javax.swing.GroupLayout(pnlCongViecCon);
+        pnlCongViecCon.setLayout(pnlCongViecConLayout);
+        pnlCongViecConLayout.setHorizontalGroup(
+            pnlCongViecConLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCongViecConLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(pnlCongViecConLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel22))
+                .addGap(10, 10, 10)
+                .addGroup(pnlCongViecConLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtMaCanBo)
+                    .addComponent(txtTrinhDoNgoaiNgu)
+                    .addComponent(txtCongViecDuocGiao)
+                    .addComponent(cboTenPhongBan, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtMaPhongBan)
+                    .addComponent(txtNgayHopDong, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(pnlCongViecConLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel28)
+                    .addComponent(jLabel25)
+                    .addComponent(jLabel19))
+                .addGap(10, 10, 10)
+                .addGroup(pnlCongViecConLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtChuyenNganhDaoTao)
+                    .addComponent(txtNoiDaoTao)
+                    .addComponent(txtNamTotNghiep)
+                    .addComponent(txtMaChucVu)
+                    .addComponent(cboTenChucVu, 0, 179, Short.MAX_VALUE))
+                .addGap(8, 8, 8))
+        );
+        pnlCongViecConLayout.setVerticalGroup(
+            pnlCongViecConLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCongViecConLayout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(jLabel13)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel15)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel17)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel14)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel18)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel22))
+            .addGroup(pnlCongViecConLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(txtMaCanBo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(cboTenPhongBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(txtMaPhongBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(txtTrinhDoNgoaiNgu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(txtNgayHopDong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(txtCongViecDuocGiao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(pnlCongViecConLayout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(jLabel3)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel4)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel28)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel25)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel19))
+            .addGroup(pnlCongViecConLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(txtChuyenNganhDaoTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(txtNoiDaoTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(txtNamTotNghiep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(cboTenChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(txtMaChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         pnlCongViecCha.add(pnlCongViecCon, java.awt.BorderLayout.CENTER);
 
@@ -786,7 +626,7 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã cán bộ", "Họ tên khai sinh", "Giới tính", "Ngày sinh", "Tình trạng hôn nhân", "Số CMND", "Quê quán", "Nơi ở hiện tại", "Email", "Dân tộc", "Tôn giáo", "Ngày hợp đồng", "Công việc được giao", "Mã chức vụ", "Chuyên ngành đào tạo", "Nơi đào tạo", "Năm tốt nghiệp", "Trình độ ngoại ngữ", "Mã phòng ban"
+                "Mã cán bộ", "Họ tên khai sinh", "Giới tính", "Ngày sinh", "Tình trạng hôn nhân", "Số CMND", "Quê quán", "Nơi ở hiện tại", "Email", "Dân tộc", "Tôn giáo", "Ngày hợp đồng", "Công việc được giao", "Mã chức vụ", "Chuyên ngành đào tạo", "Nơi đào tạo", "Năm tốt nghiệp", "Trình độ ngoại ngữ", "Mã phòng ban", "Ảnh"
             }
         ));
         tblCanBo.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
@@ -807,14 +647,14 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(pnlTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlCaNhanCha, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(pnlCaNhanCha, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(pnlCongViecCha, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlCongViecCha, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(pnlChucNang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(scrollPaneWin112, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                .addComponent(scrollPaneWin112, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -824,13 +664,163 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, 871, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+    public JLabel hienThiAnh(String selectedImagePath) {
+
+        JLabel imageLabel = new JLabel();
+        ImageIcon imageicon = new ImageIcon(selectedImagePath);
+        //Resize image to fixed dimensions 60 * 60 (width and height).
+        Image imageIc = imageicon.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+
+//        Set Description
+        ImageIcon excelSetDescription = new ImageIcon(imageIc);
+        excelSetDescription.setDescription(selectedImagePath);
+        //Storing imageicon in a jlabel
+        imageLabel.setIcon(excelSetDescription);
+
+        //Checking if one or more field is empty
+        if (imageIc == null) {
+            JOptionPane.showMessageDialog(null, "One Or More Fields Are Empty");
+        }
+        return imageLabel;
+    }
+
+    public void themAnh() {
+        // TODO add your handling code here:
+//        Setting default browser location
+        JFileChooser browseImageFile = new JFileChooser("//Users//luongtopp//Documents//study//UTT//junior//semester-2//software_technology//QuanLyHoSoNhanSuTruongDaiHoc//src//UTT//UI//Anh//AnhCanBo");
+        //Filter image extensions
+        FileNameExtensionFilter fnef = new FileNameExtensionFilter("IMAGES", "png", "jpg", "jpeg");
+        browseImageFile.addChoosableFileFilter(fnef);
+        int showOpenDialogue = browseImageFile.showOpenDialog(null);
+
+        if (showOpenDialogue == JFileChooser.APPROVE_OPTION) {
+            File selectedImageFile = browseImageFile.getSelectedFile();
+            selectedImagePath = selectedImageFile.getAbsolutePath();
+            JOptionPane.showMessageDialog(null, selectedImagePath);
+            //Display image on jlable
+            ImageIcon ii = new ImageIcon(selectedImagePath);
+//            Resize image to fit jlabel
+            Image image = ii.getImage().getScaledInstance(lblAnh.getWidth(), lblAnh.getHeight(), Image.SCALE_SMOOTH);
+
+            lblAnh.setIcon(new ImageIcon(image));
+        }
+    }
+
+    class myTableCellRenderer implements TableCellRenderer {
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+
+//            Change Image column minimum width and maximum width
+            TableColumn tb = tblCanBo.getColumn("Ảnh");
+            tb.setMaxWidth(60);
+            tb.setMinWidth(60);
+            tblCanBo.setRowHeight(60);
+            return (Component) value;
+
+        }
+
+    }
+
+    // Hiển thị bảng CÁN BỘ không tham số
+    private void hienThiBangCanBo() {
+        DefaultTableModel model = (DefaultTableModel) tblCanBo.getModel();
+        model.setRowCount(0);
+        tblCanBo.getColumn("Ảnh").setCellRenderer(new myTableCellRenderer());
+        for (CanBo item : new CanBoDAO().hienThiCanBo()) {
+            model.addRow(
+                    new Object[]{
+                        item.getMaCanBo(),
+                        item.getHoTenKhaiSinh(),
+                        item.getGioiTinh(),
+                        item.getNgaySinh(),
+                        item.getTinhTrangHonNhan(),
+                        item.getSoCMND(),
+                        item.getQueQuan(),
+                        item.getNoiOHienTai(),
+                        item.getEmail(),
+                        item.getDanToc(),
+                        item.getTonGiao(),
+                        item.getNgayHopDong(),
+                        item.getCongViecDuocGiao(),
+                        item.getMaChucVu(),
+                        item.getChuyenNganhDaoTao(),
+                        item.getNoiDaoTao(),
+                        item.getNamTotNghiep(),
+                        item.getTrinhDoNgoaiNgu(),
+                        item.getMaPhongBan(),
+                        hienThiAnh(item.getAnh())
+                    }
+            );
+
+        }
+
+    }
+
+    // Hiển thị bảng CÁN BỘ có tham số
+    private void hienThiBangCanBo(String timKiem) {
+
+        DefaultTableModel model = (DefaultTableModel) tblCanBo.getModel();
+        model.setRowCount(0);
+        tblCanBo.getColumn("Ảnh").setCellRenderer(new myTableCellRenderer());
+        for (CanBo item : new CanBoDAO().hienThiCanBo(timKiem)) {
+            model.addRow(
+                    new Object[]{
+                        item.getMaCanBo(),
+                        item.getHoTenKhaiSinh(),
+                        item.getGioiTinh(),
+                        item.getNgaySinh(),
+                        item.getTinhTrangHonNhan(),
+                        item.getSoCMND(),
+                        item.getQueQuan(),
+                        item.getNoiOHienTai(),
+                        item.getEmail(),
+                        item.getDanToc(),
+                        item.getTonGiao(),
+                        item.getNgayHopDong(),
+                        item.getCongViecDuocGiao(),
+                        item.getMaChucVu(),
+                        item.getChuyenNganhDaoTao(),
+                        item.getNoiDaoTao(),
+                        item.getNamTotNghiep(),
+                        item.getTrinhDoNgoaiNgu(),
+                        item.getMaPhongBan(),
+                        hienThiAnh(item.getAnh())
+                    }
+            );
+        }
+    }
+
+    // Hiển COMBOBOX PHÒNG BAN 
+    private void hienThiBangPhongBan() {
+
+        for (PhongBan item : new PhongBanDAO().hienThiPhongBan()) {
+            cboTenPhongBan.addItem(item.getTenPhongBan());
+
+        }
+    }
+
+    private void hienThiBangPhongBan(String timKiem) {
+
+        for (PhongBan item : new PhongBanDAO().timKiemTenPhongBan(timKiem)) {
+            cboTenPhongBan.addItem(item.getTenPhongBan());
+
+        }
+    }
+
+    private void hienThiBangChucVu() {
+
+        for (ChucVu item : new ChucVuDAO().hienThiChucVu()) {
+            cboTenChucVu.addItem(item.getTenChucVu());
+        }
+    }
 
     private void cboTenPhongBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTenPhongBanActionPerformed
         String maPhongBan = (String) cboTenPhongBan.getSelectedItem();
@@ -965,6 +955,9 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn phòng ban");
         }
 
+        if (selectedImagePath == null || maPhongBan.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập ảnh");
+        }
         try {
             new CanBoDAO().themCanBo(maCanBo, hoTenKhaiSinh,
                     gioiTinh, chuoiNgaySinh, tinhTrangHonNhan,
@@ -972,7 +965,7 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
                     danToc, tonGiao, chuoiNgayHopDong,
                     congViecDuocGiao, maChucVu, chuyenNganhDaoTao,
                     noiDaoTao, namTotNghiep, trinhDoNgoaiNgu,
-                    maPhongBan,
+                    maPhongBan, selectedImagePath,
                     null);
         } catch (SQLException ex) {
             Logger.getLogger(QuanLyThongTinCanBo.class.getName()).log(Level.SEVERE, null, ex);
@@ -1035,8 +1028,11 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
 
         cboTenPhongBan.setSelectedItem(new PhongBanDAO().timKiemTenPhongBan(txtMaPhongBan.getText()).get(0).getTenPhongBan());
         cboTenChucVu.setSelectedItem(new ChucVuDAO().timKiemTenChucVu(txtMaChucVu.getText()).get(0).getTenChucVu());
+        String urlAnh = new CanBoDAO().timAnh(txtMaCanBo.getText()).get(0).getAnh();
+        ImageIcon ii = new ImageIcon(urlAnh);
+        Image image = ii.getImage().getScaledInstance(lblAnh.getWidth(), lblAnh.getHeight(), Image.SCALE_SMOOTH);
 
-        System.out.println(new PhongBanDAO().timKiemTenPhongBan(txtMaPhongBan.getText()).get(0).getTenPhongBan());
+        lblAnh.setIcon(new ImageIcon(image));
 
     }//GEN-LAST:event_menuItemSuaActionPerformed
 
@@ -1069,8 +1065,6 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
             }
 
         }
-
-
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
@@ -1225,10 +1219,10 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         if (maPhongBan == null || maPhongBan.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn phòng ban");
         }
-
-        if ("".equals(maCanBo)) {
-
+        if (selectedImagePath == null || maPhongBan.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập ảnh");
         }
+
         try {
             new CanBoDAO().suaCanBo(maCanBo, hoTenKhaiSinh,
                     gioiTinh, chuoiNgaySinh, tinhTrangHonNhan,
@@ -1236,7 +1230,7 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
                     danToc, tonGiao, chuoiNgayHopDong,
                     congViecDuocGiao, maChucVu, chuyenNganhDaoTao,
                     noiDaoTao, namTotNghiep, trinhDoNgoaiNgu,
-                    maPhongBan,
+                    maPhongBan, selectedImagePath,
                     null);
         } catch (SQLException ex) {
             Logger.getLogger(QuanLyThongTinCanBo.class.getName()).log(Level.SEVERE, null, ex);
@@ -1252,24 +1246,49 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cboTenChucVuActionPerformed
 
-    private void btnNhapXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapXuatActionPerformed
-//       btnNhapXuat.setComponentPopupMenu(popNhapXuatExcel);
-      
-
-
-    }//GEN-LAST:event_btnNhapXuatActionPerformed
-
     private void btnNhapXuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhapXuatMouseClicked
-          popNhapXuatExcel.show(btnNhapXuat, evt.getX(), evt.getY());
+        popNhapXuatExcel.show(btnNhapXuat, evt.getX(), evt.getY());
     }//GEN-LAST:event_btnNhapXuatMouseClicked
 
+    private void menuItemNhapExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemNhapExcelActionPerformed
 
+
+    }//GEN-LAST:event_menuItemNhapExcelActionPerformed
+
+    private void menuItemXuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemXuatExcelActionPerformed
+//        File file = new File();
+
+    }//GEN-LAST:event_menuItemXuatExcelActionPerformed
+
+    private void btnThemAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemAnhActionPerformed
+
+        JFileChooser browseImageFile = new JFileChooser("//Users//luongtopp//Desktop");
+        //Filter image extensions
+        FileNameExtensionFilter fnef = new FileNameExtensionFilter("IMAGES", "png", "jpg", "jpeg");
+        browseImageFile.addChoosableFileFilter(fnef);
+        int showOpenDialogue = browseImageFile.showOpenDialog(null);
+
+        if (showOpenDialogue == JFileChooser.APPROVE_OPTION) {
+            File selectedImageFile = browseImageFile.getSelectedFile();
+            selectedImagePath = selectedImageFile.getAbsolutePath();
+
+            //Display image on jlable
+            ImageIcon ii = new ImageIcon(selectedImagePath);
+//            Resize image to fit jlabel
+            Image image = ii.getImage().getScaledInstance(lblAnh.getWidth(), lblAnh.getHeight(), Image.SCALE_SMOOTH);
+
+            lblAnh.setIcon(new ImageIcon(image));
+        }
+    }//GEN-LAST:event_btnThemAnhActionPerformed
+
+    private String selectedImagePath;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHuy;
     private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnNhapXuat;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnThemAnh;
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cboTenChucVu;
@@ -1281,6 +1300,7 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -1295,14 +1315,16 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JLabel lblAnh;
+    private javax.swing.JMenuItem menuItemNhapExcel;
     private javax.swing.JMenuItem menuItemSua;
     private javax.swing.JMenuItem menuItemXoa;
+    private javax.swing.JMenuItem menuItemXuatExcel;
     private javax.swing.JPanel pnlCaNhanCha;
     private javax.swing.JPanel pnlCaNhanCon;
     private javax.swing.JPanel pnlChucNang;
