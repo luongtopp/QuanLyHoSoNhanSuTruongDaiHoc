@@ -8,13 +8,13 @@ import UTT.Connection.JdbcHelper;
 import static UTT.Connection.JdbcHelper.executeUpdate;
 import static UTT.Connection.JdbcHelper.preparedStatement;
 
-
 import UTT.Model.CanBo;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,11 +26,13 @@ public class CanBoDAO {
         String sql = "SELECT * FROM canbo";
         return timCanBo(sql);
     }
+
     public List<CanBo> hienThiCanBo(String timKiem) {
-        String sql = "{Call tim_kiem_can_bo(?)}";
+        String sql = "{CALL tim_kiem_can_bo(?)} ";
         return timCanBo(sql, timKiem);
     }
-    public List<CanBo> timAnh (String maCanBo) {
+
+    public List<CanBo> timAnh(String maCanBo) {
         String sql = "SELECT * FROM canbo WHERE macanbo = ?";
         return timCanBo(sql, maCanBo);
     }
@@ -81,6 +83,7 @@ public class CanBoDAO {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        JOptionPane.showMessageDialog(null, "Thêm cán bộ " + maCanBo + " thành công");
 
     }
 
@@ -91,6 +94,7 @@ public class CanBoDAO {
             String congViecDuocGiao, String maChucVu, String chuyenNganhDaoTao,
             String noiDaoTao, String namTotNghiep, String trinhDoNgoaiNgu,
             String maPhongBan, String anh, Object... args) throws SQLException {
+
         String sql = """
                      UPDATE canbo 
                      SET
@@ -112,7 +116,7 @@ public class CanBoDAO {
                      namtotnghiep = ?,
                      trinhdongoainnguthanhthaonhat = ?,
                      maphongban = ?,
-                     anh = ?
+                     anh = ? 
                      WHERE macanbo = ?""";
         try {
             executeUpdate(sql, hoTenKhaiSinh,
@@ -121,8 +125,9 @@ public class CanBoDAO {
                     danToc, tonGiao, ngayHopDong,
                     congViecDuocGiao, maChucVu, chuyenNganhDaoTao,
                     noiDaoTao, namTotNghiep, trinhDoNgoaiNgu,
-                    maPhongBan, maCanBo, anh
+                    maPhongBan, anh, maCanBo
             );
+            JOptionPane.showMessageDialog(null, "Sửa cán bộ " + maCanBo + " thành công");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -138,6 +143,7 @@ public class CanBoDAO {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        JOptionPane.showMessageDialog(null, "Xóa cán bộ " + maCanBo + " thành công");
 
     }
 
@@ -183,21 +189,13 @@ public class CanBoDAO {
         canBo.setNoiDaoTao(rs.getNString("noidaotao"));
         canBo.setNamTotNghiep(rs.getInt("namtotnghiep"));
         canBo.setTrinhDoNgoaiNgu(rs.getNString("trinhdongoainnguthanhthaonhat"));
-        canBo.setMaPhongBan(rs.getString("maphongban"));        
+        canBo.setMaPhongBan(rs.getString("maphongban"));
         canBo.setAnh(rs.getString("anh"));
         return canBo;
     }
 
     public static void main(String[] args) throws SQLException {
-        List<CanBo>  list =new CanBoDAO().hienThiCanBo();
-       
-           for(var item : list) {
-               
-               System.out.println(item.getChuyenNganhDaoTao());
-           }
 
-        
-        
     }
 
 }

@@ -12,6 +12,7 @@ import UTT.UI.component.CapNhapQuaTrinhCanBo;
 import UTT.UI.component.QuanLyCanBoNghiHuu;
 import UTT.UI.component.QuanLyKhenThuong;
 import UTT.UI.component.QuanLyKyLuat;
+import UTT.UI.component.QuanLyLuong;
 
 /**
  *
@@ -42,7 +43,7 @@ public class Home extends javax.swing.JFrame {
                                 case 3 -> {
                                     showForm(new QuanLyCanBoNghiHuu());
                                 }
-                                
+
                             }
 
                         }
@@ -71,9 +72,14 @@ public class Home extends javax.swing.JFrame {
                             }
 
                         }
+                        case 7 -> {
+
+                            showForm(new QuanLyLuong());
+
+                        }
 
                     }
-                    System.out.println("Form : " + index + " " + subIndex);
+
                 }
             }
         });
@@ -141,7 +147,7 @@ public class Home extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-       
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Home().setVisible(true);

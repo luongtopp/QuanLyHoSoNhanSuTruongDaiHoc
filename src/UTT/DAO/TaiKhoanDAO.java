@@ -136,11 +136,5 @@ public class TaiKhoanDAO {
         return taiKhoan;
     }
 
-    public static void main(String[] args) throws SQLException {
-        List<TaiKhoan> list = new TaiKhoanDAO().hienTaiKhoan();
-        for (var item : list) {
-            System.out.println(item.getHoTen());
-        }
-
-    }
+    
 }

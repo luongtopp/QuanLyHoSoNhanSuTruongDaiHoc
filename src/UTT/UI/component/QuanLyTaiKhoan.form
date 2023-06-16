@@ -42,7 +42,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="scrollPaneWin111" alignment="0" pref="854" max="32767" attributes="0"/>
+          <Component id="scrollPaneWin111" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -61,10 +61,10 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pnlTimKiem" alignment="0" pref="871" max="32767" attributes="0"/>
                   <Component id="pnlChucNang" max="32767" attributes="0"/>
                   <Component id="scrollPaneWin112" alignment="0" max="32767" attributes="0"/>
-                  <Component id="pnlTaiKhoan" alignment="1" max="32767" attributes="0"/>
+                  <Component id="pnlTaiKhoan" alignment="1" pref="933" max="32767" attributes="0"/>
+                  <Component id="pnlTimKiem" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">

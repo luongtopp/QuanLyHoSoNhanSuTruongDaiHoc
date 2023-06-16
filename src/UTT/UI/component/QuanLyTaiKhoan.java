@@ -8,6 +8,7 @@ import UTT.DAO.CanBoDAO;
 import UTT.DAO.ChucVuDAO;
 import UTT.DAO.PhongBanDAO;
 import UTT.DAO.TaiKhoanDAO;
+import UTT.IOData.XuLyFileExcel;
 import UTT.Model.ChucVu;
 import UTT.Model.PhongBan;
 import UTT.Model.TaiKhoan;
@@ -490,10 +491,10 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, 871, Short.MAX_VALUE)
             .addComponent(pnlChucNang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(scrollPaneWin112, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnlTaiKhoan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlTaiKhoan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 933, Short.MAX_VALUE)
+            .addComponent(pnlTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -513,7 +514,7 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, 854, Short.MAX_VALUE)
+            .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -698,7 +699,7 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cboTenChucVuActionPerformed
 
-    private void khiAnItemSua() {
+    private void khiNhanItemSua() {
         // Button status
         btnSua.setVisible(true);
         btnThem.setVisible(false);
@@ -707,7 +708,7 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
 
     private void menuItemSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSuaActionPerformed
 
-        khiAnItemSua();
+        khiNhanItemSua();
         txtTenDangNhap.setText(tblTaiKhoan.getModel().getValueAt(tblTaiKhoan.getSelectedRow(), 0).toString());
         txtMatKhau.setText(tblTaiKhoan.getModel().getValueAt(tblTaiKhoan.getSelectedRow(), 1).toString());
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -720,7 +721,7 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
         txtNgayCapQuyen.setDate(ngayCapQuyen);
 
         String admin = tblTaiKhoan.getModel().getValueAt(tblTaiKhoan.getSelectedRow(), 3).toString();
-        System.out.println("Hiển thị trnagj thái:" + admin);
+        System.out.println("Hiển thị trạng thái:" + admin);
         if (admin == "true") {
             cboCapQuyen.setSelected(true);
         }
