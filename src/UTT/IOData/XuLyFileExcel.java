@@ -109,7 +109,7 @@ public class XuLyFileExcel {
         try {
             TableModel dtm = tbl.getModel();
 
-            JFileChooser chooser = new MyFileChooser("//Users//luongtopp//Desktop//AnhCanBo");
+            JFileChooser chooser = new MyFileChooser("//Users//luongtopp//Desktop");
             chooser.setDialogTitle("Chọn file");
             FileNameExtensionFilter fnef = new FileNameExtensionFilter("Excel Files", "xls", "xlsx", "xlsm");
             chooser.setFileFilter(fnef);
