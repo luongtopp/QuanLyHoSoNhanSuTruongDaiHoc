@@ -17,10 +17,13 @@ import java.util.List;
  */
 public class DAOChucVu {
 
-    public void themChucVu(String maChucVu, String tenChucVu) throws SQLException {
-        String sql = "INSERT into chucvu(machucvu, tenchucvu) VALUES( "
+    public void themChucVu(String maChucVu, String tenChucVu, String maPhuCap, String maBacNgach, String maLuong) throws SQLException {
+        String sql = "INSERT into chucvu(machucvu, tenchucvu, maphucap, mabacngach) VALUES( "
                 + "N'" + maChucVu + "'"
-                + ",N'" + tenChucVu + "')";
+                + "N'" + tenChucVu + "'"
+                + "N'" + maPhuCap + "'"
+                 + "N'" + maBacNgach + "'"
+                + ",N'" + maLuong + "')";
         update(sql);
     }
 
@@ -29,9 +32,12 @@ public class DAOChucVu {
         update(sql);
     }
 
-    public void suaChucVu(String MachucVu, String TenChucVu) throws SQLException {
-        String sql = "UPDATE chucvu set tenchucvu = N'" + TenChucVu + "'"
-                + " WHERE machucvu = N'" + MachucVu + "'";
+    public void suaChucVu(String maChucVu, String tenChucVu, String maPhuCap, String maBacNgach, String maLuong) throws SQLException {
+        String sql = "UPDATE chucvu set tenchucvu = N'" + tenChucVu + "'"
+                + ", maphucap = N'" + maPhuCap + "'"
+                + ", mabacngach = N'" + maBacNgach + "'"
+                  + ", maluong = N'" + maLuong + "'"
+                + " WHERE machucvu = N'" + maChucVu + "'";
         update(sql);
     }
 
@@ -70,6 +76,9 @@ public class DAOChucVu {
         ChucVu chucvu = new ChucVu();
         chucvu.setMaChucVu(rs.getString("machucvu"));
         chucvu.setTenChucVu(rs.getString("tenchucvu"));
+        chucvu.setMaPhuCap(rs.getString("maphucap"));
+        chucvu.setMaBacNgach(rs.getString("mabacngach"));
+           chucvu.setMaLuong(rs.getString("maluong"));
         return chucvu;
     }
 

@@ -33,7 +33,8 @@ public class Menu extends JComponent {
         {"Quản lý chức vụ"},
         {"Công tác cán bộ"},
         {"Quản lý tài khoản"},
-        {"Khen thưởng -  Kỷ luật", "Khen thưởng", "Kỷ luật"}
+        {"Khen thưởng -  Kỷ luật", "Khen thưởng", "Kỷ luật"},
+        {"Quản lý Luong"}
 
     };
 

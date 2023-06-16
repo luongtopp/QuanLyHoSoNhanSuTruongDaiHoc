@@ -12,6 +12,7 @@ import UTT.UI.component.CapNhapQuaTrinhCanBo;
 import UTT.UI.component.QuanLyKhenThuong;
 import UTT.UI.component.QuanLyCanBoNghiHuu;
 import UTT.UI.component.QuanLyKyLuat;
+import UTT.UI.component.QuanLyLuong;
 
 /**
  *
@@ -69,6 +70,11 @@ public class Home extends javax.swing.JFrame {
 
                                 }
                             }
+
+                        }
+                        
+                        case 7 -> {
+                            showForm(new QuanLyLuong());
 
                         }
 
