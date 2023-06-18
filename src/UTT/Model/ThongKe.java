@@ -15,14 +15,12 @@ public class ThongKe {
     public ThongKe() {
     }
 
-    public ThongKe(String maCanBo, String hoTenKhaiSinh, String queQuan, Date ngaySinh, Date ngayHopDong, Date ngayNghiHuu, Date ngayHetHopDong) {
+    public ThongKe(String maCanBo, String hoTenKhaiSinh, String maChucVu, String maPhongBan, float mucLuong) {
         this.maCanBo = maCanBo;
         this.hoTenKhaiSinh = hoTenKhaiSinh;
-        this.queQuan = queQuan;
-        this.ngaySinh = ngaySinh;
-        this.ngayHopDong = ngayHopDong;
-        this.ngayNghiHuu = ngayNghiHuu;
-        this.ngayHetHopDong = ngayHetHopDong;
+        this.maChucVu = maChucVu;
+        this.maPhongBan = maPhongBan;
+        this.mucLuong = mucLuong;
     }
 
     public String getMaCanBo() {
@@ -41,57 +39,45 @@ public class ThongKe {
         this.hoTenKhaiSinh = hoTenKhaiSinh;
     }
 
-    public String getQueQuan() {
-        return queQuan;
+    public String getMaChucVu() {
+        return maChucVu;
     }
 
-    public void setQueQuan(String queQuan) {
-        this.queQuan = queQuan;
+    public void setMaChucVu(String maChucVu) {
+        this.maChucVu = maChucVu;
     }
 
-    public Date getNgaySinh() {
-        return ngaySinh;
+    public String getMaPhongBan() {
+        return maPhongBan;
     }
 
-    public void setNgaySinh(Date ngaySinh) {
-        this.ngaySinh = ngaySinh;
+    public void setMaPhongBan(String maPhongBan) {
+        this.maPhongBan = maPhongBan;
     }
 
-    public Date getNgayHopDong() {
-        return ngayHopDong;
+    public float getMucLuong() {
+        return mucLuong;
     }
 
-    public void setNgayHopDong(Date ngayHopDong) {
-        this.ngayHopDong = ngayHopDong;
-    }
-
-    public Date getNgayNghiHuu() {
-        return ngayNghiHuu;
-    }
-
-    public void setNgayNghiHuu(Date ngayNghiHuu) {
-        this.ngayNghiHuu = ngayNghiHuu;
-    }
-
-    public Date getNgayHetHopDong() {
-        return ngayHetHopDong;
-    }
-
-    public void setNgayHetHopDong(Date ngayHetHopDong) {
-        this.ngayHetHopDong = ngayHetHopDong;
+    public void setMucLuong(float mucLuong) {
+        this.mucLuong = mucLuong;
     }
 
     @Override
     public String toString() {
-        return "ThongKe{" + "maCanBo=" + maCanBo + ", hoTenKhaiSinh=" + hoTenKhaiSinh + ", queQuan=" + queQuan + ", ngaySinh=" + ngaySinh + ", ngayHopDong=" + ngayHopDong + ", ngayNghiHuu=" + ngayNghiHuu + ", ngayHetHopDong=" + ngayHetHopDong + '}';
+        return "ThongKe{" + "maCanBo=" + maCanBo + ", hoTenKhaiSinh=" + hoTenKhaiSinh + ", maChucVu=" + maChucVu + ", maPhongBan=" + maPhongBan + ", mucLuong=" + mucLuong + '}';
     }
+    
 
+   
     private String maCanBo;
     private String hoTenKhaiSinh;    
-    private String queQuan;
-    private Date ngaySinh;
-    private Date ngayHopDong;
-    private Date ngayNghiHuu;
-    private Date ngayHetHopDong;
+    private String maChucVu;    
+    private String maPhongBan;    
+    private float mucLuong;
+
+
+
+   
 
 }

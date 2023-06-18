@@ -700,7 +700,7 @@ public class QuanLyThongTinCanBo extends javax.swing.JPanel {
     public void themAnh() {
         // TODO add your handling code here:
 //        Setting default browser location
-        JFileChooser browseImageFile = new JFileChooser("//Users//luongtopp//Documents//study//UTT//junior//semester-2//software_technology//QuanLyHoSoNhanSuTruongDaiHoc//src//UTT//UI//Anh//AnhCanBo");
+        JFileChooser browseImageFile = new JFileChooser("//Users//luongtopp//Desktop");
         //Filter image extensions
         FileNameExtensionFilter fnef = new FileNameExtensionFilter("IMAGES", "png", "jpg", "jpeg");
         browseImageFile.addChoosableFileFilter(fnef);

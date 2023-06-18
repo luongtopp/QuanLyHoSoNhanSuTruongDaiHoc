@@ -1,5 +1,7 @@
 package UTT.UI.Main;
 
+import UTT.DAO.TaiKhoanDAO;
+import UTT.Model.TaiKhoan;
 import UTT.UI.component.QuanLyPhongBan;
 import UTT.UI.component.QuanLyChucVu;
 import UTT.UI.component.QuanLyThongTinCanBo;
@@ -13,6 +15,7 @@ import UTT.UI.component.QuanLyCanBoNghiHuu;
 import UTT.UI.component.QuanLyKhenThuong;
 import UTT.UI.component.QuanLyKyLuat;
 import UTT.UI.component.QuanLyLuong;
+import UTT.UI.component.ThongKe;
 
 /**
  *
@@ -29,7 +32,7 @@ public class Home extends javax.swing.JFrame {
             @Override
             public void selected(int index, int subIndex) {
                 if (index == 0) {
-                    showForm(new HomeForm());
+                    showForm(new ThongKe());
                 } else {
                     switch (index) {
                         case 1 -> {
@@ -73,8 +76,9 @@ public class Home extends javax.swing.JFrame {
 
                         }
                         case 7 -> {
-
-                            showForm(new QuanLyLuong());
+                            if ((new TaiKhoan().isAdmin)) {
+                                showForm(new QuanLyLuong());
+                            }
 
                         }
 

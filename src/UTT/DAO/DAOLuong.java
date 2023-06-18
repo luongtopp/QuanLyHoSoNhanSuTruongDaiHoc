@@ -5,7 +5,10 @@
 package UTT.DAO;
 
 import UTT.Connection.JdbcHelper;
+import static UTT.Connection.JdbcHelper.executeUpdate;
+import static UTT.Connection.JdbcHelper.preparedStatement;
 import UTT.Model.Luong;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,37 +21,58 @@ import java.util.List;
 public class DAOLuong {
 
     //Lương cơ bản
-    public void themLuongCoBan(String maLuongCoBan, String ngayHieuLuc, String ngayHetHieuLuc, Float mucLuong) throws SQLException {
-        String sql = "INSERT into luongcoban(maluong, ngayhieuluc, ngayhethieuluc, mucluong) VALUES( "
-                + "N'" + maLuongCoBan + "'"
-                + ",N'" + ngayHieuLuc + "'"
-                + ",N'" + ngayHetHieuLuc + "'"
-                + ",N'" + mucLuong + "')";
-        update(sql);
+    public void themLuongCoBan(String maLuongCoBan, String ngayHieuLuc, String ngayHetHieuLuc, float mucLuong) throws SQLException {
+        String sql = """
+                     INSERT INTO `quan_ly_ho_so_nhan_su_truong_dai_hoc`.`luongcoban`
+                     (`maluong`,
+                     `ngayhieuluc`,
+                     `ngayhethieuluc`,
+                     `mucluong`)
+                     VALUES
+                     (?,?,?,?)
+                     """;
+        try (PreparedStatement pstmt = preparedStatement(sql, maLuongCoBan, ngayHetHieuLuc,
+                ngayHetHieuLuc, mucLuong)) {
+            int rowsAffected = pstmt.executeUpdate();
+            System.out.println(rowsAffected + " row(s) affected.");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     public void xoaLuongCoBan(String maLuongCoBan) throws SQLException {
-        String sql = "DELETE FROM luongcoban WHERE maluong = N'" + maLuongCoBan + "'";
-        update(sql);
+
+        String sql = """
+                     DELETE FROM luongcoban WHERE maluong = ?
+                     """;
+        try {
+            executeUpdate(sql, maLuongCoBan);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
     }
 
     public void suaLuongCoBan(String maLuongCoBan, String ngayHieuLuc, String ngayHetHieuLuc, Float mucLuong) throws SQLException {
-        String sql = "UPDATE luongcoban set ngayhieuluc = N'" + ngayHieuLuc + "'"
-                + ", ngayhethieuluc = N'" + ngayHetHieuLuc + "'"
-                + ", mucluong = N'" + mucLuong + "'"
-                + " WHERE maluong = N'" + maLuongCoBan + "'";
-        update(sql);
+        String sql = """
+                     UPDATE `quan_ly_ho_so_nhan_su_truong_dai_hoc`.`luongcoban`
+                     SET
+                     `ngayhieuluc` = ?,
+                     `ngayhethieuluc` = ?,
+                     `mucluong` = ?
+                     WHERE `maluong` = ?;
+                     """;
+        try {
+            executeUpdate(sql, ngayHieuLuc, ngayHetHieuLuc, mucLuong, maLuongCoBan);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     public List<Luong> bangLuongCoBan() {
         String sql = "SELECT * FROM luongcoban";
         return selectLuongCoBan(sql);
     }
-//
-//    public List<ChucVu> timKiemChucVu(String MaChucVu) throws SQLException {
-//        String sql = "SELECT * FROM chucvu WHERE machucvu like '%" + MaChucVu + "%'";
-//        return selectChucVu(sql);
-//    }
 
     private List<Luong> selectLuongCoBan(String sql, Object... args) {
         List<Luong> list = new ArrayList<>();
@@ -83,23 +107,45 @@ public class DAOLuong {
 
     //Bậc lương
     public void themBacLuong(String maBacNgach, String tenBacNgach, Float heSoLuong) throws SQLException {
-        String sql = "INSERT into bacngach(mabacngach, tenbacngach, hesoluong) VALUES( "
-                + "N'" + maBacNgach + "'"
-                + ",N'" + tenBacNgach + "'"
-                + ",N'" + heSoLuong + "')";
-        update(sql);
+        String sql = """
+                     INSERT INTO `quan_ly_ho_so_nhan_su_truong_dai_hoc`.`bacngach`
+                     (`mabacngach`,
+                     `tenbacngach`,
+                     `hesoluong`)
+                     VALUES(?, ?, ?);
+                     """;
+
+        try {
+            executeUpdate(sql, maBacNgach, tenBacNgach, heSoLuong);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     public void xoaBacLuong(String maBacNgach) throws SQLException {
-        String sql = "DELETE FROM bacngach WHERE mabacngach = N'" + maBacNgach + "'";
-        update(sql);
+        String sql = """
+                     DELETE FROM bacngach WHERE mabacngach = ?
+                     """;
+        try {
+            executeUpdate(sql, maBacNgach);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     public void suaBacLuong(String maBacNgach, String tenBacNgach, Float heSoLuong) throws SQLException {
-        String sql = "UPDATE bacngach set tenbacngach = N'" + tenBacNgach + "'"
-                + ", hesoluong = N'" + heSoLuong + "'"
-                + " WHERE mabacngach = N'" + maBacNgach + "'";
-        update(sql);
+        String sql = """
+                     UPDATE `quan_ly_ho_so_nhan_su_truong_dai_hoc`.`bacngach`
+                     SET
+                     `tenbacngach` = ?,
+                     `hesoluong` = ?
+                     WHERE `mabacngach` = ?;
+                     """;
+        try {
+            executeUpdate(sql, tenBacNgach, heSoLuong, maBacNgach);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     public List<Luong> bangBacLuong() {
@@ -139,25 +185,48 @@ public class DAOLuong {
 
     //Phụ cấp
     public void themPhuCap(String maPhuCap, String tenPhuCap, Float heSoPhuCap, String ghiChu) throws SQLException {
-        String sql = "INSERT into phucap(maphucap, tenphucap, hesophucap, ghichu) VALUES( "
-                + "N'" + maPhuCap + "'"
-                + ",N'" + tenPhuCap + "'"
-                + ",N'" + heSoPhuCap + "'"
-                + ",N'" + ghiChu + "')";
-        update(sql);
+        String sql = """
+                     INSERT INTO `quan_ly_ho_so_nhan_su_truong_dai_hoc`.`phucap`
+                     (`maphucap`,
+                     `tenphucap`,
+                     `hesophucap`,
+                     `ghichu`)
+                     VALUES (?,?,?,?);
+                     """;
+        try (PreparedStatement pstmt = preparedStatement(sql, maPhuCap, tenPhuCap,
+                heSoPhuCap, ghiChu)) {
+            int rowsAffected = pstmt.executeUpdate();
+            System.out.println(rowsAffected + " row(s) affected.");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     public void xoaPhucap(String maPhuCap) throws SQLException {
-        String sql = "DELETE FROM phucap WHERE maphucap = N'" + maPhuCap + "'";
-        update(sql);
+        String sql = """
+                     DELETE FROM phucap WHERE maphucap = ?
+                     """;
+        try {
+            executeUpdate(sql, maPhuCap);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     public void suaPhuCap(String maPhuCap, String tenPhuCap, Float heSoPhuCap, String ghiChu) throws SQLException {
-        String sql = "UPDATE phucap set tenphucap = N'" + tenPhuCap + "'"
-                + ", hesophucap = N'" + heSoPhuCap + "'"
-                + ", ghichu = N'" + ghiChu + "'"
-                + " WHERE maPhuCap = N'" + maPhuCap + "'";
-        update(sql);
+        String sql = """
+                     UPDATE `quan_ly_ho_so_nhan_su_truong_dai_hoc`.`phucap`
+                     SET
+                     `tenphucap` = ?,
+                     `hesophucap` = ?,
+                     `ghichu` = ?
+                     WHERE `maphucap` = ?;
+                     """;
+        try {
+            executeUpdate(sql, tenPhuCap, heSoPhuCap, ghiChu, maPhuCap);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     public List<Luong> bangPhuCap() {
@@ -204,10 +273,6 @@ public class DAOLuong {
                 + "  inner join phucap pc on cv.maphucap = pc.maphucap "
                 + "   inner join bacngach bn on cv.mabacngach = bn.mabacngach ";
 
-        //+"inner join chucvu cv on cb.machucvu = cv.machucvu "
-//              inner join luongcoban lcb on cv.maluong = lcb.maluong\n" +
-//                inner join phucap pc on cv.maphucap = pc.maphucap\n" +
-//              inner join bacngach bn on cv.mabacngach = bn.mabacngach\n"'"; 
         return selectTongLuong(sql);
     }
 
@@ -244,7 +309,4 @@ public class DAOLuong {
         return tongluong;
     }
 
-    private void update(String sql, Object... args) throws SQLException {
-        JdbcHelper.executeUpdate(sql, args);
-    }
 }

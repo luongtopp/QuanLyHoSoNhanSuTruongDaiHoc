@@ -18,18 +18,8 @@ import java.util.List;
 public class ThongKeDAO {
 
     public List<ThongKe> hienThiThongKe() {
-        String sql = "{CALL thong_ke_can_bo_sap_ve_huu}";
+        String sql = "{CALL tinh_luong}";
         return timKiemThongKe(sql);
-    }
-
-    public List<ThongKe> timKiemMaThongKe(String timKiem) {
-        String sql = "SELECT * FROM chucvu WHERE tenchucvu = ?";
-        return timKiemThongKe(sql, timKiem);
-    }
-
-    public List<ThongKe> timKiemTenThongKe(String timKiem) {
-        String sql = "SELECT * FROM chucvu WHERE machucvu = ?";
-        return timKiemThongKe(sql, timKiem);
     }
 
     private List<ThongKe> timKiemThongKe(String sql, Object... args) {
@@ -57,23 +47,19 @@ public class ThongKeDAO {
 
         ThongKe thongKe = new ThongKe();
         thongKe.setMaCanBo(rs.getString("macanbo"));
-        thongKe.setHoTenKhaiSinh(rs.getString("hotenkhaisinh"));        
-        thongKe.setQueQuan(rs.getString("quequan"));
-
-        thongKe.setNgaySinh(rs.getDate("ngaysinh"));
-        thongKe.setNgayHopDong(rs.getDate("ngayhopdong"));
-        thongKe.setNgayNghiHuu(rs.getDate("ngaynghihuu"));
-//        thongKe.setNgayHetHopDong(rs.getDate("tenchucvu"));
+        thongKe.setHoTenKhaiSinh(rs.getString("hotenkhaisinh"));
+        thongKe.setMaChucVu(rs.getNString("machucvu"));
+        thongKe.setMaPhongBan(rs.getNString("maphongban"));
+        thongKe.setMucLuong(rs.getFloat("mucluong"));
 
         return thongKe;
     }
-
 
     public static void main(String[] args) throws SQLException {
         List<ThongKe> list = new ThongKeDAO().hienThiThongKe();
         for (var item : list) {
             System.out.println(item.toString());
-           }
+        }
     }
 
 }

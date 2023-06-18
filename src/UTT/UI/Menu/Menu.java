@@ -1,5 +1,6 @@
 package UTT.UI.Menu;
 
+import UTT.Model.TaiKhoan;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -33,14 +34,24 @@ public class Menu extends JComponent {
         {"Quản lý chức vụ"},
         {"Công tác cán bộ"},
         {"Quản lý tài khoản"},
-        {"Khen thưởng -  Kỷ luật", "Khen thưởng", "Kỷ luật"},        
-        {"Quản lý lương"}
-
-
+        {"Khen thưởng -  Kỷ luật", "Khen thưởng", "Kỷ luật"}
     };
 
     public Menu() {
-        init();
+        if (new TaiKhoan().isAdmin) {
+            menuItems = new String[][]{
+                {"Thống kê"},
+                {"Quản lý thông tin cán bộ", "Thông tin cán bộ", "Thông tin gia đình", "Thông tin cán bộ nghỉ hưu"},
+                {"Quản lý phòng ban"},
+                {"Quản lý chức vụ"},
+                {"Công tác cán bộ"},
+                {"Quản lý tài khoản"},
+                {"Khen thưởng -  Kỷ luật", "Khen thưởng", "Kỷ luật"},
+                {"Quản lý lương"}
+            };
+
+        }
+         init();
     }
 
     private void init() {

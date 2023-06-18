@@ -83,8 +83,6 @@ public class CanBoDAO {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        JOptionPane.showMessageDialog(null, "Thêm cán bộ " + maCanBo + " thành công");
-
     }
 
     public void suaCanBo(String maCanBo, String hoTenKhaiSinh,
@@ -143,7 +141,6 @@ public class CanBoDAO {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        JOptionPane.showMessageDialog(null, "Xóa cán bộ " + maCanBo + " thành công");
 
     }
 
