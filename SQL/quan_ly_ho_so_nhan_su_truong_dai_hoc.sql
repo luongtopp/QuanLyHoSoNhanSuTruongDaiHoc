@@ -18,10 +18,11 @@ USE `quan_ly_ho_so_nhan_su_truong_dai_hoc`;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+
 --
 -- Cơ sở dữ liệu: `quan_ly_ho_so_nhan_su_truong_dai_hoc`
 --
-
+select * from tinhluong;
 -- --------------------------------------------------------
 
 --
@@ -55,7 +56,7 @@ CREATE TABLE `canbo` (
   `macanbo` varchar(50) NOT NULL,
   `hotenkhaisinh` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `gioitinh` varchar(10) CHARACTER SET utf8 DEFAULT NULL,
-  `ngaysinh` date DEFAULT NULL,
+  `ngaysinh` varchar(100) DEFAULT NULL,
   `tinhtranghonnhan` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   `soCMND` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
   `quequan` varchar(500) CHARACTER SET utf8 DEFAULT NULL,
@@ -544,3 +545,22 @@ OR trinhdongoainnguthanhthaonhat LIKE CONCAT('%', timkiem, '%')
 OR maphongban LIKE CONCAT('%', timkiem, '%');
  END; $$
 DELIMITER ;
+
+-- Tính lương
+
+DELIMITER $$
+CREATE PROCEDURE tinh_luong ()
+BEGIN 
+Select cb.macanbo, cb.hotenkhaisinh, cb.machucvu, cb.maphongban, lcb.mucluong * bn.hesoluong + lcb.mucluong * pc.hesophucap AS 'mucluong'  from canbo cb 
+join chucvu cv on cv.machucvu = cb.machucvu 
+join bacngach bn on bn.mabacngach = cv.mabacngach
+join phucap pc on pc.maphucap = cv.maphucap
+join luongcoban lcb on lcb.maluong = cv.maluong;
+ END; $$
+DELIMITER ;
+
+
+
+
+
+
