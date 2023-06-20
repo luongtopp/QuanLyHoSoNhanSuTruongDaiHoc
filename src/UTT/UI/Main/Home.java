@@ -103,6 +103,7 @@ public class Home extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         header1 = new UTT.UI.Component.Header();
         body = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         menu1 = new UTT.UI.Menu.Menu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -112,6 +113,10 @@ public class Home extends javax.swing.JFrame {
 
         body.setBackground(new java.awt.Color(245, 245, 245));
         body.setLayout(new java.awt.BorderLayout());
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UTT/UI/Anh/logo-utt-login.png"))); // NOI18N
+        body.add(jLabel1, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -162,6 +167,7 @@ public class Home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel body;
     private UTT.UI.Component.Header header1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private UTT.UI.Menu.Menu menu1;
     // End of variables declaration//GEN-END:variables
